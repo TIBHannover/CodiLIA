@@ -38,9 +38,9 @@ HackMD is built with one promise - **You own and control all your content**:
 
 ## CodiMD - The Open Source HackMD
 
-CodiMD is the free software version of [HackMD](https://hackmd.io), developed and opened source by the HackMD team with reduced features (without book mode), you can use CodiMD for your community and own all your data. *(See the [origin of the name CodiMD](https://github.com/hackmdio/hackmd/issues/720).)* 
+CodiMD is the free software version of [HackMD](https://hackmd.io), developed and opened source by the HackMD team with reduced features (without book mode), you can use CodiMD for your community and own all your data. *(See the [origin of the name CodiMD](https://github.com/hackmdio/hackmd/issues/720).)*
 
-CodiMD is perfect for open communities, while HackMD emphasizes on permission and access controls for commercial use cases. 
+CodiMD is perfect for open communities, while HackMD emphasizes on permission and access controls for commercial use cases.
 
 HackMD team is committed to keep CodiMD open source. All contributions are welcome!
 
@@ -76,7 +76,7 @@ All contributions are welcome! Even asking a question helps.
 
 ## Browser Support
 
-CodiMD is a service that runs on Node.js, while users use the service through browsers. We support your users using the following browsers: 
+CodiMD is a service that runs on Node.js, while users use the service through browsers. We support your users using the following browsers:
 - <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" /> Chrome >= 47, Chrome for Android >= 47
 - <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" /> Safari >= 9, iOS Safari >= 8.4
 - <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" /> Firefox >= 44
@@ -90,7 +90,7 @@ To stay up to date with your installation it's recommended to subscribe the [rel
 
 **License under AGPL.**
 
-[gitter-image]: https://img.shields.io/badge/gitter-hackmdio/codimd-blue.svg	
+[gitter-image]: https://img.shields.io/badge/gitter-hackmdio/codimd-blue.svg
 [gitter-url]: https://gitter.im/hackmdio/hackmd
 [travis-image]: https://travis-ci.com/hackmdio/codimd.svg?branch=master
 [travis-url]: https://travis-ci.com/hackmdio/codimd
@@ -99,3 +99,19 @@ To stay up to date with your installation it's recommended to subscribe the [rel
 [github-release-feed]: https://github.com/hackmdio/codimd/releases.atom
 [poeditor-image]: https://img.shields.io/badge/POEditor-translate-blue.svg
 [poeditor-url]: https://poeditor.com/join/project/q0nuPWyztp
+
+
+## Starting localy
+
+```
+git clone https://github.com/liaScript/codimd
+npm i
+npm i sqlite3
+npm run build
+bin/setup
+CMD_DOMAIN=localhost CMD_SESSION_SECRET=1234567 npx sequelize db:migrate & nodemon --watch app.js --watch lib --watch locales app.js
+```
+
+open in browser:
+
+http://localhost:3000/
