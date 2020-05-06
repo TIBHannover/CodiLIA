@@ -46,7 +46,7 @@ import {
   md,
   parseMeta,
   postProcess,
-  renderFilename,
+  //renderFilename,
   renderTOC,
   renderTags,
   renderTitle,
@@ -96,7 +96,7 @@ var viewportMargin = 20
 var defaultEditorMode = 'gfm'
 
 var idleTime = 300000 // 5 mins
-var updateViewDebounce = 100
+var updateViewDebounce = 500
 var cursorMenuThrottle = 50
 var cursorActivityDebounce = 50
 var cursorAnimatePeriod = 100
@@ -254,6 +254,10 @@ const statusType = {
   }
 }
 
+window.liaReady = function() {
+  alert("XXXXXXXXXXXXXXXXXXXXX")
+}
+
 // global vars
 window.loaded = false
 let needRefresh = false
@@ -313,6 +317,9 @@ var editor = editorInstance.init(textit)
 // FIXME: global referncing in jquery-textcomplete patch
 window.editor = editor
 
+var lia = document.getElementById("lia");
+
+
 var inlineAttach = inlineAttachment.editors.codemirror4.attach(editor)
 defaultTextHeight = parseInt($('.CodeMirror').css('line-height'))
 
@@ -363,6 +370,14 @@ ui.area.codemirror.on('touchstart', function () {
 
 var haveUnreadChanges = false
 
+function renderFilename() {
+  try {
+    return lia.contentDocument.title
+  } catch (e) {
+    return "Untitled"
+  }
+}
+
 function setHaveUnreadChanges (bool) {
   if (!window.loaded) return
   if (bool && (idle.isAway || Visibility.hidden())) {
@@ -375,9 +390,9 @@ function setHaveUnreadChanges (bool) {
 function updateTitleReminder () {
   if (!window.loaded) return
   if (haveUnreadChanges) {
-    document.title = '• ' + renderTitle(ui.area.markdown)
+    document.title = '• ' + renderFilename() //renderTitle(ui.area.markdown)
   } else {
-    document.title = renderTitle(ui.area.markdown)
+    document.title = renderFilename() //renderTitle(ui.area.markdown)
   }
 }
 
@@ -487,7 +502,7 @@ $(document).ready(function () {
 $(window).resize(function () {
   checkLayout()
   checkEditorStyle()
-  checkTocStyle()
+  //checkTocStyle()
   checkCursorMenu()
   windowResize()
 })
@@ -499,7 +514,7 @@ $(window).on('error', function () {
   // setNeedRefresh();
 })
 
-setupSyncAreas(ui.area.codemirrorScroll, ui.area.view, ui.area.markdown, editor)
+//setupSyncAreas(ui.area.codemirrorScroll, ui.area.view, ui.area.markdown, editor)
 
 function autoSyncscroll () {
   if (editorHasFocus()) {
@@ -516,7 +531,7 @@ function windowResizeInner (callback) {
   checkLayout()
   checkResponsive()
   checkEditorStyle()
-  checkTocStyle()
+  //checkTocStyle()
   checkCursorMenu()
   // refresh editor
   if (window.loaded) {
@@ -604,7 +619,7 @@ function checkEditorStyle () {
       },
       resize: function (e) {
         ui.area.resize.syncToggle.stop(true, true).show()
-        checkTocStyle()
+        //checkTocStyle()
       },
       stop: function (e) {
         lastEditorWidth = ui.area.edit.width()
@@ -674,10 +689,11 @@ function checkEditorScrollbarInner () {
   editor.scrollTo(null, scrollInfo.top)
 }
 
+/*
 function checkTocStyle () {
   // toc right
   var paddingRight = parseFloat(ui.area.markdown.css('padding-right'))
-  var right = ($(window).width() - (ui.area.markdown.offset().left + ui.area.markdown.outerWidth() - paddingRight))
+  var right = ($(window).width() - (lia.offsetLeft + ui.area.markdown.outerWidth() - paddingRight))
   ui.toc.toc.css('right', right + 'px')
   // affix toc left
   var newbool
@@ -710,6 +726,7 @@ function checkTocStyle () {
     generateScrollspy()
   }
 }
+*/
 
 function showStatus (type, num) {
   currentStatus = type
@@ -770,6 +787,7 @@ var lastMode = null
 
 function changeMode (type) {
   // lock navbar to prevent it hide after changeMode
+
   lockNavbar()
   saveInfo()
   if (type) {
@@ -931,7 +949,7 @@ ui.toolbar.extra.slide.attr('href', noteurl + '/slide')
 ui.toolbar.download.markdown.click(function (e) {
   e.preventDefault()
   e.stopPropagation()
-  var filename = renderFilename(ui.area.markdown) + '.md'
+  var filename = renderFilename() + '.md'
   var markdown = editor.getValue()
   var blob = new Blob([markdown], {
     type: 'text/markdown;charset=utf-8'
@@ -939,17 +957,19 @@ ui.toolbar.download.markdown.click(function (e) {
   saveAs(blob, filename, true)
 })
 // html
-ui.toolbar.download.html.click(function (e) {
+/*ui.toolbar.download.html.click(function (e) {
   e.preventDefault()
   e.stopPropagation()
   exportToHTML(ui.area.markdown)
 })
+*/
 // raw html
-ui.toolbar.download.rawhtml.click(function (e) {
+/*ui.toolbar.download.rawhtml.click(function (e) {
   e.preventDefault()
   e.stopPropagation()
   exportToRawHTML(ui.area.markdown)
 })
+*/
 // pdf
 ui.toolbar.download.pdf.attr('download', '').attr('href', noteurl + '/pdf')
 
@@ -963,7 +983,7 @@ ui.modal.pandocExport.find('#pandoc-export-download').click(function (e) {
 
 // export to dropbox
 ui.toolbar.export.dropbox.click(function () {
-  var filename = renderFilename(ui.area.markdown) + '.md'
+  var filename = renderFilename() + '.md'
   var options = {
     files: [
       {
@@ -1076,6 +1096,7 @@ ui.toolbar.uploadImage.bind('change', function (e) {
   var files = e.target.files || e.dataTransfer.files
   e.dataTransfer = {}
   e.dataTransfer.files = files
+
   inlineAttach.onDrop(e)
 })
 // toc
@@ -1245,7 +1266,7 @@ function initRevisionViewer () {
 }
 $('#revisionModalDownload').click(function () {
   if (!revision) return
-  var filename = renderFilename(ui.area.markdown) + '_' + revisionTime + '.md'
+  var filename = renderFilename() + '_' + revisionTime + '.md'
   var blob = new Blob([revision.content], {
     type: 'text/markdown;charset=utf-8'
   })
@@ -2750,7 +2771,7 @@ function restoreInfo () {
 
 // view actions
 function refreshView () {
-  ui.area.markdown.html('')
+  //ui.area.markdown.html('')
   isDirty = true
   updateViewInner()
 }
@@ -2762,12 +2783,20 @@ var updateView = _.debounce(function () {
 var lastResult = null
 var postUpdateEvent = null
 
+
+
+
+
 function updateViewInner () {
   if (appState.currentMode === modeType.edit || !isDirty) return
   var value = editor.getValue()
-  var lastMeta = md.meta
-  md.meta = {}
-  delete md.metaError
+  //var lastMeta = md.meta
+  //md.meta = {}
+  //delete md.metaError
+
+  lia.contentWindow.jitLia(value)
+
+  /*
   var rendered = md.render(value)
   if (md.meta.type && md.meta.type === 'slide') {
     var slideOptions = {
@@ -2795,20 +2824,21 @@ function updateViewInner () {
       rendered = md.render(value)
     }
     // prevent XSS
-    rendered = preventXSS(rendered)
-    var result = postProcess(rendered).children().toArray()
-    partialUpdate(result, lastResult, ui.area.markdown.children().toArray())
-    if (result && lastResult && result.length !== lastResult.length) { updateDataAttrs(result, ui.area.markdown.children().toArray()) }
-    lastResult = $(result).clone()
+    //rendered = preventXSS(rendered)
+    //var result = postProcess(rendered).children().toArray()
+    //partialUpdate(result, lastResult, ui.area.markdown.children().toArray())
+    //if (result && lastResult && result.length !== lastResult.length) { updateDataAttrs(result, ui.area.markdown.children().toArray()) }
+    //lastResult = $(result).clone()
   }
   removeDOMEvents(ui.area.markdown)
-  finishView(ui.area.markdown)
-  autoLinkify(ui.area.markdown)
-  deduplicatedHeaderId(ui.area.markdown)
-  renderTOC(ui.area.markdown)
-  generateToc('ui-toc')
-  generateToc('ui-toc-affix')
-  autoLinkify(ui.area.markdown)
+  //finishView(ui.area.markdown)
+  //autoLinkify(ui.area.markdown)
+  //deduplicatedHeaderId(ui.area.markdown)
+  //renderTOC(ui.area.markdown)
+  //generateToc('ui-toc')
+  //generateToc('ui-toc-affix')
+  //autoLinkify(ui.area.markdown)
+  */
   generateScrollspy()
   updateScrollspy()
   smoothHashScroll()
@@ -2824,7 +2854,7 @@ var updateHistoryDebounce = 600
 var updateHistory = _.debounce(updateHistoryInner, updateHistoryDebounce)
 
 function updateHistoryInner () {
-  writeHistory(renderFilename(ui.area.markdown), renderTags(ui.area.markdown))
+  writeHistory(renderFilename(), [])//renderTags(ui.area.markdown))
 }
 
 function updateDataAttrs (src, des) {
