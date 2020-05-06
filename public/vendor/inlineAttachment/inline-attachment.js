@@ -304,7 +304,8 @@
           var replacements = [];
           var string = this.settings.progressText.replace(this.filenameTag, id);
           var lines = this.editor.getValue().split('\n');
-        var newValue = this.settings.urlText.replace(this.filenameTag, filename);
+          var newValue = this.settings.urlText.replace(this.filenameTag, window.location.protocol + "//" + window.location.host + filename);
+
           for(var i = 0; i < lines.length; i++) {
             var ch = lines[i].indexOf(string);
             if(ch != -1)
