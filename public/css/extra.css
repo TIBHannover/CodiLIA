@@ -92,7 +92,7 @@
     position: relative;
     z-index: 2;
     max-width: 758px;
-    margin-top: 25px;
+    margin-top: 0px;
     margin-bottom: -25px;
     color: #777;
 }
