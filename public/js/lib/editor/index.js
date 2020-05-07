@@ -177,6 +177,13 @@ export default class Editor {
     var makeLine = $('#makeLine')
     var makeComment = $('#makeComment')
     var makeSpeech = $('#makeSpeech')
+    var makeAudio = $('#makeAudio')
+    var makeMovie = $('#makeMovie')
+    var makeMath = $('#makeMath')
+    var makeSingleChoiceQuiz = $('#makeSingleChoiceQuiz')
+    var makeMultipleChoiceQuiz = $('#makeMultipleChoiceQuiz')
+    var makeHint = $('#makeHint')
+    var makeMatrix = $('#makeMatrix')
 
     var insertRow = $('#insertRow')
     var deleteRow = $('#deleteRow')
@@ -253,6 +260,40 @@ export default class Editor {
 
     makeSpeech.click(() => {
       utils.insertText(this.editor, '{{|>}}\n')
+    })
+
+    makeAudio.click(() => {
+      utils.insertText(this.editor, '?[alt-text](audio-url "some info")\n')
+    })
+
+    makeMovie.click(() => {
+      utils.insertText(this.editor, '!?[alt-text](movie-url)\n')
+    })
+
+    makeMath.click(() => {
+      utils.insertText(this.editor, '$ \\frac{a}{\\sum{b+i}} $\n')
+    })
+
+    makeSingleChoiceQuiz.click(() => {
+      utils.insertText(this.editor, '[( )] Wrong answer\n' +
+        '[(X)] Correct answer\n' +
+        '[( )] Wrong answer\n')
+    })
+    makeMultipleChoiceQuiz.click(() => {
+      utils.insertText(this.editor, '[[ ]] Wrong answer\n' +
+        '[[X]] Correct answer\n' +
+        '[[X]] Correct answer\n' +
+        '[[ ]] Wrong answer\n')
+    })
+    makeHint.click(() => {
+      utils.insertText(this.editor, '[[?]] First Hint\n' +
+        '[[?]] Second Hint\n')
+    })
+
+    makeMatrix.click(() => {
+      utils.insertText(this.editor, '[[great] [normal] [bad]]\n' +
+        '[ [X]   [ ]    [X]  ]  Multiple choice\n' +
+        '[ ( )   ( )    (X)  ]  Single choice\n')
     })
 
     // table tools UI
@@ -778,7 +819,7 @@ export default class Editor {
       readOnly: true,
       autoRefresh: true,
       otherCursors: true,
-      placeholder: "← Start by entering a title here\n===\nVisit /features if you don't know what to do.\nHappy hacking :)"
+      placeholder: '← Start by entering a title here\n===\nVisit /features if you don\'t know what to do.\nHappy hacking :)'
     })
 
     this.spellchecker = new CodeMirrorSpellChecker(CodeMirror, this.getExistingSpellcheckLang(), this.editor)
