@@ -176,6 +176,7 @@ export default class Editor {
     var makeTable = $('#makeTable')
     var makeLine = $('#makeLine')
     var makeComment = $('#makeComment')
+    var makeSpeech = $('#makeSpeech')
 
     var insertRow = $('#insertRow')
     var deleteRow = $('#deleteRow')
@@ -248,6 +249,10 @@ export default class Editor {
 
     makeComment.click(() => {
       utils.insertText(this.editor, '> []')
+    })
+
+    makeSpeech.click(() => {
+      utils.insertText(this.editor, '{{|>}}\n')
     })
 
     // table tools UI
