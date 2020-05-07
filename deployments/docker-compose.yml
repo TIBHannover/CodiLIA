@@ -11,13 +11,16 @@ services:
     restart: always
   codimd:
     # you can use image or custom build below
-    image: nabo.codimd.dev/hackmdio/hackmd:2.0.0
+    #image: nabo.codimd.dev/hackmdio/hackmd:2.0.0
+    #image: hackmdio/codimd
+    image: liamd/liamd
     # build:
     #   context: ..
     #   dockerfile: ./deployments/Dockerfile
     environment:
       - CMD_DB_URL=postgres://codimd:change_password@database/codimd
       - CMD_USECDN=false
+      - CMD_ALLOW_ANONYMOUS=true
     depends_on:
       - database
     ports:

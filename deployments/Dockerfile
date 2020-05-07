@@ -1,4 +1,4 @@
-FROM hackmdio/buildpack:1.0.4 as BUILD
+FROM liamd/build as BUILD
 
 COPY --chown=hackmd:hackmd . .
 
@@ -14,7 +14,7 @@ RUN set -xe && \
         package-lock.json webpack.prod.js webpack.htmlexport.js webpack.dev.js webpack.common.js \
         config.json.example README.md CONTRIBUTING.md AUTHORS
 
-FROM hackmdio/runtime:1.0.6
+FROM liamd/runtime
 USER hackmd
 WORKDIR /home/hackmd/app
 COPY --chown=1500:1500 --from=BUILD /home/hackmd/app .
