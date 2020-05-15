@@ -254,18 +254,6 @@ const statusType = {
   }
 }
 
-window.liaReady = function() {
-  console.warn("liaReady");
-}
-
-window.liaGoto = function(line) {
-  console.warn("liaGoto", line);
-}
-
-window.liaDefinitions = function (json) {
-  window.definitions = json;
-}
-
 
 // global vars
 window.loaded = false
@@ -328,6 +316,17 @@ window.editor = editor
 
 window.lia = document.getElementById("lia");
 
+window.liaReady = function() {
+  console.warn("liaReady");
+}
+
+window.liaGoto = function(line) {
+  editor.setCursor({line: line, ch: 0})
+}
+
+window.liaDefinitions = function (json) {
+  window.definitions = json;
+}
 
 var inlineAttach = inlineAttachment.editors.codemirror4.attach(editor)
 defaultTextHeight = parseInt($('.CodeMirror').css('line-height'))
