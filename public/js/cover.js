@@ -33,7 +33,7 @@ require('../css/cover.css')
 require('../css/site.css')
 
 const options = {
-  valueNames: ['id', 'text', 'timestamp', 'fromNow', 'time', 'tags', 'pinned'],
+  valueNames: ['id', 'text', 'comment', 'timestamp', 'fromNow', 'time', 'tags', 'pinned', { name: 'logo', attr: 'style' }],
   item: `<li class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
           <span class="id" style="display:none;"></span>
           <a href="#">
@@ -42,6 +42,8 @@ const options = {
               <div class="ui-history-close fa fa-close fa-fw" data-toggle="modal" data-target=".delete-history-modal"></div>
               <div class="content">
                 <h4 class="text"></h4>
+                <div class="logo" style="display:none;"></div>
+                <p class="comment"></p>
                 <p>
                   <i><i class="fa fa-clock-o"></i> visited </i><i class="fromNow"></i>
                   <br>
@@ -76,6 +78,7 @@ function pageInit () {
       $('.ui-name').html(data.name)
       $('.ui-signout').show()
       $('.ui-history').click()
+
       parseServerToHistory(historyList, parseHistoryCallback)
     },
     () => {
@@ -85,6 +88,7 @@ function pageInit () {
       $('.ui-avatar').prop('src', '').hide()
       $('.ui-name').html('')
       $('.ui-signout').hide()
+
       parseStorageToHistory(historyList, parseHistoryCallback)
     }
   )
@@ -131,6 +135,7 @@ function checkHistoryList () {
 }
 
 function parseHistoryCallback (list, notehistory) {
+
   checkHistoryList()
   // sort by pinned then timestamp
   list.sort('', {

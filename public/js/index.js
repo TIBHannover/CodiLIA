@@ -255,8 +255,17 @@ const statusType = {
 }
 
 window.liaReady = function() {
-  alert("XXXXXXXXXXXXXXXXXXXXX")
+  console.warn("liaReady");
 }
+
+window.liaGoto = function(line) {
+  console.warn("liaGoto", line);
+}
+
+window.liaDefinitions = function (json) {
+  window.definitions = json;
+}
+
 
 // global vars
 window.loaded = false
@@ -317,7 +326,7 @@ var editor = editorInstance.init(textit)
 // FIXME: global referncing in jquery-textcomplete patch
 window.editor = editor
 
-var lia = document.getElementById("lia");
+window.lia = document.getElementById("lia");
 
 
 var inlineAttach = inlineAttachment.editors.codemirror4.attach(editor)
@@ -372,7 +381,7 @@ var haveUnreadChanges = false
 
 function renderFilename() {
   try {
-    return lia.contentDocument.title
+    return window.lia.contentDocument.title
   } catch (e) {
     return "Untitled"
   }
@@ -508,10 +517,10 @@ $(window).resize(function () {
 })
 // when page unload
 $(window).on('unload', function () {
-// updateHistoryInner();
+  updateHistoryInner();
 })
 $(window).on('error', function () {
-  // setNeedRefresh();
+  setNeedRefresh();
 })
 
 //setupSyncAreas(ui.area.codemirrorScroll, ui.area.view, ui.area.markdown, editor)
@@ -2785,7 +2794,13 @@ var postUpdateEvent = null
 
 
 
-
+var initView = function(value) {
+  try {
+    window.lia.contentWindow.jitLia(value)
+  } catch(e) {
+    setTimeout( function() { initView(value) }, 500 )
+  }
+}
 
 function updateViewInner () {
   if (appState.currentMode === modeType.edit || !isDirty) return
@@ -2794,7 +2809,11 @@ function updateViewInner () {
   //md.meta = {}
   //delete md.metaError
 
-  lia.contentWindow.jitLia(value)
+  try {
+    window.lia.contentWindow.jitLia(value)
+  } catch(e) {
+    initView(value)
+  }
 
   /*
   var rendered = md.render(value)
@@ -2854,7 +2873,16 @@ var updateHistoryDebounce = 600
 var updateHistory = _.debounce(updateHistoryInner, updateHistoryDebounce)
 
 function updateHistoryInner () {
-  writeHistory(renderFilename(), [])//renderTags(ui.area.markdown))
+  let tags = null
+  try {
+    tags = window.definitions.macro.tags
+      .split(",")
+      .map( e => e.trim())
+  } catch (e) {
+    tags = []
+  }
+
+  writeHistory(renderFilename(), tags, window.definitions) //renderTags(ui.area.markdown))
 }
 
 function updateDataAttrs (src, des) {
