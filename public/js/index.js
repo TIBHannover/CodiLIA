@@ -328,6 +328,10 @@ window.liaDefinitions = function (json) {
   window.definitions = json;
 }
 
+window.editor.on('dblclick', function(e) {
+   window.lia.contentWindow.gotoLia(e.getCursor().line + 1)
+})
+
 var inlineAttach = inlineAttachment.editors.codemirror4.attach(editor)
 defaultTextHeight = parseInt($('.CodeMirror').css('line-height'))
 
