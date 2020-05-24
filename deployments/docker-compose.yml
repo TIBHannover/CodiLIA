@@ -13,7 +13,7 @@ services:
     # you can use image or custom build below
     #image: nabo.codimd.dev/hackmdio/hackmd:2.0.0
     #image: hackmdio/codimd
-    image: liamd/liamd
+    image: liascript/liamd
     # build:
     #   context: ..
     #   dockerfile: ./deployments/Dockerfile
@@ -21,10 +21,11 @@ services:
       - CMD_DB_URL=postgres://codimd:change_password@database/codimd
       - CMD_USECDN=false
       - CMD_ALLOW_ANONYMOUS=true
+      #- CMD_DOMAIN=localhost:4000
     depends_on:
       - database
     ports:
-      - "3000:3000"
+      - "4000:3000"
     volumes:
       - upload-data:/home/hackmd/app/public/uploads
     restart: always
