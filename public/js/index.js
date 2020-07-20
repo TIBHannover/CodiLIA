@@ -615,7 +615,7 @@ function checkEditorStyle () {
   }
   // workaround editor will have wrong doc height when editor height changed
   editor.setSize(null, ui.area.edit.height())
-  checkEditorScrollOverLines()
+  //checkEditorScrollOverLines()
   // make editor resizable
   if (!ui.area.resize.handle.length) {
     ui.area.edit.resizable({
@@ -2644,7 +2644,7 @@ editorInstance.on('changes', function (editor, changes) {
   }
   if (docHeightChanged) {
     checkEditorScrollbar()
-    checkEditorScrollOverLines()
+    //checkEditorScrollOverLines()
     // always sync edit scrolling to view if user is editing
     if (ui.area.codemirrorScroll[0].scrollHeight > ui.area.view[0].scrollHeight && editorHasFocus()) {
       postUpdateEvent = function () {
