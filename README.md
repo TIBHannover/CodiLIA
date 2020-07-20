@@ -9,7 +9,7 @@ CodiMD
 CodiMD lets you collaborate in real-time with markdown.
 Built on [HackMD](https://hackmd.io) source code, CodiMD lets you host and control your team's content with speed and ease.
 
-![screenshot](https://raw.githubusercontent.com/hackmdio/codimd/develop/public/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/liascript/codimd/develop/public/screenshot.gif)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -25,6 +25,9 @@ Built on [HackMD](https://hackmd.io) source code, CodiMD lets you host and contr
 - [Contribution and Discussion](#contribution-and-discussion)
 - [Browser Support](#browser-support)
 - [License](#license)
+
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
