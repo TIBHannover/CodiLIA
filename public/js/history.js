@@ -72,7 +72,7 @@ export function clearDuplicatedHistory (notehistory) {
   return newnotehistory
 }
 
-function addHistory (id, text, time, tags, pinned, notehistory) {
+function addHistory (id, text, time, tags, pinned, liascript, notehistory) {
   // only add when note id exists
   if (id) {
     notehistory.push({
@@ -80,7 +80,8 @@ function addHistory (id, text, time, tags, pinned, notehistory) {
       text,
       time,
       tags,
-      pinned
+      pinned,
+      liascript: liascript
     })
   }
   return notehistory
@@ -97,20 +98,22 @@ export function removeHistory (id, notehistory) {
 }
 
 // used for inner
-export function writeHistory (title, tags) {
+export function writeHistory (title, tags, liascript) {
   checkIfAuth(
     () => {
       // no need to do this anymore, this will count from server-side
       // writeHistoryToServer(title, tags);
     },
     () => {
-      writeHistoryToStorage(title, tags)
+      writeHistoryToStorage(title, tags, liascript)
     }
   )
 }
 
-function writeHistoryToStorage (title, tags) {
+function writeHistoryToStorage (title, tags, liascript) {
   const data = store.get('notehistory')
+
+
   let notehistory
   if (data && typeof data === 'string') {
     notehistory = JSON.parse(data)
@@ -118,7 +121,7 @@ function writeHistoryToStorage (title, tags) {
     notehistory = []
   }
 
-  const newnotehistory = generateHistory(title, tags, notehistory)
+  const newnotehistory = generateHistory(title, tags, liascript, notehistory)
   saveHistoryToStorage(newnotehistory)
 }
 
@@ -126,19 +129,22 @@ if (!Array.isArray) {
   Array.isArray = arg => Object.prototype.toString.call(arg) === '[object Array]'
 }
 
-function renderHistory (title, tags) {
+function renderHistory (title, tags, liascript) {
   // console.debug(tags);
   const id = urlpath ? location.pathname.slice(urlpath.length + 1, location.pathname.length).split('/')[1] : location.pathname.split('/')[1]
   return {
     id,
     text: title,
     time: moment().valueOf(),
-    tags
+    tags,
+    comment: liascript.macro.comment || "",
+    logo: liascript.logo,
+    author: liascript.author
   }
 }
 
-function generateHistory (title, tags, notehistory) {
-  const info = renderHistory(title, tags)
+function generateHistory (title, tags, liascript, notehistory) {
+  const info = renderHistory(title, tags, liascript)
   // keep any pinned data
   let pinned = false
   for (let i = 0; i < notehistory.length; i++) {
@@ -148,7 +154,7 @@ function generateHistory (title, tags, notehistory) {
     }
   }
   notehistory = removeHistory(info.id, notehistory)
-  notehistory = addHistory(info.id, info.text, info.time, info.tags, pinned, notehistory)
+  notehistory = addHistory(info.id, info.text, info.time, info.tags, pinned, liascript, notehistory)
   notehistory = clearDuplicatedHistory(notehistory)
   return notehistory
 }
@@ -179,6 +185,7 @@ function getServerHistory (callback) {
 
 export function getStorageHistory (callback) {
   let data = store.get('notehistory')
+
   if (data) {
     if (typeof data === 'string') { data = JSON.parse(data) }
     callback(data)
@@ -238,6 +245,16 @@ function parseToHistory (list, notehistory, callback) {
       notehistory[i].timestamp = timestamp.valueOf()
       notehistory[i].fromNow = timestamp.fromNow()
       notehistory[i].time = timestamp.format('llll')
+
+
+      if (notehistory[i].liascript.logo != "")
+        notehistory[i].logo = "background-image: url('" + notehistory[i].liascript.logo + "'); width: calc(100% + 50px); height: 150px; background-size: cover; background-position: center; margin-left: -25px; margin-bottom: 10px"
+
+      try {
+        notehistory[i].comment = notehistory[i].liascript.macro.comment
+      } catch(e) {
+        notehistory[i].comment = "-----"
+      }
       // prevent XSS
       notehistory[i].text = escapeHTML(notehistory[i].text)
       notehistory[i].tags = (notehistory[i].tags && notehistory[i].tags.length > 0) ? escapeHTML(notehistory[i].tags).split(',') : []

@@ -12,3 +12,6 @@ public/views/build
 
 .nyc_output
 coverage/
+
+#ignore docker-helper when building
+docker-helper
