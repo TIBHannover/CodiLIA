@@ -6,8 +6,8 @@
         "Markdown",
         "Notes"
     ],
-    "website": "https://github.com/hackmdio/codimd",
-    "repository": "https://github.com/hackmdio/codimd",
+    "website": "https://github.com/liascript/codimd",
+    "repository": "https://github.com/liascript/codimd",
     "logo": "https://github.com/hackmdio/codimd/raw/master/public/codimd-icon-1024.png",
     "success_url": "/",
     "env": {
