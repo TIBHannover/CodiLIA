@@ -26,6 +26,9 @@ Built on [HackMD](https://hackmd.io) source code, CodiMD lets you host and contr
 - [Browser Support](#browser-support)
 - [License](#license)
 
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## HackMD
