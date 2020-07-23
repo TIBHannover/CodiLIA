@@ -1,81 +1,99 @@
-CodiMD
-===
+# CodiLIA
 
-[![build status][travis-image]][travis-url]
-[![version][github-version-badge]][github-release-page]
-[![Gitter][gitter-image]][gitter-url]
-[![POEditor][poeditor-image]][poeditor-url]
 
-CodiMD lets you collaborate in real-time with markdown.
-Built on [HackMD](https://hackmd.io) source code, CodiMD lets you host and control your team's content with speed and ease.
+CodiMD lets you collaborate in real-time with markdown. Built on
+[HackMD](https://hackmd.io) source code, CodiMD lets you host and control your
+team's content with speed and ease.
 
-![screenshot](https://raw.githubusercontent.com/liascript/codimd/develop/public/screenshot.gif)
+![screenshot](https://raw.githubusercontent.com/liascript/codilia/develop/public/screenshot.gif)
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-# Table of Contents
+## Free (Test)-Deploy
 
-- [HackMD](#hackmd)
-- [CodiMD - The Open Source HackMD](#codimd---the-open-source-hackmd)
-- [Documentation](#documentation)
-  - [Deployment](#deployment)
-  - [Configuration](#configuration)
-  - [Upgrading and Migration](#upgrading-and-migration)
-  - [Developer](#developer)
-- [Contribution and Discussion](#contribution-and-discussion)
-- [Browser Support](#browser-support)
-- [License](#license)
-
+Click on the button below and follow the install-instructions.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## HackMD
 
-[HackMD](https://hackmd.io) helps developers write better documents and build active communities with open collaboration.
-HackMD is built with one promise - **You own and control all your content**:
-- You should be able to easily [download all your online content at once](https://hackmd.io/c/news/%2Fs%2Fr1cx3a3SE).
-- Your content formatting should be portable as well. (That's why we choose [markdown](https://hackmd.io/features#Typography).)
-- You should be able to control your content's presentation with HTML, [slide mode](https://hackmd.io/p/slide-example), or [book mode](https://hackmd.io/c/book-example/).
+[HackMD](https://hackmd.io) helps developers write better documents and build
+active communities with open collaboration. HackMD is built with one promise -
+**You own and control all your content**:
+
+- You should be able to easily
+  [download all your online content at once](https://hackmd.io/c/news/%2Fs%2Fr1cx3a3SE).
+
+- Your content formatting should be portable as well.
+  (That's why we choose [markdown](https://hackmd.io/features#Typography).)
+
+- You should be able to control your content's presentation with HTML,
+  [slide mode](https://hackmd.io/p/slide-example),
+  or [book mode](https://hackmd.io/c/book-example/).
 
 ## CodiMD - The Open Source HackMD
 
-CodiMD is the free software version of [HackMD](https://hackmd.io), developed and opened source by the HackMD team with reduced features (without book mode), you can use CodiMD for your community and own all your data. *(See the [origin of the name CodiMD](https://github.com/hackmdio/hackmd/issues/720).)*
+CodiMD is the free software version of [HackMD](https://hackmd.io), developed
+and opened source by the HackMD team with reduced features (without book mode),
+you can use CodiMD for your community and own all your data. (See the
+[origin of the name CodiMD](https://github.com/hackmdio/hackmd/issues/720).)
 
-CodiMD is perfect for open communities, while HackMD emphasizes on permission and access controls for commercial use cases.
+CodiMD is perfect for open communities, while HackMD emphasizes on permission
+and access controls for commercial use cases.
 
-HackMD team is committed to keep CodiMD open source. All contributions are welcome!
+HackMD team is committed to keep CodiMD open source. All contributions are
+welcome!
+
+## CodiLIA - Codi for writing LiaScript
 
 ## Documentation
-You would find all documentation here: [CodiMD Documentation](https://hackmd.io/c/codimd-documentation)
+
+You would find all documentation here:
+[CodiMD Documentation](https://hackmd.io/c/codimd-documentation)
 
 ### Deployment
-If you want to spin up an instance and start using immediately, see [Docker deployment](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-docker-deployment).
-If you want to contribute to the project, start with [manual deployment](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-manual-deployment).
+
+If you want to spin up an instance and start using immediately, see
+[Docker deployment](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-docker-deployment).
+If you want to contribute to the project, start with
+[manual deployment](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-manual-deployment).
 
 ### Configuration
-CodiMD is highly customizable, learn about all configuration options of networking, security, performance, resources, privilege, privacy, image storage, and authentication in [CodiMD Configuration](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-configuration).
+
+CodiMD is highly customizable, learn about all configuration options of
+networking, security, performance, resources, privilege, privacy, image storage,
+and authentication in
+[CodiMD Configuration](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-configuration).
 
 ### Upgrading and Migration
-Upgrade CodiMD from previous version? See [this guide](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-upgrade)<br>
-Migrating from Etherpad? Follow [this guide](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-migration-etherpad)
+
+Upgrade CodiMD from previous version? See
+[this guide](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-upgrade)
+
+Migrating from Etherpad? Follow
+[this guide](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-migration-etherpad)
 
 ### Developer
-Join our contributor community! Start from deploying [CodiMD manually](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-manual-deployment), [connecting to your own database](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-db-connection), [learn about the project structure](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-project-structure), to [build your changes](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-webpack) with the help of webpack.
+
+Join our contributor community! Start from deploying
+[CodiMD manually](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-manual-deployment),
+[connecting to your own database](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-db-connection),
+[learn about the project structure](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-project-structure), to
+[build your changes](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-webpack) with the help of webpack.
 
 ## Contribution and Discussion
+
 All contributions are welcome! Even asking a question helps.
 
-| Project | Contribution Types | Contribution Venue |
-| ------- | ------------------ | ------------------ |
-|**CodiMD**|:couple: Community chat|[Gitter][gitter-url]|
-||:bug: Issues, bugs, and feature requests|[Issue tracker](https://github.com/hackmdio/codimd/issues)|
-||:books: Improve documentation|[Documentations](https://hackmd.io/c/codimd-documentation)|
-||:pencil: Translation|[POEditor][poeditor-url]|
-||:coffee: Donation|[Buy us coffee](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=KDGS4PREHX6QQ&lc=US&item_name=HackMD&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)|
-|**HackMD**|:question: Issues related to [HackMD](https://hackmd.io/)|[Issue tracker](https://github.com/hackmdio/hackmd-io-issues/issues)|
-||:pencil2: Translation|[hackmd-locales](https://github.com/hackmdio/hackmd-locales/tree/master/locales)|
+| Project    | Contribution Types                                        | Contribution Venue                                                                                                                                                                          |
+| ---------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **CodiMD** | :couple: Community chat                                   | [Gitter][gitter-url]                                                                                                                                                                        |
+|            | :bug: Issues, bugs, and feature requests                  | [Issue tracker](https://github.com/hackmdio/codimd/issues)                                                                                                                                  |
+|            | :books: Improve documentation                             | [Documentations](https://hackmd.io/c/codimd-documentation)                                                                                                                                  |
+|            | :pencil: Translation                                      | [POEditor][poeditor-url]                                                                                                                                                                    |
+|            | :coffee: Donation                                         | [Buy us coffee](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=KDGS4PREHX6QQ&lc=US&item_name=HackMD&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted) |
+| **HackMD** | :question: Issues related to [HackMD](https://hackmd.io/) | [Issue tracker](https://github.com/hackmdio/hackmd-io-issues/issues)                                                                                                                        |
+|            | :pencil2: Translation                                     | [hackmd-locales](https://github.com/hackmdio/hackmd-locales/tree/master/locales)                                                                                                            |
 
 ## Browser Support
 
