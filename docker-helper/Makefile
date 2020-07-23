@@ -2,10 +2,10 @@
 all: build-docker runtime-docker
 
 build-docker:
-	docker build -t liamd/build -f "build/Dockerfile" "build"
+	docker build -t codilia/build -f "build/Dockerfile" "build"
 
 runtime-docker: runtime/fonts
-	docker build -t liamd/runtime -f "runtime/Dockerfile" "runtime"
+	docker build -t codilia/runtime -f "runtime/Dockerfile" "runtime"
 
 runtime/fonts:Noto-unhinted.zip
 	unzip -d $@ $<

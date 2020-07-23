@@ -13,7 +13,7 @@ services:
     # you can use image or custom build below
     #image: nabo.codimd.dev/hackmdio/hackmd:2.0.0
     #image: hackmdio/codimd
-    image: liascript/liamd:latest
+    image: liascript/codilia:latest
     # build:
     #   context: ..
     #   dockerfile: ./deployments/Dockerfile

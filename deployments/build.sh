@@ -5,4 +5,4 @@ set -x
 
 CURRENT_DIR=$(dirname "$BASH_SOURCE")
 
-docker build -t liascript/liamd -f "$CURRENT_DIR/Dockerfile" "$CURRENT_DIR/.."
+docker build -t liascript/codilia -f "$CURRENT_DIR/Dockerfile" "$CURRENT_DIR/.."
