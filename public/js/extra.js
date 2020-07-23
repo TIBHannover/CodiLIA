@@ -131,9 +131,9 @@ function getTitle (view) {
 export function renderTitle (view) {
   let title = getTitle(view)
   if (title) {
-    title += ' - CodiMD'
+    title += ' - CodiLIA'
   } else {
-    title = 'CodiMD - Collaborative markdown notes'
+    title = 'CodiLIA - Collaborative LiaScript online courses'
   }
   return title
 }

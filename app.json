@@ -15,7 +15,7 @@
             "description": "Let npm also install development build tool",
             "value": "false"
         },
-        "CMD_SHARE": {
+        "CMD_SHARE_URL": {
             "description": "Use this param in the following way, to use LiaScript.github.io as your final renderer ('https://LiaScript.github.io/course/?https://YOURAPP.herokuapp.com')",
             "required": false
         },

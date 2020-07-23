@@ -33,10 +33,10 @@ RUN echo "**** install yarn repository ****" && \
           netcat-openbsd \
           nodejs \
           yarn && \
-  echo "**** install codi-md ****" && \
+  echo "**** install codi-lia ****" && \
   npm install -g webpack && \
-  git clone https://github.com/liascript/codimd /opt/codimd && \
-  cd /opt/codimd && \
+  git clone https://github.com/liascript/codilia /opt/codilia && \
+  cd /opt/codilia && \
   rm package-lock.json && \
   npm install \
   npm run build && \

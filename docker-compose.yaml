@@ -2,21 +2,21 @@ version: "3"
 services:
   mariadb:
     image: linuxserver/mariadb:latest
-    container_name: codimd_mariadb
+    container_name: codilia_mariadb
     restart: always
     volumes:
       - path to mariadb data:/config
     environment:
       - MYSQL_ROOT_PASSWORD=secret password
-      - MYSQL_DATABASE=codimd
-      - MYSQL_USER=codimd
+      - MYSQL_DATABASE=codilia
+      - MYSQL_USER=codilia
       - MYSQL_PASSWORD=secret password
       - PGID=1000
       - PUID=1000
       - TZ=Europe/London
-  codimd:
+  codilia:
     build: .
-    container_name: codimd
+    container_name: codilia
     restart: always
     depends_on:
       - mariadb
@@ -24,9 +24,9 @@ services:
       - path to config:/config
     environment:
       - DB_HOST=mariadb
-      - DB_USER=codimd
+      - DB_USER=codilia
       - DB_PASS=secret password
-      - DB_NAME=codimd
+      - DB_NAME=codilia
       - DB_PORT=3306
       - PGID=1000
       - PUID=1000
