@@ -473,13 +473,12 @@ module.exports = {
       }]
     }, {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      exclude: path.resolve(__dirname, 'public/js/lib/renderer/fretboard'),
       use: [{
         loader: 'url-loader',
         options: { limit: '10000', mimetype: 'svg+xml' }
       }]
     }, {
-      test: /.*\/fretboard\/svg\/.*\.svg$/,
+      test: /.*\.svg$/,
       loader: 'string-loader'
     }, {
       test: /\.png(\?v=\d+\.\d+\.\d+)?$/,

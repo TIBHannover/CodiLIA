@@ -23,7 +23,7 @@ import {
   serializeParamToAttribute,
   deserializeParamAttributeFromElement
 } from './lib/markdown/utils'
-import { renderFretBoard } from './lib/renderer/fretboard/fretboard'
+//import { renderFretBoard } from './lib/renderer/fretboard/fretboard'
 import './lib/renderer/lightbox'
 import { renderCSVPreview } from './lib/renderer/csvpreview'
 
@@ -498,6 +498,7 @@ export function finishView (view) {
     }
   })
   // fretboard
+  /*
   const fretboard = view.find('div.fretboard_instance.raw').removeClass('raw')
   fretboard.each((key, value) => {
     const params = deserializeParamAttributeFromElement(value)
@@ -512,6 +513,7 @@ export function finishView (view) {
       console.warn(err)
     }
   })
+  */
   // markmap
   view.find('div.markmap.raw').removeClass('raw').each(async (key, value) => {
     const $elem = $(value).parent().parent()
@@ -1083,7 +1085,7 @@ const fenceCodeAlias = {
   //abc: 'abc',
   //vega: 'vega',
   geo: 'geo',
-  fretboard: 'fretboard_instance',
+  //fretboard: 'fretboard_instance',
   markmap: 'markmap'
 }
 
