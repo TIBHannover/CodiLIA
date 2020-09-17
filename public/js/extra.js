@@ -31,7 +31,7 @@ import markdownit from 'markdown-it'
 import markdownitContainer from 'markdown-it-container'
 
 /* Defined regex markdown it plugins */
-import Plugin from 'markdown-it-regexp'
+//import Plugin from 'markdown-it-regexp'
 
 require('prismjs/themes/prism.css')
 require('prismjs/components/prism-wiki')
@@ -1264,6 +1264,7 @@ md.core.ruler.push('plantuml', (state) => {
   }
 })
 
+/*
 // youtube
 const youtubePlugin = new Plugin(
   // regexp to match
@@ -1365,7 +1366,7 @@ const emojijsPlugin = new Plugin(
     return div[0].outerHTML
   }
 )
-
+*/
 // yaml meta, from https://github.com/eugeneware/remarkable-meta
 function get (state, line) {
   const pos = state.bMarks[line]
@@ -1410,14 +1411,14 @@ function metaPlugin (md) {
 }
 
 md.use(metaPlugin)
-md.use(emojijsPlugin)
-md.use(youtubePlugin)
-md.use(vimeoPlugin)
-md.use(gistPlugin)
-md.use(tocPlugin)
-md.use(slidesharePlugin)
-md.use(speakerdeckPlugin)
-md.use(pdfPlugin)
+//md.use(emojijsPlugin)
+//md.use(youtubePlugin)
+//md.use(vimeoPlugin)
+//md.use(gistPlugin)
+//md.use(tocPlugin)
+//md.use(slidesharePlugin)
+//md.use(speakerdeckPlugin)
+//md.use(pdfPlugin)
 
 export default {
   md

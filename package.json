@@ -151,7 +151,6 @@
     "less-loader": "~4.1.0",
     "list.js": "~1.5.0",
     "markdown-it-container": "~2.0.0",
-    "markdown-it-regexp": "~0.4.0",
     "markdownlint": "^0.17.0",
     "mathjax": "^2.7.8",
     "mermaid": "~8.4.8",
