@@ -129,7 +129,6 @@
     "expose-loader": "~0.7.5",
     "file-loader": "~2.0.0",
     "file-saver": "~2.0.2",
-    "flowchart.js": "^1.13.0",
     "fork-awesome": "~1.1.7",
     "gist-embed": "~2.6.0",
     "graceful-fs": "^4.2.4",

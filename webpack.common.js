@@ -228,7 +228,6 @@ module.exports = {
       'script-loader!jqueryTextcomplete',
       'script-loader!codemirrorInlineAttachment',
       'script-loader!ot',
-      'flowchart.js',
       'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/index.js')
@@ -280,7 +279,6 @@ module.exports = {
       'script-loader!jqueryTextcomplete',
       'script-loader!codemirrorInlineAttachment',
       'script-loader!ot',
-      'flowchart.js',
       'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'script-loader!viz.js',
       'script-loader!viz.render.js',
@@ -290,7 +288,6 @@ module.exports = {
     ],
     pretty: [
       'babel-polyfill',
-      'flowchart.js',
       'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/pretty.js')
@@ -312,7 +309,6 @@ module.exports = {
       'expose-loader?hljs!highlight.js',
       'emojify.js',
       'script-loader!gist-embed',
-      'flowchart.js',
       'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'script-loader!viz.js',
       'script-loader!viz.render.js',
@@ -322,7 +318,6 @@ module.exports = {
     slide: [
       'babel-polyfill',
       'bootstrap-tooltip',
-      'flowchart.js',
       'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/slide.js')
@@ -347,7 +342,6 @@ module.exports = {
       'expose-loader?hljs!highlight.js',
       'emojify.js',
       'script-loader!gist-embed',
-      'flowchart.js',
       'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'script-loader!viz.js',
       'script-loader!viz.render.js',

@@ -340,6 +340,7 @@ export function finishView (view) {
     }
   })
   // flowchart
+  /*
   const flow = view.find('div.flow-chart.raw').removeClass('raw')
   flow.each((key, value) => {
     try {
@@ -363,6 +364,7 @@ export function finishView (view) {
       console.warn(err)
     }
   })
+  */
   // graphviz
   var graphvizs = view.find('div.graphviz.raw').removeClass('raw')
   graphvizs.each(function (key, value) {
@@ -1083,7 +1085,7 @@ export function scrollToHash () {
 
 const fenceCodeAlias = {
   sequence: 'sequence-diagram',
-  flow: 'flow-chart',
+  //flow: 'flow-chart',
   graphviz: 'graphviz',
   //mermaid: 'mermaid',
   //abc: 'abc',
