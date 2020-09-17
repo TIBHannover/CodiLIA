@@ -1,18 +1,20 @@
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://LiaScript.github.io/course/?https://github.com/LiaScript/docs) [![Gitter](https://badges.gitter.im/LiaScript/community.svg)](https://gitter.im/LiaScript/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 # CodiLIA
 
-
-CodiMD lets you collaborate in real-time with markdown. Built on
-[HackMD](https://hackmd.io) source code, CodiMD lets you host and control your
-team's content with speed and ease.
+CodiLIA lets you collaborate in real-time to create interactive online courses
+with [LiaScript](https://LiaScript.github.io). Built on
+[HackMD](https://hackmd.io) source code, CodiLIA lets you host and control your
+course content with speed and ease.
 
 ![screenshot](https://raw.githubusercontent.com/liascript/codilia/develop/public/screenshot.gif)
+
 
 ## Free (Test)-Deploy
 
 Click on the button below and follow the install-instructions.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
 
 
 ## HackMD
@@ -44,14 +46,64 @@ and access controls for commercial use cases.
 HackMD team is committed to keep CodiMD open source. All contributions are
 welcome!
 
-## CodiLIA - Codi for writing LiaScript
+## CodiLIA - CodiMD for writing LiaScript
+
+CodiLIA allows you to write free and open online courses based on an extended
+Markdown syntax. It applies the CodiMD backend, but all Markdown is interpreted
+by LiaScript. You can either share your courses from your plattform or share
+it via https://LiaScript.github.io
+
 
 ## Documentation
 
 You would find all documentation here:
+
+[LiaScript Documentation](https://github.com/LiaScript/docs)
+
 [CodiMD Documentation](https://hackmd.io/c/codimd-documentation)
 
-### Deployment
+### Deployment & Co
+
+To try this out locally, you need to clone this repository and build it via:
+
+``` bash
+git clone https://github.com/LiaScript/CodiLIA
+cd CodiLIA
+npm i
+npm i sqlite3
+bin/setup
+npm run build
+npm run start
+```
+
+and then open your browser at http://localhost:3000/
+
+With Docker:
+
+```
+cd deployments
+docker-compose up
+```
+
+Change the configuration in [docker-compose.yml](deployments/docer-compose.yml).
+It will automatically download the latest CodiLIA version. If you want to share
+your course, you have to set the `CMD_SHARE_URL` parameter in this file
+accordingly. All the other parameters are CodiMD-parameters, see the
+[CodiMD Configuration](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-configuration).
+
+
+If you want to, you can build your own docker-container by running the following
+commands:
+
+``` bash
+cd docker-helper
+make
+cd ..
+cd deployments
+./build.sh
+```
+
+__Further information:__
 
 If you want to spin up an instance and start using immediately, see
 [Docker deployment](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-docker-deployment).
@@ -120,19 +172,3 @@ To stay up to date with your installation it's recommended to subscribe the [rel
 [github-release-feed]: https://github.com/hackmdio/codimd/releases.atom
 [poeditor-image]: https://img.shields.io/badge/POEditor-translate-blue.svg
 [poeditor-url]: https://poeditor.com/join/project/q0nuPWyztp
-
-
-## Starting localy
-
-```
-git clone https://github.com/liaScript/codimd
-npm i
-npm i sqlite3
-npm run build
-bin/setup
-CMD_DOMAIN=localhost CMD_SESSION_SECRET=1234567 npx sequelize db:migrate & nodemon --watch app.js --watch lib --watch locales app.js
-```
-
-open in browser:
-
-http://localhost:3000/
