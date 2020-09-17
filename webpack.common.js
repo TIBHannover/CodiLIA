@@ -280,8 +280,6 @@ module.exports = {
       'script-loader!codemirrorInlineAttachment',
       'script-loader!ot',
       'imports-loader?Raphael=raphael!js-sequence-diagrams',
-      'script-loader!viz.js',
-      'script-loader!viz.render.js',
       'expose-loader?io!socket.io-client',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/index.js')
@@ -310,8 +308,6 @@ module.exports = {
       'emojify.js',
       'script-loader!gist-embed',
       'imports-loader?Raphael=raphael!js-sequence-diagrams',
-      'script-loader!viz.js',
-      'script-loader!viz.render.js',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/pretty.js')
     ],
@@ -343,8 +339,6 @@ module.exports = {
       'emojify.js',
       'script-loader!gist-embed',
       'imports-loader?Raphael=raphael!js-sequence-diagrams',
-      'script-loader!viz.js',
-      'script-loader!viz.render.js',
       'expose-loader?Reveal!reveal.js',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/slide.js')
@@ -375,14 +369,11 @@ module.exports = {
       'js-sequence-diagrams': path.join(__dirname, 'node_modules/@hackmd/js-sequence-diagrams/build/main.js'),
       'emojify.js': path.join(__dirname, 'node_modules/@hackmd/emojify.js/dist/js/emojify-browser.min.js'),
       'markdown-it': path.join(__dirname, 'node_modules/markdown-it/dist/markdown-it.js'),
-      'viz.js': path.join(__dirname, 'node_modules/viz.js/viz.js'),
-      'viz.render.js': path.join(__dirname, 'node_modules/viz.js/full.render.js'),
       markdownlint: path.join(__dirname, 'node_modules/markdownlint/demo/markdownlint-browser.js')
     }
   },
 
   externals: {
-    'viz.js': 'Viz',
     'socket.io-client': 'io',
     'jquery': '$',
     'moment': 'moment',

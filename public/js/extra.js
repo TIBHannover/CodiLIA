@@ -44,7 +44,7 @@ require('prismjs/components/prism-gherkin')
 
 require('./lib/common/login')
 require('../vendor/md-toc')
-let viz = new window.Viz()
+//let viz = new window.Viz()
 //const plantumlEncoder = require('plantuml-encoder')
 
 const ui = getUIElements()
