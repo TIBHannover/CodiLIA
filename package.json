@@ -59,7 +59,7 @@
     "i18n": "^0.8.6",
     "isomorphic-fetch": "~2.2.1",
     "jsdom-nogyp": "~0.8.3",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.20",
     "lutim": "^1.0.3",
     "markdown-it": "~10.0.0",
     "markdown-pdf": "~9.0.0",
@@ -96,7 +96,6 @@
     "sequelize-cli": "~5.5.1",
     "shortid": "^2.2.15",
     "socket.io": "~2.2.0",
-    "sqlite3": "^5.0.0",
     "toobusy-js": "~0.5.1",
     "uuid": "^3.4.0",
     "validator": "~11.1.0",
@@ -104,7 +103,7 @@
     "ws": "~7.1.1"
   },
   "devDependencies": {
-    "@hackmd/codemirror": "~5.49.5",
+    "@hackmd/codemirror": "^5.57.2",
     "@hackmd/emojify.js": "^2.1.0",
     "@hackmd/idle-js": "~1.0.1",
     "@susisu/mte-kernel": "^2.1.0",
@@ -130,7 +129,7 @@
     "fork-awesome": "~1.1.7",
     "graceful-fs": "^4.2.4",
     "handlebars": "^4.7.6",
-    "html-webpack-plugin": "^4.3.0",
+    "html-webpack-plugin": "^4.4.1",
     "imports-loader": "~0.8.0",
     "intelli-espower-loader": "~1.0.1",
     "ionicons": "~2.0.1",
@@ -149,7 +148,7 @@
     "mocha": "~5.2.0",
     "mock-require": "~3.0.3",
     "nyc": "~14.0.0",
-    "optimize-css-assets-webpack-plugin": "~5.0.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "pdfobject": "~2.1.1",
     "power-assert": "~1.6.1",
     "script-loader": "~0.7.2",
@@ -168,12 +167,12 @@
     "url-loader": "~1.0.1",
     "velocity-animate": "~1.5.2",
     "visibilityjs": "~2.0.2",
-    "webpack": "^4.43.0",
+    "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-merge": "^4.2.2",
     "webpack-parallel-uglify-plugin": "~1.1.0",
     "wurl": "^2.5.4",
-    "xss": "^1.0.7"
+    "xss": "^1.0.8"
   },
   "optionalDependencies": {
     "bufferutil": "~4.0.0",
