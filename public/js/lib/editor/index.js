@@ -184,7 +184,6 @@ export default class Editor {
     var makeSpeech = $('#makeSpeech')
     var makeAudio = $('#makeAudio')
     var makeMovie = $('#makeMovie')
-    var makeMath = $('#makeMath')
     var makeSingleChoiceQuiz = $('#makeSingleChoiceQuiz')
     var makeMultipleChoiceQuiz = $('#makeMultipleChoiceQuiz')
     var makeHint = $('#makeHint')
@@ -273,10 +272,6 @@ export default class Editor {
 
     makeMovie.click(() => {
       utils.insertText(this.editor, '!?[alt-text](movie-url)\n')
-    })
-
-    makeMath.click(() => {
-      utils.insertText(this.editor, '$ \\frac{a}{\\sum{b+i}} $\n')
     })
 
     makeSingleChoiceQuiz.click(() => {
