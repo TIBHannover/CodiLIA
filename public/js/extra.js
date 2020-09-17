@@ -28,7 +28,7 @@ import './lib/renderer/lightbox'
 //import { renderCSVPreview } from './lib/renderer/csvpreview'
 
 import markdownit from 'markdown-it'
-import markdownitContainer from 'markdown-it-container'
+//import markdownitContainer from 'markdown-it-container'
 
 /* Defined regex markdown it plugins */
 //import Plugin from 'markdown-it-regexp'
@@ -1174,6 +1174,7 @@ window.emojify.setConfig({
   ignore_emoticons: true
 })
 
+/*
 function renderContainer (tokens, idx, options, env, self) {
   tokens[idx].attrJoin('role', 'alert')
   tokens[idx].attrJoin('class', 'alert')
@@ -1205,6 +1206,7 @@ md.use(markdownitContainer, 'spoiler', {
     }
   }
 })
+*/
 
 const defaultImageRender = md.renderer.rules.image
 md.renderer.rules.image = function (tokens, idx, options, env, self) {

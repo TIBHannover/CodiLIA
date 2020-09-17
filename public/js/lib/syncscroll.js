@@ -2,7 +2,7 @@
 /* global _ */
 // Inject line numbers for sync scroll.
 
-import markdownitContainer from 'markdown-it-container'
+//import markdownitContainer from 'markdown-it-container'
 
 import { md } from '../extra'
 import modeType from './modeType'
@@ -127,6 +127,7 @@ function renderContainer (tokens, idx, options, env, self) {
   return self.renderToken(...arguments)
 }
 
+/*
 md.use(markdownitContainer, 'success', { render: renderContainer })
 md.use(markdownitContainer, 'info', { render: renderContainer })
 md.use(markdownitContainer, 'warning', { render: renderContainer })
@@ -156,6 +157,7 @@ md.use(markdownitContainer, 'spoiler', {
     }
   }
 })
+*/
 
 window.preventSyncScrollToEdit = false
 window.preventSyncScrollToView = false
