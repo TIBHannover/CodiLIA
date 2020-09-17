@@ -11,8 +11,8 @@ import unescapeHTML from 'lodash/unescape'
 
 import isURL from 'validator/lib/isURL'
 
-import { transform } from 'markmap-lib/dist/transform'
-import { markmap } from 'markmap-lib/dist/view'
+//import { transform } from 'markmap-lib/dist/transform'
+//import { markmap } from 'markmap-lib/dist/view'
 
 import { stripTags } from '../../utils/string'
 
@@ -523,6 +523,7 @@ export function finishView (view) {
   })
   */
   // markmap
+  /*
   view.find('div.markmap.raw').removeClass('raw').each(async (key, value) => {
     const $elem = $(value).parent().parent()
     const $value = $(value)
@@ -539,7 +540,7 @@ export function finishView (view) {
       console.warn(err)
     }
   })
-
+  */
   // image href new window(emoji not included)
   const images = view.find('img.raw[src]').removeClass('raw')
   images.each((key, value) => {
@@ -1094,7 +1095,7 @@ const fenceCodeAlias = {
   //vega: 'vega',
   //geo: 'geo',
   //fretboard: 'fretboard_instance',
-  markmap: 'markmap'
+  //markmap: 'markmap'
 }
 
 function highlightRender (code, lang) {
