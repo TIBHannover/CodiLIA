@@ -427,6 +427,7 @@ export function finishView (view) {
     }
   })
   // vega-lite
+  /*
   const vegas = view.find('div.vega.raw').removeClass('raw')
   vegas.each((key, value) => {
     try {
@@ -452,6 +453,7 @@ export function finishView (view) {
       console.warn(err)
     }
   })
+  */
   // geo map
   view.find('div.geo.raw').removeClass('raw').each(async function (key, value) {
     const $elem = $(value).parent().parent()
@@ -1077,7 +1079,7 @@ const fenceCodeAlias = {
   graphviz: 'graphviz',
   mermaid: 'mermaid',
   abc: 'abc',
-  vega: 'vega',
+  //vega: 'vega',
   geo: 'geo',
   fretboard: 'fretboard_instance',
   markmap: 'markmap'
