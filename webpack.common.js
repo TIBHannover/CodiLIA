@@ -103,32 +103,6 @@ module.exports = {
       inject: false,
       chunksSortMode: 'manual'
     }),
-    new HtmlWebpackPlugin({
-      template: 'public/views/includes/header.ejs',
-      chunks: ['font', 'slide-styles', 'slide'],
-      filename: path.join(__dirname, 'public/views/build/slide-header.ejs'),
-      inject: false,
-      chunksSortMode: 'manual'
-    }),
-    new HtmlWebpackPlugin({
-      template: 'public/views/includes/header.ejs',
-      chunks: ['slide-styles-pack', 'slide-styles', 'slide'],
-      filename: path.join(__dirname, 'public/views/build/slide-pack-header.ejs'),
-      inject: false,
-      chunksSortMode: 'manual'
-    }),
-    new HtmlWebpackPlugin({
-      template: 'public/views/includes/scripts.ejs',
-      chunks: ['slide'],
-      filename: path.join(__dirname, 'public/views/build/slide-scripts.ejs'),
-      inject: false
-    }),
-    new HtmlWebpackPlugin({
-      template: 'public/views/includes/scripts.ejs',
-      chunks: ['slide-pack'],
-      filename: path.join(__dirname, 'public/views/build/slide-pack-scripts.ejs'),
-      inject: false
-    }),
     new CopyWebpackPlugin([
       {
         context: path.join(__dirname, 'node_modules/@hackmd/emojify.js'),
@@ -226,8 +200,7 @@ module.exports = {
       path.join(__dirname, 'node_modules/@hackmd/codemirror/mode/mediawiki/mediawiki.css'),
       path.join(__dirname, 'public/css/github-extract.css'),
       path.join(__dirname, 'public/vendor/showup/showup.css'),
-      path.join(__dirname, 'public/css/markdown.css'),
-      path.join(__dirname, 'public/css/slide-preview.css')
+      path.join(__dirname, 'public/css/markdown.css')
     ],
     'index-styles-pack': [
       path.join(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css'),
@@ -257,8 +230,7 @@ module.exports = {
     ],
     'pretty-styles': [
       path.join(__dirname, 'public/css/github-extract.css'),
-      path.join(__dirname, 'public/css/markdown.css'),
-      path.join(__dirname, 'public/css/slide-preview.css')
+      path.join(__dirname, 'public/css/markdown.css')
     ],
     'pretty-styles-pack': [
       path.join(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css'),
@@ -272,32 +244,6 @@ module.exports = {
       'expose-loader?hljs!highlight.js',
       'emojify.js',
       path.join(__dirname, 'public/js/pretty.js')
-    ],
-    slide: [
-      'babel-polyfill',
-      'bootstrap-tooltip',
-      path.join(__dirname, 'public/js/slide.js')
-    ],
-    'slide-styles': [
-      path.join(__dirname, 'public/vendor/bootstrap/tooltip.min.css'),
-      path.join(__dirname, 'public/css/github-extract.css'),
-      path.join(__dirname, 'public/css/markdown.css')
-    ],
-    'slide-styles-pack': [
-      path.join(__dirname, 'node_modules/ionicons/css/ionicons.min.css')
-    ],
-    'slide-pack': [
-      'babel-polyfill',
-      'expose-loader?jQuery!expose-loader?$!jquery',
-      'velocity-animate',
-      'imports-loader?$=jquery!jquery-mousewheel',
-      'bootstrap-tooltip',
-      'expose-loader?jsyaml!js-yaml',
-      'expose-loader?moment!moment',
-      'script-loader!handlebars',
-      'expose-loader?hljs!highlight.js',
-      'emojify.js',
-      path.join(__dirname, 'public/js/slide.js')
     ]
   },
 
