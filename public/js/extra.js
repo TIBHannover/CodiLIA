@@ -405,7 +405,6 @@ export function exportToHTML (view) {
         dir: (md && md.meta && md.meta.dir) ? `dir="${md.meta.dir}"` : null
       }
       const html = template(context)
-      //        console.log(html);
       const blob = new Blob([html], {
         type: 'text/html;charset=utf-8'
       })

@@ -1083,7 +1083,7 @@ ui.modal.revision.on('show.bs.modal', function (e) {
     })
     .fail(function (err) {
       if (debug) {
-        console.log(err)
+        console.warn(err)
       }
     })
     .always(function () {
@@ -1193,7 +1193,7 @@ function selectRevision (time) {
     })
     .fail(function (err) {
       if (debug) {
-        console.log(err)
+        console.warn(err)
       }
     })
     .always(function () {
@@ -1253,7 +1253,7 @@ ui.modal.snippetImportProjects.change(function () {
     })
     .fail(function (err) {
       if (debug) {
-        console.log(err)
+        console.warn(err)
       }
     })
     .always(function () {
@@ -1477,7 +1477,6 @@ function replaceAll (data) {
 }
 
 function importFromUrl (url) {
-  // console.log(url);
   if (!url) return
   if (!isURL(url)) {
     showMessageModal('<i class="fa fa-cloud-download"></i> Import from URL', 'Not a valid URL :(', '', '', false)
@@ -1742,7 +1741,6 @@ var authorship = []
 var authorMarks = {} // temp variable
 var addTextMarkers = [] // temp variable
 function updateInfo (data) {
-  // console.log(data);
   if (Object.hasOwnProperty.call(data, 'createtime') && window.createtime !== data.createtime) {
     window.createtime = data.createtime
     updateLastChange()
@@ -1967,7 +1965,6 @@ editorInstance.on('update', function () {
   })
 })
 socket.on('check', function (data) {
-  // console.log(data);
   updateInfo(data)
 })
 socket.on('permission', function (data) {
@@ -1976,7 +1973,6 @@ socket.on('permission', function (data) {
 
 var permission = null
 socket.on('refresh', function (data) {
-  // console.log(data);
   editorInstance.config.docmaxlength = data.docmaxlength
   editor.setOption('maxLength', editorInstance.config.docmaxlength)
   updateInfo(data)
@@ -2500,7 +2496,6 @@ function enforceMaxLength (cm, change) {
 let lastDocHeight
 var ignoreEmitEvents = ['setValue', 'ignoreHistory']
 editorInstance.on('beforeChange', function (cm, change) {
-  if (debug) { console.debug(change) }
   lastDocHeight = editor.doc.height
   removeNullByte(cm, change)
   if (enforceMaxLength(cm, change)) {
@@ -2778,8 +2773,6 @@ function partialUpdate (src, tar, des) {
       var rawSrc = cloneAndRemoveDataAttr(src[i])
       var rawTar = cloneAndRemoveDataAttr(tar[i])
       if (rawSrc.outerHTML !== rawTar.outerHTML) {
-        // console.log(rawSrc);
-        // console.log(rawTar);
         $(des[i]).replaceWith(src[i])
       }
     }
@@ -2889,7 +2882,7 @@ function partialUpdate (src, tar, des) {
     if (debug) { console.log('REMOVE ELEMENTS') }
     for (let j = 0; j < removeElements.length; j++) {
       if (debug) {
-        console.log(removeElements[j].outerHTML)
+        console.warn(removeElements[j].outerHTML)
       }
       if (removeElements[j]) { $(removeElements[j]).remove() }
     }
@@ -3004,7 +2997,6 @@ function checkAbove (method) {
     text.push(editor.getLine(i))
   }
   text = text.join('\n') + '\n' + editor.getLine(cursor.line).slice(0, cursor.ch)
-  // console.log(text);
   return method(text)
 }
 
@@ -3016,7 +3008,6 @@ function checkBelow (method) {
     text.push(editor.getLine(i))
   }
   text = editor.getLine(cursor.line).slice(cursor.ch) + '\n' + text.join('\n')
-  // console.log(text);
   return method(text)
 }
 
@@ -3142,7 +3133,6 @@ $(editor.getInputField())
         text.push(editor.getLine(cursor.line - 1))
         text.push(editor.getLine(cursor.line))
         text = text.join('\n')
-        // console.log(text);
         if (text === '\n```') { editor.doc.cm.execCommand('goLineUp') }
       },
       context: function (text) {
@@ -3174,7 +3164,6 @@ $(editor.getInputField())
         text.push(editor.getLine(cursor.line - 1))
         text.push(editor.getLine(cursor.line))
         text = text.join('\n')
-        // console.log(text);
         if (text === '\n:::') { editor.doc.cm.execCommand('goLineUp') }
       },
       context: function (text) {
