@@ -272,7 +272,6 @@ module.exports = {
       'script-loader!handlebars',
       'expose-loader?hljs!highlight.js',
       'emojify.js',
-      'script-loader!gist-embed',
       'script-loader!codemirror',
       'script-loader!inlineAttachment',
       'script-loader!jqueryTextcomplete',
@@ -303,7 +302,6 @@ module.exports = {
       'script-loader!handlebars',
       'expose-loader?hljs!highlight.js',
       'emojify.js',
-      'script-loader!gist-embed',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/pretty.js')
     ],
@@ -332,7 +330,6 @@ module.exports = {
       'script-loader!handlebars',
       'expose-loader?hljs!highlight.js',
       'emojify.js',
-      'script-loader!gist-embed',
       'expose-loader?Reveal!reveal.js',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/slide.js')
@@ -356,7 +353,6 @@ module.exports = {
       ot: path.join(__dirname, 'public/vendor/ot/ot.min.js'),
       handlebars: path.join(__dirname, 'node_modules/handlebars/dist/handlebars.min.js'),
       'jquery-ui-resizable': path.join(__dirname, 'public/vendor/jquery-ui/jquery-ui.min.js'),
-      'gist-embed': path.join(__dirname, 'node_modules/gist-embed/gist-embed.min.js'),
       'bootstrap-tooltip': path.join(__dirname, 'public/vendor/bootstrap/tooltip.min.js'),
       'reveal-markdown': path.join(__dirname, 'public/js/reveal-markdown.js'),
       'emojify.js': path.join(__dirname, 'node_modules/@hackmd/emojify.js/dist/js/emojify-browser.min.js'),

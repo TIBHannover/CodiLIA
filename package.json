@@ -127,7 +127,6 @@
     "file-loader": "~2.0.0",
     "file-saver": "~2.0.2",
     "fork-awesome": "~1.1.7",
-    "gist-embed": "~2.6.0",
     "graceful-fs": "^4.2.4",
     "handlebars": "^4.7.6",
     "highlight.js": "^9.18.1",
