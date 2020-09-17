@@ -153,7 +153,6 @@
     "markdown-it-container": "~2.0.0",
     "markdown-it-imsize": "~2.0.1",
     "markdown-it-ins": "~2.0.0",
-    "markdown-it-mark": "~2.0.0",
     "markdown-it-mathjax": "~2.0.0",
     "markdown-it-regexp": "~0.4.0",
     "markdown-it-ruby": "^0.1.1",
