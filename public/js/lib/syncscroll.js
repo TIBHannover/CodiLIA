@@ -89,7 +89,6 @@ md.renderer.rules.fence = (tokens, idx, options, env, self) => {
 
     if (/!$/.test(info)) token.attrJoin('class', 'wrap')
     token.attrJoin('class', options.langPrefix + langName.replace(/=$|=\d+$|=\+$|!$|=!/, ''))
-    token.attrJoin('class', 'hljs')
     token.attrJoin('class', 'raw')
   }
 
