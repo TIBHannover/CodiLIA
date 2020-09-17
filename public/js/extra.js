@@ -1,7 +1,6 @@
 /* eslint-env browser, jquery */
 /* global moment, serverurl, plantumlServer, L */
 
-import hljs from 'highlight.js'
 import PDFObject from 'pdfobject'
 import { saveAs } from 'file-saver'
 
@@ -705,47 +704,12 @@ const fenceCodeAlias = {
   //markmap: 'markmap'
 }
 
-function highlightRender (code, lang) {
-  if (!lang || /no(-?)highlight|plain|text/.test(lang)) { return }
-
-  const params = parseFenceCodeParams(lang)
-  const attr = serializeParamToAttribute(params)
-  lang = lang.split(/\s+/g)[0]
-
-  code = escapeHTML(code)
-
-  const langAlias = fenceCodeAlias[lang]
-  if (langAlias) {
-    return `<div class="${langAlias} raw"${attr}>${code}</div>`
-  }
-
-  const result = {
-    value: code
-  }
-  const showlinenumbers = /=$|=\d+$|=\+$/.test(lang)
-  if (showlinenumbers) {
-    let startnumber = 1
-    const matches = lang.match(/=(\d+)$/)
-    if (matches) { startnumber = parseInt(matches[1]) }
-    const lines = result.value.split('\n')
-    const linenumbers = []
-    for (let i = 0; i < lines.length - 1; i++) {
-      linenumbers[i] = `<span data-linenumber='${startnumber + i}'></span>`
-    }
-    const continuelinenumber = /=\+$/.test(lang)
-    const linegutter = `<div class='gutter linenumber${continuelinenumber ? ' continue' : ''}'>${linenumbers.join('\n')}</div>`
-    result.value = `<div class='wrapper'>${linegutter}<div class='code'>${result.value}</div></div>`
-  }
-  return result.value
-}
-
 export const md = markdownit('default', {
   html: true,
   breaks: window.defaultUseHardbreak,
   langPrefix: '',
   linkify: true,
-  typographer: true,
-  highlight: highlightRender
+  typographer: true
 })
 window.md = md
 
@@ -776,33 +740,7 @@ md.renderer.rules.heading_open = function (tokens, idx, options, env, self) {
   tokens[idx].attrJoin('class', 'raw')
   return self.renderToken(...arguments)
 }
-md.renderer.rules.fence = (tokens, idx, options, env, self) => {
-  const token = tokens[idx]
-  const info = token.info ? md.utils.unescapeAll(token.info).trim() : ''
-  let langName = ''
-  let highlighted
 
-  if (info) {
-    langName = info.split(/\s+/g)[0]
-
-    if (/!$/.test(info)) token.attrJoin('class', 'wrap')
-    token.attrJoin('class', options.langPrefix + langName.replace(/=$|=\d+$|=\+$|!$|=!$/, ''))
-    token.attrJoin('class', 'hljs')
-    token.attrJoin('class', 'raw')
-  }
-
-  if (options.highlight) {
-    highlighted = options.highlight(token.content, info) || md.utils.escapeHtml(token.content)
-  } else {
-    highlighted = md.utils.escapeHtml(token.content)
-  }
-
-  if (highlighted.indexOf('<pre') === 0) {
-    return `${highlighted}\n`
-  }
-
-  return `<pre><code${self.renderAttrs(token)}>${highlighted}</code></pre>\n`
-}
 
 // yaml meta, from https://github.com/eugeneware/remarkable-meta
 function get (state, line) {
