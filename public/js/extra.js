@@ -289,6 +289,7 @@ export function finishView (view) {
   }
 
   // youtube
+  /*
   view.find('div.youtube.raw').removeClass('raw')
     .click(function () {
       imgPlayiframe(this, '//www.youtube.com/embed/')
@@ -316,7 +317,9 @@ export function finishView (view) {
   view.find('code[data-gist-id]').each((key, value) => {
     if ($(value).children().length === 0) { $(value).gist(window.viewAjaxCallback) }
   })
+  */
   // sequence diagram
+  /*
   const sequences = view.find('div.sequence-diagram.raw').removeClass('raw')
   sequences.each((key, value) => {
     try {
@@ -339,6 +342,7 @@ export function finishView (view) {
       console.warn(err)
     }
   })
+  */
   // flowchart
   /*
   const flow = view.find('div.flow-chart.raw').removeClass('raw')
@@ -1087,7 +1091,7 @@ export function scrollToHash () {
 }
 
 const fenceCodeAlias = {
-  sequence: 'sequence-diagram',
+  //sequence: 'sequence-diagram',
   //flow: 'flow-chart',
   //graphviz: 'graphviz',
   //mermaid: 'mermaid',

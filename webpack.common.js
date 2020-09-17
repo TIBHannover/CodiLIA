@@ -228,7 +228,6 @@ module.exports = {
       'script-loader!jqueryTextcomplete',
       'script-loader!codemirrorInlineAttachment',
       'script-loader!ot',
-      'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/index.js')
     ],
@@ -279,14 +278,12 @@ module.exports = {
       'script-loader!jqueryTextcomplete',
       'script-loader!codemirrorInlineAttachment',
       'script-loader!ot',
-      'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'expose-loader?io!socket.io-client',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/index.js')
     ],
     pretty: [
       'babel-polyfill',
-      'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/pretty.js')
     ],
@@ -307,14 +304,12 @@ module.exports = {
       'expose-loader?hljs!highlight.js',
       'emojify.js',
       'script-loader!gist-embed',
-      'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/pretty.js')
     ],
     slide: [
       'babel-polyfill',
       'bootstrap-tooltip',
-      'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/slide.js')
     ],
@@ -338,7 +333,6 @@ module.exports = {
       'expose-loader?hljs!highlight.js',
       'emojify.js',
       'script-loader!gist-embed',
-      'imports-loader?Raphael=raphael!js-sequence-diagrams',
       'expose-loader?Reveal!reveal.js',
       'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/slide.js')
@@ -365,8 +359,6 @@ module.exports = {
       'gist-embed': path.join(__dirname, 'node_modules/gist-embed/gist-embed.min.js'),
       'bootstrap-tooltip': path.join(__dirname, 'public/vendor/bootstrap/tooltip.min.js'),
       'reveal-markdown': path.join(__dirname, 'public/js/reveal-markdown.js'),
-      raphael: path.join(__dirname, 'node_modules/raphael/raphael.min.js'),
-      'js-sequence-diagrams': path.join(__dirname, 'node_modules/@hackmd/js-sequence-diagrams/build/main.js'),
       'emojify.js': path.join(__dirname, 'node_modules/@hackmd/emojify.js/dist/js/emojify-browser.min.js'),
       'markdown-it': path.join(__dirname, 'node_modules/markdown-it/dist/markdown-it.js'),
       markdownlint: path.join(__dirname, 'node_modules/markdownlint/demo/markdownlint-browser.js')
