@@ -257,7 +257,6 @@ module.exports = {
       path.join(__dirname, 'node_modules/@hackmd/codemirror/mode/mediawiki/mediawiki.css'),
       path.join(__dirname, 'public/css/github-extract.css'),
       path.join(__dirname, 'public/vendor/showup/showup.css'),
-      path.join(__dirname, 'public/css/mermaid.css'),
       path.join(__dirname, 'public/css/markdown.css'),
       path.join(__dirname, 'public/css/slide-preview.css')
     ],
@@ -271,7 +270,6 @@ module.exports = {
       'script-loader!jquery-ui-resizable',
       'bootstrap-validator',
       'expose-loader?jsyaml!js-yaml',
-      'script-loader!mermaid',
       'expose-loader?moment!moment',
       'script-loader!handlebars',
       'expose-loader?hljs!highlight.js',
@@ -299,7 +297,6 @@ module.exports = {
     ],
     'pretty-styles': [
       path.join(__dirname, 'public/css/github-extract.css'),
-      path.join(__dirname, 'public/css/mermaid.css'),
       path.join(__dirname, 'public/css/markdown.css'),
       path.join(__dirname, 'public/css/slide-preview.css')
     ],
@@ -310,7 +307,6 @@ module.exports = {
     'pretty-pack': [
       'babel-polyfill',
       'expose-loader?jsyaml!js-yaml',
-      'script-loader!mermaid',
       'expose-loader?moment!moment',
       'script-loader!handlebars',
       'expose-loader?hljs!highlight.js',
@@ -334,7 +330,6 @@ module.exports = {
     'slide-styles': [
       path.join(__dirname, 'public/vendor/bootstrap/tooltip.min.css'),
       path.join(__dirname, 'public/css/github-extract.css'),
-      path.join(__dirname, 'public/css/mermaid.css'),
       path.join(__dirname, 'public/css/markdown.css')
     ],
     'slide-styles-pack': [
@@ -347,7 +342,6 @@ module.exports = {
       'imports-loader?$=jquery!jquery-mousewheel',
       'bootstrap-tooltip',
       'expose-loader?jsyaml!js-yaml',
-      'script-loader!mermaid',
       'expose-loader?moment!moment',
       'script-loader!handlebars',
       'expose-loader?hljs!highlight.js',
@@ -378,7 +372,6 @@ module.exports = {
       jqueryTextcomplete: path.join(__dirname, 'public/vendor/jquery-textcomplete/jquery.textcomplete.js'),
       codemirrorInlineAttachment: path.join(__dirname, 'public/vendor/inlineAttachment/codemirror.inline-attachment.js'),
       ot: path.join(__dirname, 'public/vendor/ot/ot.min.js'),
-      mermaid: path.join(__dirname, 'node_modules/mermaid/dist/mermaid.min.js'),
       handlebars: path.join(__dirname, 'node_modules/handlebars/dist/handlebars.min.js'),
       'jquery-ui-resizable': path.join(__dirname, 'public/vendor/jquery-ui/jquery-ui.min.js'),
       'gist-embed': path.join(__dirname, 'node_modules/gist-embed/gist-embed.min.js'),

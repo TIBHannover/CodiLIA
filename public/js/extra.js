@@ -253,7 +253,7 @@ function replaceExtraTags (html) {
   return html
 }
 
-if (typeof window.mermaid !== 'undefined' && window.mermaid) window.mermaid.startOnLoad = false
+//if (typeof window.mermaid !== 'undefined' && window.mermaid) window.mermaid.startOnLoad = false
 
 // dynamic event or object binding here
 export function finishView (view) {
@@ -390,6 +390,7 @@ export function finishView (view) {
     }
   })
   // mermaid
+  /*
   const mermaids = view.find('div.mermaid.raw').removeClass('raw')
   mermaids.each((key, value) => {
     try {
@@ -406,6 +407,7 @@ export function finishView (view) {
       console.warn(err)
     }
   })
+  */
   // abc.js
   /*
   const abcs = view.find('div.abc.raw').removeClass('raw')
@@ -1083,7 +1085,7 @@ const fenceCodeAlias = {
   sequence: 'sequence-diagram',
   flow: 'flow-chart',
   graphviz: 'graphviz',
-  mermaid: 'mermaid',
+  //mermaid: 'mermaid',
   //abc: 'abc',
   //vega: 'vega',
   //geo: 'geo',
