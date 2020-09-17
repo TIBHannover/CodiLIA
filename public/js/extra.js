@@ -457,6 +457,7 @@ export function finishView (view) {
   })
   */
   // geo map
+  /*
   view.find('div.geo.raw').removeClass('raw').each(async function (key, value) {
     const $elem = $(value).parent().parent()
     const $value = $(value)
@@ -497,6 +498,7 @@ export function finishView (view) {
       console.warn(err)
     }
   })
+  */
   // fretboard
   /*
   const fretboard = view.find('div.fretboard_instance.raw').removeClass('raw')
@@ -1084,7 +1086,7 @@ const fenceCodeAlias = {
   mermaid: 'mermaid',
   //abc: 'abc',
   //vega: 'vega',
-  geo: 'geo',
+  //geo: 'geo',
   //fretboard: 'fretboard_instance',
   markmap: 'markmap'
 }

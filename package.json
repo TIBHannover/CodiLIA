@@ -146,7 +146,6 @@
     "js-yaml": "~3.13.1",
     "jsonlint": "~1.6.2",
     "keymaster": "~1.6.2",
-    "leaflet": "~1.6.0",
     "less": "~3.9.0",
     "less-loader": "~4.1.0",
     "list.js": "~1.5.0",
