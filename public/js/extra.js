@@ -1127,9 +1127,9 @@ export const md = markdownit('default', {
 })
 window.md = md
 
-md.use(require('markdown-it-abbr'))
-md.use(require('markdown-it-footnote'))
-md.use(require('markdown-it-deflist'))
+//md.use(require('markdown-it-abbr'))
+//md.use(require('markdown-it-footnote'))
+//md.use(require('markdown-it-deflist'))
 md.use(require('markdown-it-mark'))
 md.use(require('markdown-it-ins'))
 md.use(require('markdown-it-sub'))
