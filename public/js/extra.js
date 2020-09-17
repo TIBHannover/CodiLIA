@@ -1142,8 +1142,8 @@ md.use(require('markdown-it-mathjax')({
   beforeDisplayMath: '<span class="mathjax raw">\\[',
   afterDisplayMath: '\\]</span>'
 }))
-md.use(require('markdown-it-imsize'))
-md.use(require('markdown-it-ruby'))
+//md.use(require('markdown-it-imsize'))
+//md.use(require('markdown-it-ruby'))
 
 window.emojify.setConfig({
   blacklist: {
