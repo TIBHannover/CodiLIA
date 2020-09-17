@@ -1132,8 +1132,8 @@ window.md = md
 //md.use(require('markdown-it-deflist'))
 //md.use(require('markdown-it-mark'))
 //md.use(require('markdown-it-ins'))
-md.use(require('markdown-it-sub'))
-md.use(require('markdown-it-sup'))
+//md.use(require('markdown-it-sub'))
+//md.use(require('markdown-it-sup'))
 md.use(require('markdown-it-mathjax')({
   beforeMath: '<span class="mathjax raw">',
   afterMath: '</span>',

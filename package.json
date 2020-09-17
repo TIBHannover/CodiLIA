@@ -155,8 +155,6 @@
     "markdown-it-mathjax": "~2.0.0",
     "markdown-it-regexp": "~0.4.0",
     "markdown-it-ruby": "^0.1.1",
-    "markdown-it-sub": "~1.0.0",
-    "markdown-it-sup": "~1.0.0",
     "markdownlint": "^0.17.0",
     "mathjax": "^2.7.8",
     "mermaid": "~8.4.8",
