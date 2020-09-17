@@ -155,7 +155,6 @@
     "pdfobject": "~2.1.1",
     "power-assert": "~1.6.1",
     "prismjs": "^1.20.0",
-    "reveal.js": "~3.9.2",
     "script-loader": "~0.7.2",
     "select2": "~3.5.2-browserify",
     "sinon": "~7.3.2",

@@ -139,26 +139,6 @@ module.exports = {
         to: 'emojify.js/'
       },
       {
-        context: path.join(__dirname, 'node_modules/reveal.js'),
-        from: 'js',
-        to: 'reveal.js/js'
-      },
-      {
-        context: path.join(__dirname, 'node_modules/reveal.js'),
-        from: 'css',
-        to: 'reveal.js/css'
-      },
-      {
-        context: path.join(__dirname, 'node_modules/reveal.js'),
-        from: 'lib',
-        to: 'reveal.js/lib'
-      },
-      {
-        context: path.join(__dirname, 'node_modules/reveal.js'),
-        from: 'plugin',
-        to: 'reveal.js/plugin'
-      },
-      {
         context: path.join(__dirname, 'node_modules/dictionary-de'),
         from: '*',
         to: 'dictionary-de/'
@@ -220,7 +200,6 @@ module.exports = {
       'script-loader!jqueryTextcomplete',
       'script-loader!codemirrorInlineAttachment',
       'script-loader!ot',
-      'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/index.js')
     ],
     'index-styles': [
@@ -270,12 +249,10 @@ module.exports = {
       'script-loader!codemirrorInlineAttachment',
       'script-loader!ot',
       'expose-loader?io!socket.io-client',
-      'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/index.js')
     ],
     pretty: [
       'babel-polyfill',
-      'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/pretty.js')
     ],
     'pretty-styles': [
@@ -294,13 +271,11 @@ module.exports = {
       'script-loader!handlebars',
       'expose-loader?hljs!highlight.js',
       'emojify.js',
-      'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/pretty.js')
     ],
     slide: [
       'babel-polyfill',
       'bootstrap-tooltip',
-      'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/slide.js')
     ],
     'slide-styles': [
@@ -322,8 +297,6 @@ module.exports = {
       'script-loader!handlebars',
       'expose-loader?hljs!highlight.js',
       'emojify.js',
-      'expose-loader?Reveal!reveal.js',
-      'expose-loader?RevealMarkdown!reveal-markdown',
       path.join(__dirname, 'public/js/slide.js')
     ]
   },
@@ -346,7 +319,6 @@ module.exports = {
       handlebars: path.join(__dirname, 'node_modules/handlebars/dist/handlebars.min.js'),
       'jquery-ui-resizable': path.join(__dirname, 'public/vendor/jquery-ui/jquery-ui.min.js'),
       'bootstrap-tooltip': path.join(__dirname, 'public/vendor/bootstrap/tooltip.min.js'),
-      'reveal-markdown': path.join(__dirname, 'public/js/reveal-markdown.js'),
       'emojify.js': path.join(__dirname, 'node_modules/@hackmd/emojify.js/dist/js/emojify-browser.min.js'),
       'markdown-it': path.join(__dirname, 'node_modules/markdown-it/dist/markdown-it.js'),
       markdownlint: path.join(__dirname, 'node_modules/markdownlint/demo/markdownlint-browser.js')
