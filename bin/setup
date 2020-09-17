@@ -33,10 +33,10 @@ npm install
 cat << EOF
 
 
-Edit the following config file to setup CodiMD server and client.
+Edit the following config file to setup CodiLIA server and client.
 Read more info at https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-configuration
 
-* config.json           -- CodiMD config
+* config.json           -- CodiLIA config
 * .sequelizerc          -- db config
 
 EOF
