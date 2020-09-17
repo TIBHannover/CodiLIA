@@ -653,6 +653,7 @@ export function finishView (view) {
       }
     })
     // mathjax
+  /*
   const mathjaxdivs = view.find('span.mathjax.raw').removeClass('raw').toArray()
   try {
     if (mathjaxdivs.length > 1) {
@@ -665,7 +666,7 @@ export function finishView (view) {
   } catch (err) {
     console.warn(err)
   }
-
+  */
   // register details toggle for scrollmap recalulation
   view.find('details.raw').removeClass('raw').each(function (key, val) {
     $(val).on('toggle', window.viewAjaxCallback)
@@ -1015,8 +1016,8 @@ export function autoLinkify (view) {
 
 function getHeaderContent (header) {
   const headerHTML = $(header).clone()
-  headerHTML.find('.MathJax_Preview').remove()
-  headerHTML.find('.MathJax').remove()
+  //headerHTML.find('.MathJax_Preview').remove()
+  //headerHTML.find('.MathJax').remove()
   return headerHTML[0].innerHTML
 }
 

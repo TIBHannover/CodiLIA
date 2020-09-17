@@ -131,14 +131,6 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        context: path.join(__dirname, 'node_modules/mathjax'),
-        from: {
-          glob: '**/*',
-          dot: false
-        },
-        to: 'MathJax/'
-      },
-      {
         context: path.join(__dirname, 'node_modules/@hackmd/emojify.js'),
         from: {
           glob: 'dist/**/*',
