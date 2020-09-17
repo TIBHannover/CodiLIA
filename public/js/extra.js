@@ -45,7 +45,7 @@ require('prismjs/components/prism-gherkin')
 require('./lib/common/login')
 require('../vendor/md-toc')
 let viz = new window.Viz()
-const plantumlEncoder = require('plantuml-encoder')
+//const plantumlEncoder = require('plantuml-encoder')
 
 const ui = getUIElements()
 
@@ -1251,7 +1251,7 @@ md.renderer.rules.fence = (tokens, idx, options, env, self) => {
 
   return `<pre><code${self.renderAttrs(token)}>${highlighted}</code></pre>\n`
 }
-
+/*
 const makePlantumlURL = (umlCode) => {
   const format = 'svg'
   const code = plantumlEncoder.encode(umlCode)
@@ -1278,7 +1278,7 @@ md.core.ruler.push('plantuml', (state) => {
     }
   }
 })
-
+*/
 /*
 // youtube
 const youtubePlugin = new Plugin(
