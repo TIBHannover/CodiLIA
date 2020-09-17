@@ -407,6 +407,7 @@ export function finishView (view) {
     }
   })
   // abc.js
+  /*
   const abcs = view.find('div.abc.raw').removeClass('raw')
   abcs.each((key, value) => {
     try {
@@ -426,6 +427,7 @@ export function finishView (view) {
       console.warn(err)
     }
   })
+  */
   // vega-lite
   /*
   const vegas = view.find('div.vega.raw').removeClass('raw')
@@ -1078,7 +1080,7 @@ const fenceCodeAlias = {
   flow: 'flow-chart',
   graphviz: 'graphviz',
   mermaid: 'mermaid',
-  abc: 'abc',
+  //abc: 'abc',
   //vega: 'vega',
   geo: 'geo',
   fretboard: 'fretboard_instance',
