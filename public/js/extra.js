@@ -737,7 +737,7 @@ function generateCleanHTML (view) {
   eles.removeAttr('data-startline data-endline')
   src.find("a[href^='#'][smoothhashscroll]").removeAttr('smoothhashscroll')
   // remove gist content
-  src.find('code[data-gist-id]').children().remove()
+  //src.find('code[data-gist-id]').children().remove()
   // disable todo list
   src.find('input.task-list-item-checkbox').attr('disabled', '')
   // replace emoji image path
