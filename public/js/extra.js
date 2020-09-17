@@ -686,12 +686,6 @@ export function renderTOC (view) {
   }
 }
 
-export function scrollToHash () {
-  const hash = location.hash
-  location.hash = ''
-  location.hash = hash
-}
-
 const fenceCodeAlias = {
   //sequence: 'sequence-diagram',
   //flow: 'flow-chart',

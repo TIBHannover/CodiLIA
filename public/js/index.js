@@ -49,19 +49,11 @@ import {
   renderTOC,
   renderTags,
   renderTitle,
-  scrollToHash,
-  smoothHashScroll,
   updateLastChange,
   updateLastChangeUser,
   updateOwner
 } from './extra'
 
-import {
-  clearMap,
-  setupSyncAreas,
-  syncScrollToEdit,
-  syncScrollToView
-} from './lib/syncscroll'
 
 import {
   writeHistory,
@@ -448,7 +440,6 @@ $(document).ready(function () {
   }
   if (scrollbarStyle !== editor.getOption('scrollbarStyle')) {
     editor.setOption('scrollbarStyle', scrollbarStyle)
-    clearMap()
   }
   checkEditorStyle()
 
@@ -513,16 +504,6 @@ $(window).on('error', function () {
   setNeedRefresh();
 })
 
-//setupSyncAreas(ui.area.codemirrorScroll, ui.area.view, ui.area.markdown, editor)
-
-function autoSyncscroll () {
-  if (editorHasFocus()) {
-    syncScrollToView()
-  } else {
-    syncScrollToEdit()
-  }
-}
-
 var windowResizeDebounce = 200
 var windowResize = _.debounce(windowResizeInner, windowResizeDebounce)
 
@@ -536,23 +517,17 @@ function windowResizeInner (callback) {
   if (window.loaded) {
     if (editor.getOption('scrollbarStyle') === 'native') {
       setTimeout(function () {
-        clearMap()
-        autoSyncscroll()
-        updateScrollspy()
         if (callback && typeof callback === 'function') { callback() }
       }, 1)
     } else {
       // force it load all docs at once to prevent scroll knob blink
       editor.setOption('viewportMargin', Infinity)
       setTimeout(function () {
-        clearMap()
-        autoSyncscroll()
         editor.setOption('viewportMargin', viewportMargin)
         // add or update user cursors
         for (var i = 0; i < onlineUsers.length; i++) {
           if (onlineUsers[i].id !== personalInfo.id) { buildCursor(onlineUsers[i]) }
         }
-        updateScrollspy()
         if (callback && typeof callback === 'function') { callback() }
       }, 1)
     }
@@ -650,7 +625,6 @@ function checkEditorStyle () {
     })
     ui.area.resize.syncToggle.click(function () {
       appState.syncscroll = !appState.syncscroll
-      checkSyncToggle()
     })
     ui.area.resize.handle.append(ui.area.resize.syncToggle)
     ui.area.resize.syncToggle.hide()
@@ -659,21 +633,6 @@ function checkEditorStyle () {
     }, function () {
       ui.area.resize.syncToggle.stop(true, true).delay(300).fadeOut(300)
     })
-  }
-}
-
-function checkSyncToggle () {
-  if (appState.syncscroll) {
-    if (previousFocusOnEditor) {
-      window.preventSyncScrollToView = false
-      syncScrollToView()
-    } else {
-      window.preventSyncScrollToEdit = false
-      syncScrollToEdit()
-    }
-    ui.area.resize.syncToggle.find('i').removeClass('fa-unlink').addClass('fa-link')
-  } else {
-    ui.area.resize.syncToggle.find('i').removeClass('fa-link').addClass('fa-unlink')
   }
 }
 
@@ -867,12 +826,10 @@ function changeMode (type) {
 
   if (lastMode === modeType.view && appState.currentMode === modeType.both) {
     window.preventSyncScrollToView = 2
-    syncScrollToEdit(null, true)
   }
 
   if (lastMode === modeType.edit && appState.currentMode === modeType.both) {
     window.preventSyncScrollToEdit = 2
-    syncScrollToView(null, true)
   }
 
   if (lastMode === modeType.both && appState.currentMode !== modeType.both) {
@@ -1343,40 +1300,6 @@ window.scrollToTop = scrollToTop
 window.scrollToBottom = scrollToBottom
 
 var enoughForAffixToc = true
-
-// scrollspy
-function generateScrollspy () {
-  $(document.body).scrollspy({
-    target: '.scrollspy-body'
-  })
-  ui.area.view.scrollspy({
-    target: '.scrollspy-view'
-  })
-  $(document.body).scrollspy('refresh')
-  ui.area.view.scrollspy('refresh')
-  if (enoughForAffixToc) {
-    ui.toc.toc.hide()
-    ui.toc.affix.show()
-  } else {
-    ui.toc.affix.hide()
-    ui.toc.toc.show()
-  }
-  // $(document.body).scroll();
-  // ui.area.view.scroll();
-}
-
-function updateScrollspy () {
-  var headers = ui.area.markdown.find('h1, h2, h3').toArray()
-  var headerMap = []
-  for (var i = 0; i < headers.length; i++) {
-    headerMap.push($(headers[i]).offset().top - parseInt($(headers[i]).css('margin-top')))
-  }
-  applyScrollspyActive($(window).scrollTop(), headerMap, headers,
-    $('.scrollspy-body'), 0)
-  var offset = ui.area.view.scrollTop() - ui.area.view.offset().top
-  applyScrollspyActive(ui.area.view.scrollTop(), headerMap, headers,
-    $('.scrollspy-view'), offset - 10)
-}
 
 function applyScrollspyActive (top, headerMap, headers, target, offset) {
   var index = 0
@@ -2083,7 +2006,6 @@ socket.on('refresh', function (data) {
       // work around editor not refresh or doc not fully loaded
       windowResizeInner()
       // work around might not scroll to hash
-      scrollToHash()
     }, 1)
   }
   if (editor.getOption('readOnly')) { editor.setOption('readOnly', false) }
@@ -2635,7 +2557,6 @@ editorInstance.on('changes', function (editor, changes) {
     // always sync edit scrolling to view if user is editing
     if (ui.area.codemirrorScroll[0].scrollHeight > ui.area.view[0].scrollHeight && editorHasFocus()) {
       postUpdateEvent = function () {
-        syncScrollToView()
         postUpdateEvent = null
       }
     }
@@ -2814,54 +2735,7 @@ function updateViewInner () {
     initView(value)
   }
 
-  /*
-  var rendered = md.render(value)
-  if (md.meta.type && md.meta.type === 'slide') {
-    var slideOptions = {
-      separator: '^(\r\n?|\n)---(\r\n?|\n)$',
-      verticalSeparator: '^(\r\n?|\n)----(\r\n?|\n)$'
-    }
-    var slides = window.RevealMarkdown.slidify(editor.getValue(), slideOptions)
-    ui.area.markdown.html(slides)
-    window.RevealMarkdown.initialize()
-    // prevent XSS
-    ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
-    ui.area.markdown.addClass('slides')
-    appState.syncscroll = false
-    checkSyncToggle()
-  } else {
-    if (lastMeta.type && lastMeta.type === 'slide') {
-      refreshView()
-      ui.area.markdown.removeClass('slides')
-      appState.syncscroll = true
-      checkSyncToggle()
-    }
-    // only render again when meta changed
-    if (JSON.stringify(md.meta) !== JSON.stringify(lastMeta)) {
-      parseMeta(md, ui.area.codemirror, ui.area.markdown, $('#ui-toc'), $('#ui-toc-affix'))
-      rendered = md.render(value)
-    }
-    // prevent XSS
-    //rendered = preventXSS(rendered)
-    //var result = postProcess(rendered).children().toArray()
-    //partialUpdate(result, lastResult, ui.area.markdown.children().toArray())
-    //if (result && lastResult && result.length !== lastResult.length) { updateDataAttrs(result, ui.area.markdown.children().toArray()) }
-    //lastResult = $(result).clone()
-  }
-  removeDOMEvents(ui.area.markdown)
-  //finishView(ui.area.markdown)
-  //autoLinkify(ui.area.markdown)
-  //deduplicatedHeaderId(ui.area.markdown)
-  //renderTOC(ui.area.markdown)
-  //generateToc('ui-toc')
-  //generateToc('ui-toc-affix')
-  //autoLinkify(ui.area.markdown)
-  */
-  generateScrollspy()
-  updateScrollspy()
-  smoothHashScroll()
   isDirty = false
-  clearMap()
   // buildMap();
   updateTitleReminder()
   if (postUpdateEvent && typeof postUpdateEvent === 'function') { postUpdateEvent() }
