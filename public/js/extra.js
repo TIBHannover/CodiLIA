@@ -1,7 +1,6 @@
 /* eslint-env browser, jquery */
 /* global moment, serverurl, plantumlServer, L */
 
-import Prism from 'prismjs'
 import hljs from 'highlight.js'
 import PDFObject from 'pdfobject'
 import { saveAs } from 'file-saver'
@@ -10,9 +9,6 @@ import escapeHTML from 'lodash/escape'
 import unescapeHTML from 'lodash/unescape'
 
 import isURL from 'validator/lib/isURL'
-
-//import { transform } from 'markmap-lib/dist/transform'
-//import { markmap } from 'markmap-lib/dist/view'
 
 import { stripTags } from '../../utils/string'
 
@@ -23,29 +19,14 @@ import {
   serializeParamToAttribute,
   deserializeParamAttributeFromElement
 } from './lib/markdown/utils'
-//import { renderFretBoard } from './lib/renderer/fretboard/fretboard'
 import './lib/renderer/lightbox'
-//import { renderCSVPreview } from './lib/renderer/csvpreview'
+
 
 import markdownit from 'markdown-it'
-//import markdownitContainer from 'markdown-it-container'
-
-/* Defined regex markdown it plugins */
-//import Plugin from 'markdown-it-regexp'
-
-require('prismjs/themes/prism.css')
-require('prismjs/components/prism-wiki')
-require('prismjs/components/prism-haskell')
-require('prismjs/components/prism-go')
-require('prismjs/components/prism-typescript')
-require('prismjs/components/prism-jsx')
-require('prismjs/components/prism-makefile')
-require('prismjs/components/prism-gherkin')
 
 require('./lib/common/login')
 require('../vendor/md-toc')
-//let viz = new window.Viz()
-//const plantumlEncoder = require('plantuml-encoder')
+
 
 const ui = getUIElements()
 
@@ -288,385 +269,6 @@ export function finishView (view) {
     })
   }
 
-  // youtube
-  /*
-  view.find('div.youtube.raw').removeClass('raw')
-    .click(function () {
-      imgPlayiframe(this, '//www.youtube.com/embed/')
-    })
-    // vimeo
-  view.find('div.vimeo.raw').removeClass('raw')
-    .click(function () {
-      imgPlayiframe(this, '//player.vimeo.com/video/')
-    })
-    .each((key, value) => {
-      $.ajax({
-        type: 'GET',
-        url: `//vimeo.com/api/v2/video/${$(value).attr('data-videoid')}.json`,
-        jsonp: 'callback',
-        dataType: 'jsonp',
-        success (data) {
-          const thumbnailSrc = data[0].thumbnail_large
-          const image = `<img src="${thumbnailSrc}" />`
-          $(value).prepend(image)
-          if (window.viewAjaxCallback) window.viewAjaxCallback()
-        }
-      })
-    })
-    // gist
-  view.find('code[data-gist-id]').each((key, value) => {
-    if ($(value).children().length === 0) { $(value).gist(window.viewAjaxCallback) }
-  })
-  */
-  // sequence diagram
-  /*
-  const sequences = view.find('div.sequence-diagram.raw').removeClass('raw')
-  sequences.each((key, value) => {
-    try {
-      var $value = $(value)
-      const $ele = $(value).parent().parent()
-
-      const sequence = $value
-      sequence.sequenceDiagram({
-        theme: 'simple'
-      })
-
-      $ele.addClass('sequence-diagram')
-      $value.children().unwrap().unwrap()
-      const svg = $ele.find('> svg')
-      svg[0].setAttribute('viewBox', `0 0 ${svg.attr('width')} ${svg.attr('height')}`)
-      svg[0].setAttribute('preserveAspectRatio', 'xMidYMid meet')
-    } catch (err) {
-      $value.unwrap()
-      $value.parent().append(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-      console.warn(err)
-    }
-  })
-  */
-  // flowchart
-  /*
-  const flow = view.find('div.flow-chart.raw').removeClass('raw')
-  flow.each((key, value) => {
-    try {
-      var $value = $(value)
-      const $ele = $(value).parent().parent()
-
-      const chart = window.flowchart.parse($value.text())
-      $value.html('')
-      chart.drawSVG(value, {
-        'line-width': 2,
-        fill: 'none',
-        'font-size': '16px',
-        'font-family': "'Andale Mono', monospace"
-      })
-
-      $ele.addClass('flow-chart')
-      $value.children().unwrap().unwrap()
-    } catch (err) {
-      $value.unwrap()
-      $value.parent().append(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-      console.warn(err)
-    }
-  })
-  */
-  // graphviz
-  /*
-  var graphvizs = view.find('div.graphviz.raw').removeClass('raw')
-  graphvizs.each(function (key, value) {
-    try {
-      var $value = $(value)
-      var $ele = $(value).parent().parent()
-      $value.unwrap()
-      viz.renderString($value.text())
-        .then(graphviz => {
-          if (!graphviz) throw Error('viz.js output empty graph')
-          $value.html(graphviz)
-
-          $ele.addClass('graphviz')
-          $value.children().unwrap()
-        })
-        .catch(err => {
-          viz = new window.Viz()
-          $value.parent().append(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-          console.warn(err)
-        })
-    } catch (err) {
-      viz = new window.Viz()
-      $value.parent().append(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-      console.warn(err)
-    }
-  })
-  */
-  // mermaid
-  /*
-  const mermaids = view.find('div.mermaid.raw').removeClass('raw')
-  mermaids.each((key, value) => {
-    try {
-      var $value = $(value)
-      const $ele = $(value).closest('pre')
-
-      window.mermaid.parse($value.text())
-      $ele.addClass('mermaid')
-      $ele.html($value.text())
-      window.mermaid.init(undefined, $ele)
-    } catch (err) {
-      $value.unwrap()
-      $value.parent().append(`<div class="alert alert-warning">${escapeHTML(err.str)}</div>`)
-      console.warn(err)
-    }
-  })
-  */
-  // abc.js
-  /*
-  const abcs = view.find('div.abc.raw').removeClass('raw')
-  abcs.each((key, value) => {
-    try {
-      var $value = $(value)
-      var $ele = $(value).parent().parent()
-
-      window.ABCJS.renderAbc(value, $value.text())
-
-      $ele.addClass('abc')
-      $value.children().unwrap().unwrap()
-      const svg = $ele.find('> svg')
-      svg[0].setAttribute('viewBox', `0 0 ${svg.attr('width')} ${svg.attr('height')}`)
-      svg[0].setAttribute('preserveAspectRatio', 'xMidYMid meet')
-    } catch (err) {
-      $value.unwrap()
-      $value.parent().append(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-      console.warn(err)
-    }
-  })
-  */
-  // vega-lite
-  /*
-  const vegas = view.find('div.vega.raw').removeClass('raw')
-  vegas.each((key, value) => {
-    try {
-      var $value = $(value)
-      var $ele = $(value).parent().parent()
-
-      const specText = $value.text()
-
-      $value.unwrap()
-      window.vegaEmbed($ele[0], JSON.parse(specText), { renderer: 'svg' })
-        .then(result => {
-          $ele.addClass('vega')
-        })
-        .catch(err => {
-          $ele.append(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-          console.warn(err)
-        })
-        .finally(() => {
-          if (window.viewAjaxCallback) window.viewAjaxCallback()
-        })
-    } catch (err) {
-      $ele.append(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-      console.warn(err)
-    }
-  })
-  */
-  // geo map
-  /*
-  view.find('div.geo.raw').removeClass('raw').each(async function (key, value) {
-    const $elem = $(value).parent().parent()
-    const $value = $(value)
-    const content = $value.text()
-    $value.unwrap()
-
-    try {
-      let position, zoom
-      if (content.match(/^[-\d.,\s]+$/)) {
-        const [lng, lat, zoo] = content.split(',').map(parseFloat)
-        zoom = zoo
-        position = [lat, lng]
-      } else {
-        // parse value as address
-        const data = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(content)}&format=json`).then(r => r.json())
-        if (!data || !data.length) {
-          throw new Error('Location not found')
-        }
-        const { lat, lon } = data[0]
-        position = [lat, lon]
-      }
-      $elem.html(`<div class="geo-map"></div>`)
-      const map = L.map($elem.find('.geo-map')[0]).setView(position, zoom || 16)
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '<a href="https://www.openstreetmap.org/">OSM</a>',
-        maxZoom: 18
-      }).addTo(map)
-      L.marker(position, {
-        icon: L.icon({
-          iconUrl: `${serverurl}/build/leaflet/images/marker-icon.png`,
-          shadowUrl: `${serverurl}/build/leaflet/images/marker-shadow.png`
-        })
-      }).addTo(map)
-      $elem.addClass('geo')
-    } catch (err) {
-      $elem.append(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-      console.warn(err)
-    }
-  })
-  */
-  // fretboard
-  /*
-  const fretboard = view.find('div.fretboard_instance.raw').removeClass('raw')
-  fretboard.each((key, value) => {
-    const params = deserializeParamAttributeFromElement(value)
-    const $value = $(value)
-
-    try {
-      const $ele = $(value).parent().parent()
-      $ele.html(renderFretBoard($value.text(), params))
-    } catch (err) {
-      $value.unwrap()
-      $value.parent().append(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-      console.warn(err)
-    }
-  })
-  */
-  // markmap
-  /*
-  view.find('div.markmap.raw').removeClass('raw').each(async (key, value) => {
-    const $elem = $(value).parent().parent()
-    const $value = $(value)
-    const content = $value.text()
-    $value.unwrap()
-    try {
-      const data = transform(content)
-      $elem.html(`<div class="markmap-container"><svg></svg></div>`)
-      markmap($elem.find('svg')[0], data, {
-        duration: 0
-      })
-    } catch (err) {
-      $elem.html(`<div class="alert alert-warning">${escapeHTML(err)}</div>`)
-      console.warn(err)
-    }
-  })
-  */
-  // image href new window(emoji not included)
-  const images = view.find('img.raw[src]').removeClass('raw')
-  images.each((key, value) => {
-    // if it's already wrapped by link, then ignore
-    const $value = $(value)
-    $value[0].onload = e => {
-      if (window.viewAjaxCallback) window.viewAjaxCallback()
-    }
-  })
-  // blockquote
-  const blockquote = view.find('blockquote.raw').removeClass('raw')
-  const blockquoteP = blockquote.find('p')
-  blockquoteP.each((key, value) => {
-    let html = $(value).html()
-    html = replaceExtraTags(html)
-    $(value).html(html)
-  })
-  // color tag in blockquote will change its left border color
-  const blockquoteColor = blockquote.find('.color')
-  blockquoteColor.each((key, value) => {
-    $(value).closest('blockquote').css('border-left-color', $(value).attr('data-color'))
-  })
-  // slideshare
-  view.find('div.slideshare.raw').removeClass('raw')
-    .each((key, value) => {
-      $.ajax({
-        type: 'GET',
-        url: `//www.slideshare.net/api/oembed/2?url=http://www.slideshare.net/${$(value).attr('data-slideshareid')}&format=json`,
-        jsonp: 'callback',
-        dataType: 'jsonp',
-        success (data) {
-          const $html = $(data.html)
-          const iframe = $html.closest('iframe')
-          const caption = $html.closest('div')
-          const inner = $('<div class="inner"></div>').append(iframe)
-          const height = iframe.attr('height')
-          const width = iframe.attr('width')
-          const ratio = (height / width) * 100
-          inner.css('padding-bottom', `${ratio}%`)
-          $(value).html(inner).append(caption)
-          if (window.viewAjaxCallback) window.viewAjaxCallback()
-        }
-      })
-    })
-    // speakerdeck
-  view.find('div.speakerdeck.raw').removeClass('raw')
-    .each((key, value) => {
-      const url = `https://speakerdeck.com/${$(value).attr('data-speakerdeckid')}`
-      const inner = $('<a>Speakerdeck</a>')
-      inner.attr('href', url)
-      inner.attr('rel', 'noopener noreferrer')
-      inner.attr('target', '_blank')
-      $(value).append(inner)
-    })
-    // pdf
-  view.find('div.pdf.raw').removeClass('raw')
-    .each(function (key, value) {
-      const url = $(value).attr('data-pdfurl')
-      const inner = $('<div></div>')
-      $(this).append(inner)
-      PDFObject.embed(url, inner, {
-        height: '400px'
-      })
-    })
-    // syntax highlighting
-  view.find('code.raw').removeClass('raw')
-    .each((key, value) => {
-      const langDiv = $(value)
-      if (langDiv.length > 0) {
-        const reallang = langDiv[0].className.replace(/hljs|wrap/g, '').trim()
-        const codeDiv = langDiv.find('.code')
-        let code = ''
-        if (codeDiv.length > 0) code = codeDiv.html()
-        else code = langDiv.html()
-        var result
-        if (!reallang) {
-          result = {
-            value: code
-          }
-        } else if (reallang === 'haskell' || reallang === 'go' || reallang === 'typescript' || reallang === 'jsx' || reallang === 'gherkin') {
-          code = unescapeHTML(code)
-          result = {
-            value: Prism.highlight(code, Prism.languages[reallang])
-          }
-        } else if (reallang === 'tiddlywiki' || reallang === 'mediawiki') {
-          code = unescapeHTML(code)
-          result = {
-            value: Prism.highlight(code, Prism.languages.wiki)
-          }
-        } else if (reallang === 'cmake') {
-          code = unescapeHTML(code)
-          result = {
-            value: Prism.highlight(code, Prism.languages.makefile)
-          }
-        } else {
-          code = unescapeHTML(code)
-          const languages = hljs.listLanguages()
-          if (!languages.includes(reallang)) {
-            result = hljs.highlightAuto(code)
-          } else {
-            result = hljs.highlight(reallang, code)
-          }
-        }
-        if (codeDiv.length > 0) codeDiv.html(result.value)
-        else langDiv.html(result.value)
-      }
-    })
-    // mathjax
-  /*
-  const mathjaxdivs = view.find('span.mathjax.raw').removeClass('raw').toArray()
-  try {
-    if (mathjaxdivs.length > 1) {
-      window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub, mathjaxdivs])
-      window.MathJax.Hub.Queue(window.viewAjaxCallback)
-    } else if (mathjaxdivs.length > 0) {
-      window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub, mathjaxdivs[0]])
-      window.MathJax.Hub.Queue(window.viewAjaxCallback)
-    }
-  } catch (err) {
-    console.warn(err)
-  }
-  */
   // register details toggle for scrollmap recalulation
   view.find('details.raw').removeClass('raw').each(function (key, val) {
     $(val).on('toggle', window.viewAjaxCallback)
@@ -1147,24 +749,6 @@ export const md = markdownit('default', {
 })
 window.md = md
 
-//md.use(require('markdown-it-abbr'))
-//md.use(require('markdown-it-footnote'))
-//md.use(require('markdown-it-deflist'))
-//md.use(require('markdown-it-mark'))
-//md.use(require('markdown-it-ins'))
-//md.use(require('markdown-it-sub'))
-//md.use(require('markdown-it-sup'))
-/*md.use(require('markdown-it-mathjax')({
-  beforeMath: '<span class="mathjax raw">',
-  afterMath: '</span>',
-  beforeInlineMath: '<span class="mathjax raw">\\(',
-  afterInlineMath: '\\)</span>',
-  beforeDisplayMath: '<span class="mathjax raw">\\[',
-  afterDisplayMath: '\\]</span>'
-}))*/
-//md.use(require('markdown-it-imsize'))
-//md.use(require('markdown-it-ruby'))
-
 window.emojify.setConfig({
   blacklist: {
     elements: ['script', 'textarea', 'a', 'pre', 'code', 'svg'],
@@ -1173,40 +757,6 @@ window.emojify.setConfig({
   img_dir: emojifyImageDir,
   ignore_emoticons: true
 })
-
-/*
-function renderContainer (tokens, idx, options, env, self) {
-  tokens[idx].attrJoin('role', 'alert')
-  tokens[idx].attrJoin('class', 'alert')
-  tokens[idx].attrJoin('class', `alert-${tokens[idx].info.trim()}`)
-  return self.renderToken(...arguments)
-}
-md.use(markdownitContainer, 'success', { render: renderContainer })
-md.use(markdownitContainer, 'info', { render: renderContainer })
-md.use(markdownitContainer, 'warning', { render: renderContainer })
-md.use(markdownitContainer, 'danger', { render: renderContainer })
-md.use(markdownitContainer, 'spoiler', {
-  validate: function (params) {
-    return params.trim().match(/^spoiler(\s+.*)?$/)
-  },
-  render: function (tokens, idx) {
-    const m = tokens[idx].info.trim().match(/^spoiler(\s+.*)?$/)
-
-    if (tokens[idx].nesting === 1) {
-      // opening tag
-      const summary = m[1] && m[1].trim()
-      if (summary) {
-        return `<details><summary>${md.renderInline(summary)}</summary>\n`
-      } else {
-        return `<details>\n`
-      }
-    } else {
-      // closing tag
-      return '</details>\n'
-    }
-  }
-})
-*/
 
 const defaultImageRender = md.renderer.rules.image
 md.renderer.rules.image = function (tokens, idx, options, env, self) {
@@ -1235,11 +785,6 @@ md.renderer.rules.fence = (tokens, idx, options, env, self) => {
   if (info) {
     langName = info.split(/\s+/g)[0]
 
-    /*if (langName === 'csvpreview') {
-      const params = parseFenceCodeParams(info)
-      return renderCSVPreview(token.content, params)
-    }*/
-
     if (/!$/.test(info)) token.attrJoin('class', 'wrap')
     token.attrJoin('class', options.langPrefix + langName.replace(/=$|=\d+$|=\+$|!$|=!$/, ''))
     token.attrJoin('class', 'hljs')
@@ -1258,137 +803,7 @@ md.renderer.rules.fence = (tokens, idx, options, env, self) => {
 
   return `<pre><code${self.renderAttrs(token)}>${highlighted}</code></pre>\n`
 }
-/*
-const makePlantumlURL = (umlCode) => {
-  const format = 'svg'
-  const code = plantumlEncoder.encode(umlCode)
-  return `${plantumlServer}/${format}/${code}`
-}
 
-// https://github.com/qjebbs/vscode-plantuml/tree/master/src/markdown-it-plantuml
-md.renderer.rules.plantuml = (tokens, idx) => {
-  const token = tokens[idx]
-  if (token.type !== 'plantuml') {
-    return tokens[idx].content
-  }
-
-  const url = makePlantumlURL(token.content)
-  return `<img src="${url}" />`
-}
-
-// https://github.com/qjebbs/vscode-plantuml/tree/master/src/markdown-it-plantuml
-md.core.ruler.push('plantuml', (state) => {
-  const blockTokens = state.tokens
-  for (const blockToken of blockTokens) {
-    if (blockToken.type === 'fence' && blockToken.info === 'plantuml') {
-      blockToken.type = 'plantuml'
-    }
-  }
-})
-*/
-/*
-// youtube
-const youtubePlugin = new Plugin(
-  // regexp to match
-  /{%youtube\s*([\d\D]*?)\s*%}/,
-
-  (match, utils) => {
-    const videoid = match[1]
-    if (!videoid) return
-    const div = $('<div class="youtube raw"></div>')
-    div.attr('data-videoid', videoid)
-    const thumbnailSrc = `//img.youtube.com/vi/${videoid}/hqdefault.jpg`
-    const image = `<img src="${thumbnailSrc}" />`
-    div.append(image)
-    const icon = '<i class="icon fa fa-youtube-play fa-5x"></i>'
-    div.append(icon)
-    return div[0].outerHTML
-  }
-)
-// vimeo
-const vimeoPlugin = new Plugin(
-  // regexp to match
-  /{%vimeo\s*([\d\D]*?)\s*%}/,
-
-  (match, utils) => {
-    const videoid = match[1].split(/[?&=]+/)[0]
-    if (!videoid) return
-    const div = $('<div class="vimeo raw"></div>')
-    div.attr('data-videoid', videoid)
-    const icon = '<i class="icon fa fa-vimeo-square fa-5x"></i>'
-    div.append(icon)
-    return div[0].outerHTML
-  }
-)
-// gist
-const gistPlugin = new Plugin(
-  // regexp to match
-  /{%gist\s*([\d\D]*?)\s*%}/,
-
-  (match, utils) => {
-    const gistid = match[1].split(/[?&=]+/)[0]
-    const code = `<code data-gist-id="${gistid}"></code>`
-    return code
-  }
-)
-// TOC
-const tocPlugin = new Plugin(
-  // regexp to match
-  /^\[TOC\]$/i,
-
-  (match, utils) => '<div class="toc"></div>'
-)
-// slideshare
-const slidesharePlugin = new Plugin(
-  // regexp to match
-  /{%slideshare\s*([\d\D]*?)\s*%}/,
-
-  (match, utils) => {
-    const slideshareid = match[1].split(/[?&=]+/)[0]
-    const div = $('<div class="slideshare raw"></div>')
-    div.attr('data-slideshareid', slideshareid)
-    return div[0].outerHTML
-  }
-)
-// speakerdeck
-const speakerdeckPlugin = new Plugin(
-  // regexp to match
-  /{%speakerdeck\s*([\d\D]*?)\s*%}/,
-
-  (match, utils) => {
-    const speakerdeckid = match[1]
-    const div = $('<div class="speakerdeck raw"></div>')
-    div.attr('data-speakerdeckid', speakerdeckid)
-    return div[0].outerHTML
-  }
-)
-// pdf
-const pdfPlugin = new Plugin(
-  // regexp to match
-  /{%pdf\s*([\d\D]*?)\s*%}/,
-
-  (match, utils) => {
-    const pdfurl = match[1]
-    if (!isURL(pdfurl)) return match[0]
-    const div = $('<div class="pdf raw"></div>')
-    div.attr('data-pdfurl', pdfurl)
-    return div[0].outerHTML
-  }
-)
-
-const emojijsPlugin = new Plugin(
-  // regexp to match emoji shortcodes :something:
-  // We generate an universal regex that guaranteed only contains the
-  // emojies we have available. This should prevent all false-positives
-  new RegExp(':(' + window.emojify.emojiNames.map((item) => { return RegExp.escape(item) }).join('|') + '):', 'i'),
-
-  (match, utils) => {
-    const emoji = match[1].toLowerCase()
-    const div = $(`<img class="emoji" alt=":${emoji}:" src="${emojifyImageDir}/${emoji}.png"></img>`)
-    return div[0].outerHTML
-  }
-)
-*/
 // yaml meta, from https://github.com/eugeneware/remarkable-meta
 function get (state, line) {
   const pos = state.bMarks[line]
@@ -1433,14 +848,6 @@ function metaPlugin (md) {
 }
 
 md.use(metaPlugin)
-//md.use(emojijsPlugin)
-//md.use(youtubePlugin)
-//md.use(vimeoPlugin)
-//md.use(gistPlugin)
-//md.use(tocPlugin)
-//md.use(slidesharePlugin)
-//md.use(speakerdeckPlugin)
-//md.use(pdfPlugin)
 
 export default {
   md
