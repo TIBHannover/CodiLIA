@@ -234,42 +234,58 @@ const statusType = {
 }
 
 const liaSnippets = [
-  {
-    search: "lia-effect-inline",
-    replace: "{number}{__element__}",
-    helpMsg: "Use simple inline effects to highlight specific elements within a Markdown block. Simply enclose your elements within two subsequent braces ({}{}), whereby the first one is used to hold the number of appearance, while the will contain your text, image, video, what so ever ...\nYou can tweak your effects with additional animations and styling. Animate.css is included at default.\n\nExamples:\n  This block contains some {1}{inline __effects__} that will appear {2}{subsequently}.\n\n  Inline effects can also contain more effects {1}{I will appear first {2}{and I as a second}}.\n\n  With styling ++ {3}{bouncing red and delayed}<!--\n        class = \"animated infinite bounce\"\n        style = \"animation-delay: 3s; color: red;\"\n      -->"
-  },
-  {
-    search: "lia-effect-inline2",
-    replace: "{from-to}{__element__}",
-    helpMsg: "Use simple inline effects to highlight specific elements within a Markdown block. Simply enclose your elements within two subsequent braces ({}{}), whereby the first one contains two numbers separated by (-) the first number defines the time of appearance and the second one the time of disappearance. The element contains the Markdown elements for highlighting (text, videos, images, etc.)\nYou can tweak your effects with additional animations and styling. Animate.css is included at default.\n\nExamples:\n  This block contains some {1-2}{I appear at fragment 1 and disapper at 2}.\n\n  Nesting is allowed but has to make sense {1-3}{I will rest from 1 to 3 {4}{I will not be visible}}.\n\n  With styling ++ {1-3}{bouncing red and delayed}<!--\n        class = \"animated infinite bounce\"\n        style = \"animation-delay: 3s; color: red;\"\n      -->"
-  },
-  {
-    search: "lia-effect-block",
-    replace: "    {number}\n",
-    helpMsg: "Use block effects to let entire Markdown blocks appear or disappear. It works exactly as simple inline effects. But the number of appearance has to be put in double braces.\nThe entire block can also be styled and the animation tweaked, but the required comment tag has to be defined before the Markdown block. Animate.css is included at default.\n\nExamples:\n                    {{1}}\n  This entire block will appear with the first\n  fragment. And remain till the end of this slide.\n\n                    {{2}}\n  ```js\n  // this works with any markdown block\n  ```\n\n  <!-- class = \"animated rollIn\" -->\n       {{3}}\n  | Also | with  |\n  |------|-------|\n  | any  | table |"
-  },
-  {
-    search: "lia-effect-block",
-    replace: "    {from-to}\n",
-    helpMsg: "Use block effects to let entire Markdown blocks appear or disappear. It works exactly as simple inline effects. But the number of appearance has to be put in double braces, followed by a hyphen (-) and the number of disappearance.\nThe entire block can also be styled and the animation tweaked, but the required comment tag has to be defined before the Markdown block. Animate.css is included at default.\n\nExamples:\n                   {{1-4}}\n  This entire block will appear with the first fragment.\n  And remain untill the fourth fragment of this slide.\n\n                   {{0-1}}\n  ```js\n  // I will be present emeadiately and disapper on the\n  // 1st fragment.\n  ```\n\n  <!-- class = \"animated rollIn\" -->\n       {{3-4}}\n  | Also | with  |\n  |------|-------|\n  | any  | table |"
-  },
-  {
-    search: "lia-effect-multiblock",
-    replace: "                 {{number}}\n************************************************\n\nInsert your Markdown blocks in here ...\n\n************************************************",
-    helpMsg: "You can bundle multiple blocks to one effect block by enclosing them into two lines of stars (*). The rest works exactly as block effects...\nThe entire block can also be styled and the animation tweaked, but the required comment tag has to be defined before the Markdown block. Animate.css is included at default.\n\nExamples:\n                    {{1}}\n  *************************************************\n\n  Both blocks will appear at once. Nesting of other\n  {2}{inline} and block effects is also allowed.\n\n\n  | Also | with  |\n  |------|-------|\n  | any  | table |\n\n  **************************************************"
-  },
-  {
-    search: "lia-effect-multiblock2",
-    replace: "                 {{from-to}}\n************************************************\n\nInsert your Markdown blocks in here ...\n\n************************************************",
-    helpMsg: "You can bundle multiple blocks to one effect block by enclosing them into two lines of stars (*). The rest works exactly as block effects...\nThe entire block can also be styled and the animation tweaked, but the required comment tag has to be defined before the Markdown block. Animate.css is included at default.\n\nExamples:\n                    {{1-3}}\n  *************************************************\n\n  Both blocks will appear at once and disappear at\n  the third fragment. Nesting of other {2}{inline}\n  and block effects is also allowed.\n\n\n  | Also | with  |\n  |------|-------|\n  | any  | table |\n\n  **************************************************"
-  },
-  {
-    search: "lia-effect-animate-example",
-    replace: "<!-- class=\"animated rollIn\" style=\"animation-delay: 3s;\" -->",
-    helpMsg: "This is only an example of how Animate.css can be used to tweak your effects. Additional CSS magic can be applied onto single elements or blocks by adding a comment tag either in front of the block or directly after the element.\n\nExample:\n\n  <!-- class = \"animated rollIn\" style = \"animation-delay: 3s; color: purple\" -->\n  The whole text-block should appear in purple color and with a wobbling effect.\n  Which is a **bad** example, please use it with caution ...\n  ~~ Jumping red ~~ <!-- class = \"animated infinite bounce\" style = \"color: red;\" -->\n\nFor more information how to change the animation styles, click on the link below."
-  }
+    {
+        key: "{number}{element}",
+        search: "lia-effect-inline",
+        replace: "{number}{__element__}",
+        helpMsg: "Use simple inline effects to highlight specific elements within a Markdown block. Simply enclose your elements within two subsequent braces ({}{}), whereby the first one is used to hold the number of appearance, while the will contain your text, image, video, what so ever ...\nYou can tweak your effects with additional animations and styling. Animate.css is included at default.\n\nExamples:\n  This block contains some {1}{inline __effects__} that will appear {2}{subsequently}.\n\n  Inline effects can also contain more effects {1}{I will appear first {2}{and I as a second}}.\n\n  With styling ++ {3}{bouncing red and delayed}<!--\n        class = \"animated infinite bounce\"\n        style = \"animation-delay: 3s; color: red;\"\n      -->",
+        icon: "<span style=\"color:#ff0\">\ud83d\udcab</span>"
+    },
+    {
+        key: "{from-to}{element}",
+        search: "lia-effect-inline2",
+        replace: "{from-to}{__element__}",
+        helpMsg: "Use simple inline effects to highlight specific elements within a Markdown block. Simply enclose your elements within two subsequent braces ({}{}), whereby the first one contains two numbers separated by (-) the first number defines the time of appearance and the second one the time of disappearance. The element contains the Markdown elements for highlighting (text, videos, images, etc.)\nYou can tweak your effects with additional animations and styling. Animate.css is included at default.\n\nExamples:\n  This block contains some {1-2}{I appear at fragment 1 and disapper at 2}.\n\n  Nesting is allowed but has to make sense {1-3}{I will rest from 1 to 3 {4}{I will not be visible}}.\n\n  With styling ++ {1-3}{bouncing red and delayed}<!--\n        class = \"animated infinite bounce\"\n        style = \"animation-delay: 3s; color: red;\"\n      -->",
+        icon: "<span style=\"color:#ff0\">\ud83d\udcab</span>"
+    },
+    {
+        key: "{{number}}",
+        search: "lia-effect-block",
+        replace: "    {number}\n",
+        helpMsg: "Use block effects to let entire Markdown blocks appear or disappear. It works exactly as simple inline effects. But the number of appearance has to be put in double braces.\nThe entire block can also be styled and the animation tweaked, but the required comment tag has to be defined before the Markdown block. Animate.css is included at default.\n\nExamples:\n                    {{1}}\n  This entire block will appear with the first\n  fragment. And remain till the end of this slide.\n\n                    {{2}}\n  ```js\n  // this works with any markdown block\n  ```\n\n  <!-- class = \"animated rollIn\" -->\n       {{3}}\n  | Also | with  |\n  |------|-------|\n  | any  | table |",
+        icon: "<span style=\"color:#ff0\">\ud83d\udcab</span>"
+    },
+    {
+        key: "{{from-to}}",
+        search: "lia-effect-block",
+        replace: "    {from-to}\n",
+        helpMsg: "Use block effects to let entire Markdown blocks appear or disappear. It works exactly as simple inline effects. But the number of appearance has to be put in double braces, followed by a hyphen (-) and the number of disappearance.\nThe entire block can also be styled and the animation tweaked, but the required comment tag has to be defined before the Markdown block. Animate.css is included at default.\n\nExamples:\n                   {{1-4}}\n  This entire block will appear with the first fragment.\n  And remain untill the fourth fragment of this slide.\n\n                   {{0-1}}\n  ```js\n  // I will be present emeadiately and disapper on the\n  // 1st fragment.\n  ```\n\n  <!-- class = \"animated rollIn\" -->\n       {{3-4}}\n  | Also | with  |\n  |------|-------|\n  | any  | table |",
+        icon: "<span style=\"color:#ff0\">\ud83d\udcab</span>"
+    },
+    {
+        key: "{{number}} *** ... ***",
+        search: "lia-effect-multiblock",
+        replace: "                 {{number}}\n************************************************\n\nInsert your Markdown blocks in here ...\n\n************************************************",
+        helpMsg: "You can bundle multiple blocks to one effect block by enclosing them into two lines of stars (*). The rest works exactly as block effects...\nThe entire block can also be styled and the animation tweaked, but the required comment tag has to be defined before the Markdown block. Animate.css is included at default.\n\nExamples:\n                    {{1}}\n  *************************************************\n\n  Both blocks will appear at once. Nesting of other\n  {2}{inline} and block effects is also allowed.\n\n\n  | Also | with  |\n  |------|-------|\n  | any  | table |\n\n  **************************************************",
+        icon: "<span style=\"color:#ff0\">\ud83d\udcab</span>"
+    },
+    {
+        key: "{{from-to}} *** ... ***",
+        search: "lia-effect-multiblock2",
+        replace: "                 {{from-to}}\n************************************************\n\nInsert your Markdown blocks in here ...\n\n************************************************",
+        helpMsg: "You can bundle multiple blocks to one effect block by enclosing them into two lines of stars (*). The rest works exactly as block effects...\nThe entire block can also be styled and the animation tweaked, but the required comment tag has to be defined before the Markdown block. Animate.css is included at default.\n\nExamples:\n                    {{1-3}}\n  *************************************************\n\n  Both blocks will appear at once and disappear at\n  the third fragment. Nesting of other {2}{inline}\n  and block effects is also allowed.\n\n\n  | Also | with  |\n  |------|-------|\n  | any  | table |\n\n  **************************************************",
+        icon: "<span style=\"color:#ff0\">\ud83d\udcab</span>"
+    },
+    {
+        key: "<!-- class=\"animated rollIn\" ... -->",
+        search: "lia-effect-animate-example",
+        replace: "<!-- class=\"animated rollIn\" style=\"animation-delay: 3s;\" -->",
+        helpMsg: "This is only an example of how Animate.css can be used to tweak your effects. Additional CSS magic can be applied onto single elements or blocks by adding a comment tag either in front of the block or directly after the element.\n\nExample:\n\n  <!-- class = \"animated rollIn\" style = \"animation-delay: 3s; color: purple\" -->\n  The whole text-block should appear in purple color and with a wobbling effect.\n  Which is a **bad** example, please use it with caution ...\n  ~~ Jumping red ~~ <!-- class = \"animated infinite bounce\" style = \"color: red;\" -->\n\nFor more information how to change the animation styles, click on the link below.",
+        icon: "<span style=\"color:#ff0\">\ud83d\udcab</span>"
+    }
 ]
+
+
 
 
 // global vars
@@ -3013,6 +3029,13 @@ function checkCursorMenuInner () {
   // set position
   dropdown[0].style.left = left + offsetLeft + 'px'
   dropdown[0].style.top = top + offsetTop + 'px'
+
+  let help = document.createElement('pre')
+
+  help.style = "max-width:500px; display: block; white-space: pre-wrap;" + window.sss
+  help.id = "lia-help"
+
+  dropdown[0].appendChild(help)
 }
 
 function checkInIndentCode () {
@@ -3107,6 +3130,9 @@ const textCompleteKeyMap = {
     editor.doc.cm.execCommand('delCharBefore')
   }
 }
+
+if(!window.sss)
+  window.sss = ""
 
 $(editor.getInputField())
   .textcomplete([
@@ -3303,7 +3329,12 @@ $(editor.getInputField())
         callback(helpStrings)
       },
       template: function (value) {
-        return '<marquee>' + value.helpMsg + '</marquee>'
+        // style='width:500px; display: block; white-space: pre-wrap;'
+        return '<div>' +
+          value.icon + " " +
+          value.search +
+          '<span style="color: grey; display: block; float: right;">' + value.key + '</span>' +
+          '</div>'
       },
       replace: function (value) {
         return '$1' + value.replace
@@ -3321,6 +3352,12 @@ $(editor.getInputField())
     },
     'textComplete:afterSearch': function (e) {
       checkCursorMenu()
+    },
+    'textComplete:activate': function (e, value) {
+      try {
+        document.getElementById("lia-help").innerHTML = value.value.helpMsg
+      } catch (e) { }
+
     },
     'textComplete:select': function (e, value, strategy) {
       // NA

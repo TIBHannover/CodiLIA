@@ -410,6 +410,7 @@ if (typeof jQuery === 'undefined') {
     render: function (zippedData) {
       var contentsHtml = this._buildContents(zippedData);
       var unzippedData = $.map(this.data, function (d) { return d.value; });
+
       if (this.data.length) {
         this._renderHeader(unzippedData);
         this._renderFooter(unzippedData);
@@ -459,6 +460,7 @@ if (typeof jQuery === 'undefined') {
         this.completer.fire('textComplete:show');
         this.shown = true;
       }
+
       return this;
     },
 
@@ -469,6 +471,7 @@ if (typeof jQuery === 'undefined') {
         this.completer.fire('textComplete:hide');
         this.shown = false;
       }
+
       return this;
     },
 
@@ -639,6 +642,8 @@ if (typeof jQuery === 'undefined') {
     _activateIndexedItem: function () {
       this.$el.find('.textcomplete-item.active').removeClass('active');
       this._getActiveElement().addClass('active');
+
+      this.completer.fire('textComplete:activate', this.data[this._index]);
     },
 
     _getActiveElement: function () {
@@ -986,7 +991,7 @@ if (typeof jQuery === 'undefined') {
         pre = match[0];
         var newSubstr = strategy.replace(value);
         newSubstr = pre.replace(strategy.match, newSubstr);
-        
+
         editor.operation(function() {
           var selections = editor.listSelections();
           var bias = match.index - cursor.ch;
@@ -1003,7 +1008,7 @@ if (typeof jQuery === 'undefined') {
             editor.replaceRange(newSubstr, start, end, "+input");
           }
         });
-        
+
         if(strategy.done)
             strategy.done();
     },
