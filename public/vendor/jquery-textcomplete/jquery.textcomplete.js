@@ -459,6 +459,8 @@ if (typeof jQuery === 'undefined') {
         if (this.className) { this.$el.addClass(this.className); }
         this.completer.fire('textComplete:show');
         this.shown = true;
+
+        this.completer.fire('textComplete:activate', this.data[this._index]);
       }
 
       return this;
