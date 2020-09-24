@@ -374,7 +374,7 @@ if (typeof jQuery === 'undefined') {
           zIndex: option.zIndex
         }).appendTo($parent);
         */
-        $el = $(`<ul class="dropdown-menu" style="display: none; left: 0, position: absolute, zIndex: ${option.zIndex}">
+        $el = $(`<ul class="dropdown-menu" style="max-height: 220px; display: none; left: 0, position: absolute, zIndex: ${option.zIndex}">
           </ul>
           <pre id="lia-help" style="display: none"></pre>
         `).appendTo($parent);
