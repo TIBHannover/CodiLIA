@@ -245,7 +245,7 @@ const liaSnippets = [
     {
         key: "&lt;!-- style ... --&gt; ```` /--=... `````",
         search: "lia-ascii-example-css",
-        replace: "<!-- style=\"display: block; margin-left: auto; margin-right: auto; max-width:px;\" -->\n``````````````````````````````````````````````````\n                             .--->  F\n    A       B     C   D     /\n    *-------*-----*---*----*----->  E\n                         ^ v          /   '--->  G\n               B --> C -'\n`````````````````````````````````````````````````",
+        replace: "<!-- style=\"display: block; margin-left: auto; margin-right: auto; max-width: 315px;\" -->\n``````````````````````````````````````````````````\n                             .--->  F\n    A       B     C   D     /\n    *-------*-----*---*----*----->  E\n                         ^ v          /   '--->  G\n               B --> C -'\n`````````````````````````````````````````````````",
         icon: "<span style=\"color:#ff0\">\u2328</span>",
         url: "https://github.com/ivanceras/svgbob",
         helpMsg: "Add styling to your ASCII art drawings, sketches. Set the maximum size or center it.\n\nExamples:\n\n  &lt;!-- style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 315px;&quot; --&gt;\n  ``````````````````````````````````````````````````\n  ${1:                             .---&gt;  F\n      A       B     C   D     /\n      *-------*-----*---*----*-----&gt;  E\n                           ^ v          /   &#x27;---&gt;  G\n                 B --&gt; C -&#x27;}\n  ``````````````````````````````````````````````````"
@@ -293,7 +293,7 @@ const liaSnippets = [
     {
         key: "```lang ... ``` &lt;script&gt; ... ",
         search: "lia-code-block-jsx",
-        replace: "```javascript\nvar s = \"JavaScript syntax highlighting\";\nalert(s);\n```\n<script>\n  try{\n    eval(`@input`);\n  } catch (e) {\n    var log = e.stack.match(/((.*?):(.*))\\\\n.*?(:(\\\\d+):(\\\\d+)\\\\)\\\\n)/);\n    var err_msg = new LiaError(log] + \" =>  (\" + log],);\n    err_msg.add_detail, log], \"error\", log], log]);\n    throw err_msg;\n  }\n</script",
+        replace: "```javascript\nvar s = \"JavaScript syntax highlighting\";\nalert(s);\n```\n<script>\n  try{\n    eval(`@input`);\n  } catch (e) {\n    var log = e.stack.match(/((.*?):(.*))\\\\n.*?(:(\\\\d+):(\\\\d+)\\\\)\\\\n)/);\n    var err_msg = new LiaError(log[1] + \" =>  (\" + log[4], 1);\n    err_msg.add_detail(0, log[3], \"error\", log[5]-1, log[6]);\n    throw err_msg;\n  }\n</script",
         icon: "<span style=\"color:#ff0\">\ud83d\udcbb</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "This is an extended executable version of a code block, it shows how errors can be extracted and fed back by using LiaError to show inline errors, warnings, or information.\nIf you are using a project and want to integrate more than one file into your execution, you will have to use the parameterized @input(int) macro, the integer is defined by the file order (@input defaults to 0).\n\nExample:\n\n  ```javascript\n  var s = &quot;JavaScript syntax highlighting&quot;;\n  alert(s);\n  ```\n  &lt;script&gt;\n    try{\n      eval(`@input`);  // &lt;== code to evaluate\n    } catch (e) {\n      var log = e.stack.match(/((.*?):(.*))\\n.*?(:(\\d+):(\\d+)\\)\\n)/);\n      var err_msg = new LiaError(log[1] + &quot; =&gt;  (&quot; + log[4], 1);\n      err_msg.add_detail(0, log[3], &quot;error&quot;, log[5]-1, log[6]);\n      throw err_msg;\n    }\n  &lt;/script&gt;"
@@ -301,7 +301,7 @@ const liaSnippets = [
     {
         key: "&lt;script&gt;...@input...&lt;/script&gt;",
         search: "lia-code-js",
-        replace: "<script>\n  try{\n    eval(`@input`);\n  } catch (e) {\n    var log = e.stack.match(/((.*?):(.*))\\\\n.*?(:(\\\\d+):(\\\\d+)\\\\)\\\\n)/);\n    var err_msg = new LiaError(log] + \" =>  (\" + log],);\n    err_msg.add_detail, log], \"error\", log], log]);\n    throw err_msg;\n  }\n</script",
+        replace: "<script>\n  try{\n    eval(`@input`);\n  } catch (e) {\n    var log = e.stack.match(/((.*?):(.*))\\\\n.*?(:(\\\\d+):(\\\\d+)\\\\)\\\\n)/);\n    var err_msg = new LiaError(log[1] + \" =>  (\" + log[4], 1);\n    err_msg.add_detail(0, log[3], \"error\", log[5]-1, log[6]);\n    throw err_msg;\n  }\n</script",
         icon: "<span style=\"color:#ff0\">\ud83d\udcbb</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "This is an extended executable version of a code block, it shows how errors can be extracted and fed back by using LiaError to show inline errors, warnings, or information.\nIf you are using a project and want to integrate more than one file into your execution, you will have to use the parameterized @input(int) macro, the integer is defined by the file order (@input defaults to 0).\n\nExample:\n\n  &lt;script&gt;\n    try{\n      eval(`@input`); // code to be evaluated\n    } catch (e) {\n      // do some pattern matching to get the error string, the line number and column\n      var log = e.stack.match(/((.*?):(.*))\\n.*?(:(\\d+):(\\d+)\\)\\n)/);\n\n      // create a new LiaError object with\n      // param1: an error message string\n      // param2: add the number of files involved as int\n      var err_msg = new LiaError(log[1] + &quot; =&gt;  (&quot; + log[4], 1);\n\n      // add as many information to your error message\n      // param1: file id\n      // param2: additional information string\n      // param3: type, either &quot;error&quot;, &quot;info&quot;, or &quot;warning&quot;\n      // param4: line number\n      // param5: column number\n      err_msg.add_detail(0, log[3], &quot;error&quot;, log[5]-1, log[6]);\n\n      throw err_msg;   // finally just throw it away\n    }\n  &lt;/script&gt;"
@@ -317,7 +317,7 @@ const liaSnippets = [
     {
         key: "``` ... ``` ``` ... ``` ...",
         search: "lia-code-project",
-        replace: "``` js     -EvalScript.js\nlet who = data.first_name + \" \" + data.last_name;\n\nif(data.online) {\n  who + \" is online\"; \\\nelse {\n  who + \" is NOT online\"; \\}}\n```\n``` json    +Data.json\n{\n  \"first_name\" :  \"Sammy\",\n  \"last_name\"  :  \"Shark\",\n  \"online\"     :  true\n\\}\n```\n<script>\n  // insert the JSON dataset into the local variable data\n  let data = @input);\n\n  // eval the script that uses this dataset\n  eval(`@input)`);\n</script",
+        replace: "``` js     -EvalScript.js\nlet who = data.first_name + \" \" + data.last_name;\n\nif(data.online) {\n  who + \" is online\"; \\\nelse {\n  who + \" is NOT online\"; \\}}\n```\n``` json    +Data.json\n{\n  \"first_name\" :  \"Sammy\",\n  \"last_name\"  :  \"Shark\",\n  \"online\"     :  true\n\\}\n```\n<script>\n  // insert the JSON dataset into the local variable data\n  let data = @input(1);\n\n  // eval the script that uses this dataset\n  eval(`@input(0)`);\n</script",
         icon: "<span style=\"color:#ff0\">\ud83d\udcbb</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "If you want to create a project and thus separate data and code into multiple files, simply write multiple code blocks in a sequence. To make them executable as a whole, simply add a script tag to the end and use the parameterized @input(id) macro to compose your project properly. The file id is defined by the order of code blocks.\nSee the link below to see more examples.\n\nExample:\n\n  ``` js     -EvalScript.js\n  let who = data.first_name + &quot; &quot; + data.last_name;\n\n  if(data.online) { who + &quot; is online&quot;; }\n  else            { who + &quot; is NOT online&quot;; }\n  ```\n  ``` json    +Data.json\n  { &quot;first_name&quot; :  &quot;Sammy&quot;,\n    &quot;last_name&quot;  :  &quot;Shark&quot;,\n    &quot;online&quot;     :  true   }\n  ```\n  &lt;script&gt;\n    // insert the JSON dataset into the local variable data\n    let data = @input(1);\n\n    // eval the script that uses this dataset\n    eval(`@input(0)`);\n  &lt;/script&gt;"
@@ -357,7 +357,7 @@ const liaSnippets = [
     {
         key: "color dot diagram",
         search: "lia-diagram-dots",
-        replace: "               Title - dots | A a B b C c\n  | D d E e F f G g H h I i\n  | J j K k L l M m N n o O\n  | P p Q q R r S s T t U u\n  | V v W w X x Y y Z Z   * +------------------------\n                      ",
+        replace: "               Title - dots\n6 | A a B b C c\n  | D d E e F f G g H h I i\n  | J j K k L l M m N n o O\n  | P p Q q R r S s T t U u\n  | V v W w X x Y y Z Z   *\n1 +------------------------\n  0                      2",
         icon: "<span style=\"color:#ff0\">\ud83d\udcc8</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "The character is used as a color code, such as r stands for red, w for white, etc. Uppercase and lowercase characters define the size of the plotted dots. And if there is only one character, then it is plotted as a single dot only.\n\nExample:\n                  Colored - Dots\n     6 | A a B b C c\n       | D d E e F f G g H h I i\ny-axis | J j K k L l M m N n o O\n       | P p Q q R r S s T t U u\n       | V v W w X x Y y Z Z   *\n     1 +------------------------\n       0        x-axis        24\n\nThe definition of the title, x and y labels and their limits is optional, but the number of used pipes (|) and hyphens (-) define the resolution of the diagram."
@@ -365,7 +365,7 @@ const liaSnippets = [
     {
         key: "multiline diagram",
         search: "lia-diagram-multiline",
-        replace: "                                Multiline |\n    |                 ***\n  y |               *     *\n  - | r r r r r r r*r r r r*r r r r r r r\n  a |             *         *\n  x |            *           *\n  i | B B B B B * B B B B B B * B B B B B\n  s |         *                 *\n    | *  * *                       * *  *\n  +------------------------------------\n                 x-axis              ",
+        replace: "                                Multiline\n1.9 |\n    |                 ***\n  y |               *     *\n  - | r r r r r r r*r r r r*r r r r r r r\n  a |             *         *\n  x |            *           *\n  i | B B B B B * B B B B B B * B B B B B\n  s |         *                 *\n    | *  * *                       * *  *\n -1 +------------------------------------\n    0              x-axis               ",
         icon: "<span style=\"color:#ff0\">\ud83d\udcc8</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "The character is used as a color code, such as r stands for red, B for blue, etc. Uppercase and lowercase characters define the size of the plotted dots. A sequence of equal characters gets interpreted as a poly-line, there are more than two characters and if there are no two characters at the same x position.\n\nExample:\n                                  Multiline\n  1.9 |\n      |                 ***\n    y |               *     *\n    - | r r r r r r r*r r r r*r r r r r r r\n    a |             *         *\n    x |            *           *\n    i | B B B B B * B B B B B B * B B B B B\n    s |         *                 *\n      | *  * *                       * *  *\n   -1 +------------------------------------\n      0            x-axis                 1\n\nThe definition of the title, x and y labels and their limits is optional, but the number of used pipes (|) and hyphens (-) define the resolution of the diagram."
@@ -373,7 +373,7 @@ const liaSnippets = [
     {
         key: "simple diagram",
         search: "lia-diagram-simple",
-        replace: "             Combining dots and polylines |\n    |     DOTS\n  y |                                *\n  - |\n  a |                         *\n  x |                  *\n  i |         *\n  s |\n    | *\n  +------------------------------------\n               x-axis                ",
+        replace: "             Combining dots and polylines\n1.9 |\n    |     DOTS\n  y |                                *\n  - |\n  a |                         *\n  x |                  *\n  i |         *\n  s |\n    | *\n -1 +------------------------------------\n    0            x-axis                 ",
         icon: "<span style=\"color:#ff0\">\ud83d\udcc8</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "Simple dots and poly-line representations can be applied together in one diagram, if they use different characters.\n\nExample:\n              Combining dots and poly-lines\n  1.9 |\n      |     DOTS\n    y |                                *\n    - |\n    a |                         *\n    x |                  *\n    i |         *\n    s |\n      | *\n   -1 +------------------------------------\n      0            x-axis                 1\n\nThe definition of the title, x and y labels and their limits is optional, but the number of used pipes (|) and hyphens (-) define the resolution of the diagram."
@@ -429,7 +429,7 @@ const liaSnippets = [
     {
         key: "&lt;!-- class=&quot;animated rollIn&quot; ... --&gt;",
         search: "lia-effect-animate-example",
-        replace: "<!-- class=\"animated rollIn\" style=\"animation-delay:s;\" --",
+        replace: "<!-- class=\"animated rollIn\" style=\"animation-delay: 3s;\" --",
         icon: "<span style=\"color:#ff0\">\ud83d\udcab</span>",
         url: "https://github.com/daneden/animate.css/",
         helpMsg: "This is only an example of how Animate.css can be used to tweak your effects. Additional CSS magic can be applied onto single elements or blocks by adding a comment tag either in front of the block or directly after the element.\n\nExample:\n\n  &lt;!-- class = &quot;animated rollIn&quot; style = &quot;animation-delay: 3s; color: purple&quot; --&gt;\n  The whole text-block should appear in purple color and with a wobbling effect.\n  Which is a **bad** example, please use it with caution ...\n  ~~ Jumping red ~~ &lt;!-- class = &quot;animated infinite bounce&quot; style = &quot;color: red;&quot; --&gt;\n\nFor more information how to change the animation styles, click on the link below."
@@ -517,7 +517,7 @@ const liaSnippets = [
     {
         key: "$ f(x) = (x^2+5)^3 $",
         search: "lia-formula-inline",
-        replace: "$ f(a,b,c) = (a+b+c) ",
+        replace: "$ ${1:f(a,b,c) = (a^2+b^2+c^2)^3} $",
         icon: "<span style=\"color:#ff0\">\ud835\udf45\u00b2</span>",
         url: "https://khan.github.io/KaTeX/docs/supported.html",
         helpMsg: "Insert a mathematical formula (inline) within your text. It has to be enclosed with two single dollar signs, as shown in the example.\n\nExample: $ f(a,b,c) = (a^2+b^2+c^2)^3 $\n\nFormulas are rendered with KaTex, so click on the link below to get more information and examples on the applied notation."
@@ -525,7 +525,7 @@ const liaSnippets = [
     {
         key: "$$ \\sum_\\{i=1\\}^\\\\infty\\ ... $$",
         search: "lia-formula-block",
-        replace: "$$\n   \\\\sum_\\{i\\^\\\\infty\\\\frac\\\\}\\{n\\}\n        =\\\\frac\\{\\\\pi\\}\\\\}}\n$",
+        replace: "$$\n   ${1:\\\\sum_\\{i=1\\}^\\\\infty\\\\frac\\{1\\}\\{n^2\\}\n        =\\\\frac\\{\\\\pi^2\\}\\{6\\}}\n$$",
         icon: "<span style=\"color:#ff0\">\ud835\udf45\u00b2</span>",
         url: "https://khan.github.io/KaTeX/docs/supported.html",
         helpMsg: "Insert a more multiline mathematical formula as a block, which is automatically centered within your document. It has to be enclosed with two dollar signs, as shown in the example.\n\nExample:\n\n$$\n   \\sum_{i=1}^\\infty\\frac{1}{n^2}\n        =\\frac{\\pi^2}{6}\n$$\n\nFormulas are rendered with KaTex, so click on the link below to get more information and examples on the applied notation."
@@ -533,7 +533,7 @@ const liaSnippets = [
     {
         key: "&lt;!-- name: ...",
         search: "lia-header-main",
-        replace: "<!--\nauthor:   Your Name\nemail:    your@email.com\nversion:  0\nlanguage: en\nnarrator: US English Female\n\ncomment:  This simple description of your course.\n          Multiline is also okay.\n\nlink:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css\n\nscript:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js\n\ntranslation: Fran\u00e7ais translations/French.md\n--",
+        replace: "<!--\nauthor:   Your Name\nemail:    your@email.com\nversion:  0.1.0\nlanguage: en\nnarrator: US English Female\n\ncomment:  This simple description of your course.\n          Multiline is also okay.\n\nlink:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css\n\nscript:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js\n\ntranslation: Fran\u00e7ais translations/French.md\n--",
         icon: "<span style=\"color:#ff0\">\ud83d\udcc4</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "  The main header is a comment of the following format. You can use it to define defaults, such as authors, emails, where to find translations, what JavaScript and styles should be loaded additionally, as well as the language of your course.\n  You can change some of these settings within a sub-header for each section individually.\n\n  Default:\n      language: (en) | de | ua | fa | hy | bg\n      narrator: US English Male\n\n  Example:\n\n      &lt;!--\n      author:   Your Name\n      email:    your@email.com\n      version:  0.1.0\n      language: en\n      narrator: US English Female\n\n      comment:  This simple description of your course.\n                Multiline is also okay.\n\n      link:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css\n                https://...\n\n      script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js\n                https://...\n\n      translation: Fran\u00e7ais translations/French.md\n      translation: \u65e5\u672c\u8a9e    translations/Japanese.md\n      --&gt;\n\n      # Course ...\n\nAnd you can refer to these values via the system macros:\n\n    @author\n    @email\n    @version"
@@ -541,7 +541,7 @@ const liaSnippets = [
     {
         key: "&lt;!-- name: ... --&gt;",
         search: "lia-header-section",
-        replace: "<!--\nauthor:   Section Author\nemail:    section.author@email.com\nversion:  0\nnarrator: UK English Female\n\nlink:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css\n\nscript:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js\n--",
+        replace: "<!--\nauthor:   Section Author\nemail:    section.author@email.com\nversion:  0.1.0\nnarrator: UK English Female\n\nlink:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css\n\nscript:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js\n--",
         icon: "<span style=\"color:#ff0\">\ud83d\udcc4</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "You can overwrite some main header settings as it is listed below. Just attach a comment to the section title and overwrite only those settings, that are relevant to you.\n\nExample:\n\n    ...\n    # Course\n    ...\n    ## Section\n    &lt;!--\n    narrator: Australian Female\n    --&gt;\n    ...\n    ### Sub Section\n    &lt;!--\n    author:   Section Author\n    email:    section.author@email.com\n    version:  0.1.0\n    narrator: Australian Female\n\n    link:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css\n    script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js\n    --&gt;"
@@ -549,7 +549,7 @@ const liaSnippets = [
     {
         key: "&lt; ... # ... [",
         search: "lia-init",
-        replace: "<!--\nauthor:   Your Name\n\nemail:    your@mail.org\n\nversion: \n\nlanguage: en\n\nnarrator: US English Female\n\ncomment:  Try to write a short comment about\n          your course, multiline is also okay.\n\nlink:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css\n\nscript:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js\n\ntranslation: Deutsch  translations/German.md\n\ntranslation: Fran\u00e7ais translations/French.md\n-->\n\n# Course Main Title\n\nThis is your **course** initialization stub.\n\nPlease see the [Docs](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md)\nto find out what is possible in [LiaScript](https://liascript.github.io).\n\nIf you want to use instant help in your Atom IDE, please type **lia** to see all available shortcuts.\n\n## Markdown\n\nYou can use common [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) syntax to create your course, such as:\n. Lists. ordered or\n\n   * unordered\n   * ones ...\n\n\n| Header   | Header   |\n| :--------- | :--------- |\n| Item     | Item     |\n\n\nImages:\n\n![images](https://far.static.flickr.com8be6.jpg)\n\n\n### Extensions\n\n     --{}}--\nBut you can also include other features such as spoken text.\n\n      --{}}--\nInsert any kind of audio file:\n\n       {}}\n?[audio](https://bigsoundbank.com/UPLOAD/m8.m)\n\n\n     --{}}--\nEven videos or change the language completely.\n\n       {}}\n!?[video](https://www.youtube.com/watch?v=bICfKRyKTwE)\n\n\n      --{ Russian Female}}--\n\u041f\u0435\u0440\u0432\u043e\u043d\u0430\u0447\u0430\u043b\u044c\u043d\u043e \u0441\u043e\u0437\u0434\u0430\u043d \u04324 \u0433\u043e\u0434\u0443 \u0414\u0436\u043e\u043d\u043e\u043c \u0413\u0440\u0443\u0431\u0435\u0440\u043e\u043c (\u0430\u043d\u0433\u043b. John Gruber) \u0438 \u0410\u0430\u0440\u043e\u043d\u043e\u043c\n\u0428\u0432\u0430\u0440\u0446\u0435\u043c. \u041c\u043d\u043e\u0433\u0438\u0435 \u0438\u0434\u0435\u0438 \u044f\u0437\u044b\u043a\u0430 \u0431\u044b\u043b\u0438 \u043f\u043e\u0437\u0430\u0438\u043c\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u044b \u0438\u0437 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0445 \u0441\u043e\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0439 \u043f\u043e\n\u0440\u0430\u0437\u043c\u0435\u0442\u043a\u0435 \u0442\u0435\u043a\u0441\u0442\u0430 \u0432 \u044d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u044b\u0445 \u043f\u0438\u0441\u044c\u043c\u0430\u0445...\n\n\n    {}}\nType \"voice\" to see a list of all available languages.\n\n\n### Styling\n\n<!-- class = \"animated rollIn\" style = \"animation-delay:s; color: purple\" -->\nThe whole text-block should appear in purple color and with a wobbling effect.\nWhich is a **bad** example, please use it with caution ...\n~~ only this is red ;-) ~~ <!-- class = \"animated infinite bounce\" style = \"color: red;\" -->\n\n## Charts\n\nUse ASCII-Art to draw diagrams:\n\n                                    Multiline\n    |    DOTS\n        |                 ***\n      y |               *     *\n      - | r r r r r r r*r r r r*r r r r r r r\n      a |             *         *\n      x |            *           *\n      i | B B B B B * B B B B B B * B B B B B\n      s |         *                 *\n        | *  * *                       * *  *\n      +------------------------------------\n                     x-axis              \n\n## Quizzes\n\n### A Textquiz\n\nWhat did the **fish** say when he hit a **concrete wall**?\n\n    [[dam]]\n\n### Multiple Choice\n\nJust add as many points as you wish:\n\n    [[X]] Only the **X** marks the correct point.\n    [[ ]] Empty ones are wrong.\n    [[X]] ...\n\n### Single Choice\n\nJust add as many points as you wish:\n\n    [( )] ...\n    [(X)] <-- Only the **X** is allowed.\n    [( )] ...\n\n## Executable Code\n\nA drawing example, for demonstrating that any JavaScript library can be used, also for drawing.\n\n```javascript\n// Initialize a Line chart in the container with the ID char\nnew Chartist.Line('#char', {\n  labels: ,,,],\n  series: [,,,]]\n});\n\n// Initialize a Line chart in the container with the ID char\nnew Chartist.Bar('#char', {\n  labels: ,,,],\n  series: [,,,]]\n});\n```\n<script>@input</script>\n\n<div class=\"ct-chart ct-golden-section\" id=\"char\"></div>\n<div class=\"ct-chart ct-golden-section\" id=\"char\"></div>\n\n\n### Projects\n\nYou can make your code executable and define projects:\n\n``` js     -EvalScript.js\nlet who = data.first_name + \" \" + data.last_name;\n\nif(data.online) {\n  who + \" is online\"; }\nelse {\n  who + \" is NOT online\"; }\n```\n``` json    +Data.json\n{\n  \"first_name\" :  \"Sammy\",\n  \"last_name\"  :  \"Shark\",\n  \"online\"     :  true\n}\n```\n<script>\n  // insert the JSON dataset into the local variable data\n  let data = @input);\n\n  // eval the script that uses this dataset\n  eval(`@input)`);\n</script>\n\n## More\n\nFind out what you can even do more with quizzes:\n\nhttps://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.m",
+        replace: "<!--\nauthor:   Your Name\n\nemail:    your@mail.org\n\nversion:  0.0.1\n\nlanguage: en\n\nnarrator: US English Female\n\ncomment:  Try to write a short comment about\n          your course, multiline is also okay.\n\nlink:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css\n\nscript:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js\n\ntranslation: Deutsch  translations/German.md\n\ntranslation: Fran\u00e7ais translations/French.md\n-->\n\n# Course Main Title\n\nThis is your **course** initialization stub.\n\nPlease see the [Docs](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md)\nto find out what is possible in [LiaScript](https://liascript.github.io).\n\nIf you want to use instant help in your Atom IDE, please type **lia** to see all available shortcuts.\n\n## Markdown\n\nYou can use common [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) syntax to create your course, such as:\n\n1. Lists\n2. ordered or\n\n   * unordered\n   * ones ...\n\n\n| Header 1   | Header 2   |\n| :--------- | :--------- |\n| Item 1     | Item 2     |\n\n\nImages:\n\n![images](https://farm2.static.flickr.com/1618/26701766821_7bea494826.jpg)\n\n\n### Extensions\n\n     --{{0}}--\nBut you can also include other features such as spoken text.\n\n      --{{1}}--\nInsert any kind of audio file:\n\n       {{1}}\n?[audio](https://bigsoundbank.com/UPLOAD/mp3/1068.mp3)\n\n\n     --{{2}}--\nEven videos or change the language completely.\n\n       {{2-3}}\n!?[video](https://www.youtube.com/watch?v=bICfKRyKTwE)\n\n\n      --{{3 Russian Female}}--\n\u041f\u0435\u0440\u0432\u043e\u043d\u0430\u0447\u0430\u043b\u044c\u043d\u043e \u0441\u043e\u0437\u0434\u0430\u043d \u0432 2004 \u0433\u043e\u0434\u0443 \u0414\u0436\u043e\u043d\u043e\u043c \u0413\u0440\u0443\u0431\u0435\u0440\u043e\u043c (\u0430\u043d\u0433\u043b. John Gruber) \u0438 \u0410\u0430\u0440\u043e\u043d\u043e\u043c\n\u0428\u0432\u0430\u0440\u0446\u0435\u043c. \u041c\u043d\u043e\u0433\u0438\u0435 \u0438\u0434\u0435\u0438 \u044f\u0437\u044b\u043a\u0430 \u0431\u044b\u043b\u0438 \u043f\u043e\u0437\u0430\u0438\u043c\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u044b \u0438\u0437 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0445 \u0441\u043e\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0439 \u043f\u043e\n\u0440\u0430\u0437\u043c\u0435\u0442\u043a\u0435 \u0442\u0435\u043a\u0441\u0442\u0430 \u0432 \u044d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u044b\u0445 \u043f\u0438\u0441\u044c\u043c\u0430\u0445...\n\n\n    {{3}}\nType \"voice\" to see a list of all available languages.\n\n\n### Styling\n\n<!-- class = \"animated rollIn\" style = \"animation-delay: 2s; color: purple\" -->\nThe whole text-block should appear in purple color and with a wobbling effect.\nWhich is a **bad** example, please use it with caution ...\n~~ only this is red ;-) ~~ <!-- class = \"animated infinite bounce\" style = \"color: red;\" -->\n\n## Charts\n\nUse ASCII-Art to draw diagrams:\n\n                                    Multiline\n    1.9 |    DOTS\n        |                 ***\n      y |               *     *\n      - | r r r r r r r*r r r r*r r r r r r r\n      a |             *         *\n      x |            *           *\n      i | B B B B B * B B B B B B * B B B B B\n      s |         *                 *\n        | *  * *                       * *  *\n     -1 +------------------------------------\n        0              x-axis               1\n\n## Quizzes\n\n### A Textquiz\n\nWhat did the **fish** say when he hit a **concrete wall**?\n\n    [[dam]]\n\n### Multiple Choice\n\nJust add as many points as you wish:\n\n    [[X]] Only the **X** marks the correct point.\n    [[ ]] Empty ones are wrong.\n    [[X]] ...\n\n### Single Choice\n\nJust add as many points as you wish:\n\n    [( )] ...\n    [(X)] <-- Only the **X** is allowed.\n    [( )] ...\n\n## Executable Code\n\nA drawing example, for demonstrating that any JavaScript library can be used, also for drawing.\n\n```javascript\n// Initialize a Line chart in the container with the ID chart1\nnew Chartist.Line('#chart1', {\n  labels: [1, 2, 3, 4],\n  series: [[100, 120, 180, 200]]\n});\n\n// Initialize a Line chart in the container with the ID chart2\nnew Chartist.Bar('#chart2', {\n  labels: [1, 2, 3, 4],\n  series: [[5, 2, 8, 3]]\n});\n```\n<script>@input</script>\n\n<div class=\"ct-chart ct-golden-section\" id=\"chart1\"></div>\n<div class=\"ct-chart ct-golden-section\" id=\"chart2\"></div>\n\n\n### Projects\n\nYou can make your code executable and define projects:\n\n``` js     -EvalScript.js\nlet who = data.first_name + \" \" + data.last_name;\n\nif(data.online) {\n  who + \" is online\"; }\nelse {\n  who + \" is NOT online\"; }\n```\n``` json    +Data.json\n{\n  \"first_name\" :  \"Sammy\",\n  \"last_name\"  :  \"Shark\",\n  \"online\"     :  true\n}\n```\n<script>\n  // insert the JSON dataset into the local variable data\n  let data = @input(1);\n\n  // eval the script that uses this dataset\n  eval(`@input(0)`);\n</script>\n\n## More\n\nFind out what you can even do more with quizzes:\n\nhttps://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.m",
         icon: "<span style=\"color:#ff0\">\ud83d\ude80</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "Initialize your file with a complete dummy course with a header and body, which can be used as a bootstrap for your course.\n\nExample:\n\n    &lt;!--\n    author:   Your Name\n\n    email:    your@mail.org\n\n    version:  0.0.1\n\n    language: en\n\n    narrator: US English Female\n\n    ...\n    --&gt;\n\n    # Course Main Title\n\n    This is your **course** initialization stub..."
@@ -557,7 +557,7 @@ const liaSnippets = [
     {
         key: "1. ... 2. ... 3. ...",
         search: "lia-list-ordered",
-        replace: "1. block. block. block",
+        replace: "1. block\n2. block\n3. block",
         icon: "<span style=\"color:#ff0\">\ud834\udf06</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "Insert a Markdown ordered list, as depicted below. Indentation is important in this case.\n\nExample:\n  1. first point\n  2. second point\n  3. some text\n\n     and some image ![image](img/point.jpg)"
@@ -669,7 +669,7 @@ const liaSnippets = [
     {
         key: "@name ... body ... @end",
         search: "lia-macro-definition-block",
-        replace: "@name\npara -> ____\n@en",
+        replace: "@name\nparam1 -> __@0__\n@en",
         icon: "<span style=\"color:#ff0\">\ud83d\udee0</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "Use macros to deal with repetitive task and to make the document more readable. Multi-line macros start with an (@your_name) and end with (@end). Parameters can also be passed as to single line macros.\n\nExample:\n\n  ## section\n  &lt;!--\n  @evalJS\n  &lt;script&gt;\n    try{\n      eval(`@input`);\n    } catch (e) {\n      var log = e.stack.match(/((.*?):(.*))\n.*?(:(d+):(d+))\n)/);\n      var err_msg = new LiaError(log[1] + &quot; =&gt;  (&quot; + log[4], 1);\n      err_msg.add_detail(0, log[3], &quot;error&quot;, log[5]-1, log[6]);\n      throw err_msg;\n    }\n  &lt;/script&gt;\n  @end\n  --&gt;\n\n  eval this code with erros:\n\n  ```js\n  let x = 12;\n  x * c;\n  ```\n  @evalJS"
@@ -757,7 +757,7 @@ const liaSnippets = [
     {
         key: "[(1)]...[(:...)]...",
         search: "lia-survey-single-choice",
-        replace: "[(1)] option\n[(2)] option\n[(3)] option",
+        replace: "[(1)] option 1\n[(2)] option 2\n[(3)] option 3",
         icon: "<span style=\"color:#ff0\">\ud83d\udccb</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "The definition is similar to a single choice quiz, but instead of an X, either numbers have to be put into parentheses or variable names. They do not have to be ordered and the number is also variable.\n\nExample:\n\n  Choose between different options:\n\n    [(1)] option 1\n    [(2)] option 2\n    [(0)] option 3\n\n  What is your favorite color:\n\n    [(red)]   red?\n    [(blue)]  blue?\n    [(green)] green?"
@@ -765,7 +765,7 @@ const liaSnippets = [
     {
         key: "[[1]]...[[:...]]...",
         search: "lia-survey-multiple-choice",
-        replace: "[[1]] option\n[[2]] option\n[[3]] option",
+        replace: "[[1]] option 1\n[[2]] option 2\n[[3]] option 3",
         icon: "<span style=\"color:#ff0\">\ud83d\udccb</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "The definition is similar to a multiple choice quiz, but instead of an X, either numbers have to be put into parentheses or variable names. They do not have to be ordered and the number is also variable.\n\nExample:\n\n  Choose as many options as your want:\n\n    [[1]] option 1\n    [[2]] option 2\n    [[0]] option 0\n\n  Mark all colors you like:\n\n    [[red]]   red?\n    [[blue]]  blue?\n    [[green]] green?\n    [[none]]  None of these ..."
@@ -797,7 +797,7 @@ const liaSnippets = [
     {
         key: "2 colum table",
         search: "lia-table-2",
-        replace: "| Header   | Header   |\n| :--------- | :--------- |\n| Item     | Item     ",
+        replace: "| Header 1   | Header 2   |\n| :--------- | :--------- |\n| Item 1     | Item 2     ",
         icon: "<span style=\"color:#ff0\">\ud834\udf20</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "There must be at least 3 dashes separating each header cell. Cells are separated by pipes (|), and you don&#x27;t need to make the raw Markdown line up prettily. Hyphens (-) are used to separate the table header from the body, whereby the colons are used to align the columns.\n\nExample:\n\n| Tables        | Are           | Cool  |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n| zebra stripes | are neat      |    $1 |"
@@ -805,7 +805,7 @@ const liaSnippets = [
     {
         key: "3 colum table",
         search: "lia-table-3",
-        replace: "| Header   | Header   | Header   |\n| :--------- | :--------- | :--------- |\n| Item     | Item     | Item     ",
+        replace: "| Header 1   | Header 2   | Header 3   |\n| :--------- | :--------- | :--------- |\n| Item 1     | Item 2     | Item 3     ",
         icon: "<span style=\"color:#ff0\">\ud834\udf20</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "There must be at least 3 dashes separating each header cell. Cells are separated by pipes (|), and you don&#x27;t need to make the raw Markdown line up prettily. Hyphens (-) are used to separate the table header from the body, whereby the colons are used to align the columns.\n\nExample:\n\n| Tables        | Are           | Cool  |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n| zebra stripes | are neat      |    $1 |"
@@ -813,7 +813,7 @@ const liaSnippets = [
     {
         key: "4 colum table",
         search: "lia-table-4",
-        replace: "| Header   | Header   | Header   | Header   |\n| :--------- | :--------- | :--------- | :--------- |\n| Item     | Item     | Item     | Item     ",
+        replace: "| Header 1   | Header 2   | Header 3   | Header 4   |\n| :--------- | :--------- | :--------- | :--------- |\n| Item 1     | Item 2     | Item 3     | Item 4     ",
         icon: "<span style=\"color:#ff0\">\ud834\udf20</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "There must be at least 3 dashes separating each header cell. Cells are separated by pipes (|), and you don&#x27;t need to make the raw Markdown line up prettily. Hyphens (-) are used to separate the table header from the body, whereby the colons are used to align the columns.\n\nExample:\n\n| Tables        | Are           | Cool  |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n| zebra stripes | are neat      |    $1 |"
@@ -821,7 +821,7 @@ const liaSnippets = [
     {
         key: "5 colum table",
         search: "lia-table-5",
-        replace: "| Header   | Header   | Header   | Header   | Header   |\n| :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item     | Item     | Item     | Item     | Item     ",
+        replace: "| Header 1   | Header 2   | Header 3   | Header 4   | Header 5   |\n| :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item 1     | Item 2     | Item 3     | Item 4     | Item 5     ",
         icon: "<span style=\"color:#ff0\">\ud834\udf20</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "There must be at least 3 dashes separating each header cell. Cells are separated by pipes (|), and you don&#x27;t need to make the raw Markdown line up prettily. Hyphens (-) are used to separate the table header from the body, whereby the colons are used to align the columns.\n\nExample:\n\n| Tables        | Are           | Cool  |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n| zebra stripes | are neat      |    $1 |"
@@ -829,7 +829,7 @@ const liaSnippets = [
     {
         key: "6 colum table",
         search: "lia-table-6",
-        replace: "| Header   | Header   | Header   | Header   | Header   | Header   |\n| :--------- | :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item     | Item     | Item     | Item     | Item     | Item     ",
+        replace: "| Header 1   | Header 2   | Header 3   | Header 4   | Header 5   | Header 6   |\n| :--------- | :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item 1     | Item 2     | Item 3     | Item 4     | Item 5     | Item 6     ",
         icon: "<span style=\"color:#ff0\">\ud834\udf20</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "There must be at least 3 dashes separating each header cell. Cells are separated by pipes (|), and you don&#x27;t need to make the raw Markdown line up prettily. Hyphens (-) are used to separate the table header from the body, whereby the colons are used to align the columns.\n\nExample:\n\n| Tables        | Are           | Cool  |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n| zebra stripes | are neat      |    $1 |"
@@ -837,7 +837,7 @@ const liaSnippets = [
     {
         key: "7 colum table",
         search: "lia-table-7",
-        replace: "| Header   | Header   | Header   | Header   | Header   | Header   | Header   |\n| :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item     | Item     | Item     | Item     | Item     | Item     | Item     ",
+        replace: "| Header 1   | Header 2   | Header 3   | Header 4   | Header 5   | Header 6   | Header 7   |\n| :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item 1     | Item 2     | Item 3     | Item 4     | Item 5     | Item 6     | Item 7     ",
         icon: "<span style=\"color:#ff0\">\ud834\udf20</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "There must be at least 3 dashes separating each header cell. Cells are separated by pipes (|), and you don&#x27;t need to make the raw Markdown line up prettily. Hyphens (-) are used to separate the table header from the body, whereby the colons are used to align the columns.\n\nExample:\n\n| Tables        | Are           | Cool  |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n| zebra stripes | are neat      |    $1 |"
@@ -845,7 +845,7 @@ const liaSnippets = [
     {
         key: "8 colum table",
         search: "lia-table-8",
-        replace: "| Header   | Header   | Header   | Header   | Header   | Header   | Header   | Header   |\n| :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item     | Item     | Item     | Item     | Item     | Item     | Item     | Item     ",
+        replace: "| Header 1   | Header 2   | Header 3   | Header 4   | Header 5   | Header 6   | Header 7   | Header 8   |\n| :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item 1     | Item 2     | Item 3     | Item 4     | Item 5     | Item 6     | Item 7     | Item 8     ",
         icon: "<span style=\"color:#ff0\">\ud834\udf20</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "There must be at least 3 dashes separating each header cell. Cells are separated by pipes (|), and you don&#x27;t need to make the raw Markdown line up prettily. Hyphens (-) are used to separate the table header from the body, whereby the colons are used to align the columns.\n\nExample:\n\n| Tables        | Are           | Cool  |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n| zebra stripes | are neat      |    $1 |"
@@ -853,7 +853,7 @@ const liaSnippets = [
     {
         key: "9 colum table",
         search: "lia-table-9",
-        replace: "| Header   | Header   | Header   | Header   | Header   | Header   | Header   | Header   | Header   |\n| :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item     | Item     | Item     | Item     | Item     | Item     | Item     | Item     | Item     ",
+        replace: "| Header 1   | Header 2   | Header 3   | Header 4   | Header 5   | Header 6   | Header 7   | Header 8   | Header 9   |\n| :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- |\n| Item 1     | Item 2     | Item 3     | Item 4     | Item 5     | Item 6     | Item 7     | Item 8     | Item 9     ",
         icon: "<span style=\"color:#ff0\">\ud834\udf20</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "There must be at least 3 dashes separating each header cell. Cells are separated by pipes (|), and you don&#x27;t need to make the raw Markdown line up prettily. Hyphens (-) are used to separate the table header from the body, whereby the colons are used to align the columns.\n\nExample:\n\n| Tables        | Are           | Cool  |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n| zebra stripes | are neat      |    $1 |"
@@ -1147,7 +1147,7 @@ const liaSnippets = [
     {
         key: "&lt;script&gt; /*single choice*/ &lt;/script&gt;",
         search: "lia-quiz-single-js",
-        replace: "<script>\n  // @input gets replaced by a single number\n  //  if no selection otherwise it starts\n  // with.\n  let input_number = @input;\n\n  if(input_number ==)\n    true;\n  else\n    false;\n</script",
+        replace: "<script>\n  // @input gets replaced by a single number\n  // -1 if no selection otherwise it starts\n  // with 0.\n  let input_number = @input;\n\n  if(input_number == 1)\n    true;\n  else\n    false;\n</script",
         icon: "<span style=\"color:#ff0\">\ud83c\udf93</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "In some rare cases you might want to change the correct solution, or add a counter, that reveals the correct answer after some predefined number of trials. Then simply add a script tag to the quiz. The @input string gets replaced by an integer representing the current user input:\n\n-1 -&gt; no selection\n0  -&gt; the first\n1  -&gt; the second\n\nExample:\n\n    [( )] Check this ...\n    [(X)] ... and not this\n    &lt;script&gt;\n      // @input gets replaced by a single number\n      // -1 if no selection otherwise it starts\n      // with 0.\n      let input_number = @input;\n\n      ${7:if(input_number == 0)\n        true;\n      else\n        false;}\n    &lt;/script&gt;"
@@ -1155,7 +1155,7 @@ const liaSnippets = [
     {
         key: "&lt;script&gt; /*single multiple*/ &lt;/script&gt;",
         search: "lia-quiz-multiple-js",
-        replace: "<script>\n  // @input gets replaced by an array in the\n  // form of ], whereby and\n  // define whether a checkbox is checked\n  // or not...\n  let input_array = @input;\n  input_array = JSON.stringify(input_array);\n\n  if      (input_array == \"]\")  true;\n  else if (input_array == \"]\")  true;\n  else if (input_array == \"]\")  true;\n  else                                 false;\n</script",
+        replace: "<script>\n  // @input gets replaced by an array in the\n  // form of [0,0,0,1], whereby 0 and 1\n  // define whether a checkbox is checked\n  // or not...\n  let input_array = @input;\n  input_array = JSON.stringify(input_array);\n\n  if      (input_array == \"[0,1,0,1]\")  true;\n  else if (input_array == \"[0,1,0,0]\")  true;\n  else if (input_array == \"[0,0,0,1]\")  true;\n  else                                 false;\n</script",
         icon: "<span style=\"color:#ff0\">\ud83c\udf93</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "In some rare cases you might want to change the correct solution, add a counter, or let some correct answers pass. Then simply add a script tag to the quiz. The @input string here gets replaced by an by an array of integers ([0,1,1,0]) that represent the current user input:\n\n0 -&gt; stands for checked\n1 -&gt; represents an unchecked field\n\nExample:\n\n  Get at least one right ...\n\n  [[ ]] Wrong.\n  [[X]] Right.\n  [[ ]] Wrong.\n  [[X]] Right.\n  &lt;script&gt;\n    // @input gets replaced by an array in the\n    // form of [0,0,0,1], whereby 0 and 1\n    // define whether a checkbox is checked\n    // or not...\n    let input_array = @input;\n    input_array = JSON.stringify(input_array);\n\n    if      (input_array == &quot;[0,1,0,1]&quot;)  true;\n    else if (input_array == &quot;[0,1,0,0]&quot;)  true;\n    else if (input_array == &quot;[0,0,0,1]&quot;)  true;\n    else                                 false;\n  &lt;/script&gt;"
@@ -1163,7 +1163,7 @@ const liaSnippets = [
     {
         key: "&lt;script&gt; /* quiz */ &lt;/script&gt;",
         search: "lia-quiz-js",
-        replace: "<script>\n  // @input gets replaced by the current quiz input.\n  // In case of a:\n  // * text input -> string, that has to be encapsulated with (\")\n  // * single choice -> int (, if nothing is selected)\n  // * multiple choice -> array int  unchecked, checked)\n  let input = @input;\n\n  true; // if solved otherwise return false\n</script",
+        replace: "<script>\n  // @input gets replaced by the current quiz input.\n  // In case of a:\n  // * text input -> string, that has to be encapsulated with (\")\n  // * single choice -> int (-1, if nothing is selected)\n  // * multiple choice -> array int (0 unchecked, 1 checked)\n  let input = @input;\n\n  true; // if solved otherwise return false\n</script",
         icon: "<span style=\"color:#ff0\">\ud83c\udf93</span>",
         url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md",
         helpMsg: "This will insert a generic script tag in the following form, the @input will be replaced according the current context:\n\n&lt;script&gt;\n  // @input gets replaced by the current quiz input.\n  // In case of a:\n  // * text input -&gt; string, that has to be encapsulated with (&quot;)\n  // * single choice -&gt; int (-1, if nothing is selected)\n  // * multiple choice -&gt; array int (0 unchecked, 1 checked)\n  let input = @input;\n\n  true; // if solved otherwise return false\n&lt;/script&gt;"
@@ -1193,6 +1193,9 @@ const liaSnippets = [
         helpMsg: "In some rarely rarely rare cases, you might want to have something completely different and analyze some other HTML or code inputs (unit testing). In this case you can apply this generic tag and do in JavaScript whatever you want. The this quiz is solved if the script gets evaluated to true, not solved by resulting in false (everything else is ignored).\n\n*Click Me!*&lt;!-- onclick=&quot;window[&#x27;rand&#x27;] = Math.random();&quot; --&gt;\n\n[[!]]\n&lt;script&gt;\n  alert(&quot;your value random value is:&quot;, window[&#x27;rand&#x27;]);\n  if(window[&#x27;rand&#x27;] &gt; 0.8)\n    true;\n  else\n    false\n&lt;/script&gt;"
     }
 ]
+
+
+
 
 
 // global vars
