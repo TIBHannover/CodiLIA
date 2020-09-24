@@ -53,6 +53,7 @@ Markdown syntax. It applies the CodiMD backend, but all Markdown is interpreted
 by LiaScript. You can either share your courses from your plattform or share
 it via https://LiaScript.github.io
 
+> __Type `lia` into the editor to get help on common liascript tasks and functionality.___
 
 ## Documentation
 
