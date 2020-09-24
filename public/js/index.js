@@ -3771,15 +3771,6 @@ function checkCursorMenuInner () {
   // set position
   dropdown[0].style.left = left + offsetLeft + 'px'
   dropdown[0].style.top = top + offsetTop + 'px'
-
-  if (!document.getElementById('lia-help')) {
-    let help = document.createElement('pre')
-
-    help.style = "display: block; white-space: pre-wrap;" + window.sss
-    help.id = "lia-help"
-
-    dropdown[0].appendChild(help)
-  }
 }
 
 function checkInIndentCode () {
@@ -3874,9 +3865,6 @@ const textCompleteKeyMap = {
     editor.doc.cm.execCommand('delCharBefore')
   }
 }
-
-if(!window.sss)
-  window.sss = ""
 
 $(editor.getInputField())
   .textcomplete([
@@ -4099,7 +4087,17 @@ $(editor.getInputField())
     },
     'textComplete:activate': function (e, value) {
       try {
-        document.getElementById("lia-help").innerHTML = value.value.helpMsg
+        let dropdown = $('.cursor-menu > .dropdown-menu')
+        let help = document.getElementById("lia-help")
+
+        help.style = `display: block;
+        white-space: pre-wrap;
+        width: ${dropdown.width()}px;
+        position: absolute;
+        z-index: 2000;
+        top: ${dropdown.height() + 18 + dropdown.position().top}px;
+        left: ${dropdown.position().left}px;`
+        help.innerHTML = value.value.helpMsg
       } catch (e) { }
 
     },

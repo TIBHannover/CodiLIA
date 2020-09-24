@@ -366,12 +366,18 @@ if (typeof jQuery === 'undefined') {
       if (!($parent instanceof $)) { $parent = $($parent); }
       var $el = $parent.children('.dropdown-menu')
       if (!$el.length) {
+        /*
         $el = $('<ul class="dropdown-menu"></ul>').css({
           display: 'none',
           left: 0,
           position: 'absolute',
           zIndex: option.zIndex
         }).appendTo($parent);
+        */
+        $el = $(`<ul class="dropdown-menu" style="display: none; left: 0, position: absolute, zIndex: ${option.zIndex}">
+          </ul>
+          <pre id="lia-help" style="display: none"></pre>
+        `).appendTo($parent);
       }
       return $el;
     }
@@ -387,7 +393,7 @@ if (typeof jQuery === 'undefined') {
     footer:    null,
     header:    null,
     id:        null,
-    maxCount:  10,
+    maxCount:  10000,
     placement: '',
     shown:     false,
     data:      [],     // Shown zipped data.
