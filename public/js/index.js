@@ -3302,7 +3302,7 @@ $(editor.getInputField())
         z-index: 2000;
         top: ${dropdown.height() + 18 + dropdown.position().top}px;
         left: ${dropdown.position().left}px;`
-        help.innerHTML = value.value.helpMsg
+        help.innerHTML = `<div>${value.value.helpMsg}</div><div>See documentation here: <a href=${value.value.url}>${value.value.url}</a></div>`
       } catch (e) { }
 
     },
