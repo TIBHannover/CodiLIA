@@ -300,8 +300,9 @@ window.liaReady = function() {
   console.warn("liaReady");
 }
 
-window.liaGoto = function(line) {
+window.lia.contentWindow.liaGoto = function(line) {
   editor.setCursor({line: line, ch: 0})
+  editor.focus()
 }
 
 window.liaDefinitions = function (json) {
