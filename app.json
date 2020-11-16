@@ -19,6 +19,10 @@
             "description": "Use this param in the following way, to use LiaScript.github.io as your final renderer ('https://LiaScript.github.io/course/?https://YOURAPP.herokuapp.com')",
             "required": false
         },
+        "CMD_RESPONSIVEVOICE_KEY": {
+            "description": "If you want responsivevoice output in your editor then get a free key from responsivevoice.com",
+            "required": false
+        },
         "CMD_SESSION_SECRET": {
             "description": "Secret used to secure session cookies.",
             "required": false

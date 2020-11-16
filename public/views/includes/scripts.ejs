@@ -2,3 +2,7 @@
 <% for (var js in htmlWebpackPlugin.files.js) { %>
 <script src="<%= '\<\%= serverURL \%\>'%><%= htmlWebpackPlugin.files.js[js] %>" defer></script>
 <% } %>
+
+<% if( true ) { %>
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=<%= '\<\%= responsivevoiceKey \%\>'%>"></script>
+<% } %>

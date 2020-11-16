@@ -25,13 +25,18 @@ var logger = require('./lib/logger')
 var response = require('./lib/response')
 var models = require('./lib/models')
 var csp = require('./lib/csp')
-const { Environment } = require('./lib/config/enum')
+const {
+  Environment
+} = require('./lib/config/enum')
 
-const { versionCheckMiddleware, checkVersion } = require('./lib/web/middleware/checkVersion')
+const {
+  versionCheckMiddleware,
+  checkVersion
+} = require('./lib/web/middleware/checkVersion')
 
-function createHttpServer () {
+function createHttpServer() {
   if (config.useSSL) {
-    const ca = (function () {
+    const ca = (function() {
       let i, len
       const results = []
       for (i = 0, len = config.sslCAPath.length; i < len; i++) {
@@ -70,7 +75,7 @@ app.use(morgan('combined', {
 
 // socket io
 var io = require('socket.io')(server)
-io.engine.ws = new (require('ws').Server)({
+io.engine.ws = new(require('ws').Server)({
   noServer: true,
   perMessageDeflate: false
 })
@@ -136,10 +141,19 @@ app.use(i18n.init)
 
 // routes without sessions
 // static files
-app.use('/', express.static(path.join(__dirname, '/public'), { maxAge: config.staticCacheTime, index: false }))
-app.use('/docs', express.static(path.resolve(__dirname, config.docsPath), { maxAge: config.staticCacheTime }))
-app.use('/uploads', express.static(path.resolve(__dirname, config.uploadsPath), { maxAge: config.staticCacheTime }))
-app.use('/default.md', express.static(path.resolve(__dirname, config.defaultNotePath), { maxAge: config.staticCacheTime }))
+app.use('/', express.static(path.join(__dirname, '/public'), {
+  maxAge: config.staticCacheTime,
+  index: false
+}))
+app.use('/docs', express.static(path.resolve(__dirname, config.docsPath), {
+  maxAge: config.staticCacheTime
+}))
+app.use('/uploads', express.static(path.resolve(__dirname, config.uploadsPath), {
+  maxAge: config.staticCacheTime
+}))
+app.use('/default.md', express.static(path.resolve(__dirname, config.defaultNotePath), {
+  maxAge: config.staticCacheTime
+}))
 app.use(require('./lib/metrics').router)
 
 // session
@@ -157,11 +171,11 @@ app.use(session({
 
 // session resumption
 var tlsSessionStore = {}
-server.on('newSession', function (id, data, cb) {
+server.on('newSession', function(id, data, cb) {
   tlsSessionStore[id.toString('hex')] = data
   cb()
 })
-server.on('resumeSession', function (id, cb) {
+server.on('resumeSession', function(id, cb) {
   cb(null, tlsSessionStore[id.toString('hex')] || null)
 })
 
@@ -195,6 +209,7 @@ app.set('view engine', 'ejs')
 // set generally available variables for all views
 app.locals.useCDN = config.useCDN
 app.locals.serverURL = config.serverURL
+app.locals.responsivevoiceKey = config.responsivevoiceKey
 app.locals.sourceURL = config.sourceURL
 app.locals.allowAnonymous = config.allowAnonymous
 app.locals.allowAnonymousEdits = config.allowAnonymousEdits
@@ -231,7 +246,7 @@ app.locals.enableGitlabSnippets = config.isGitlabSnippetsEnable
 app.use(require('./lib/routes').router)
 
 // response not found if no any route matxches
-app.get('*', function (req, res) {
+app.get('*', function(req, res) {
   response.errorNotFound(req, res)
 })
 
@@ -253,9 +268,9 @@ io.set('heartbeat timeout', config.heartbeatTimeout)
 io.sockets.on('connection', realtime.connection)
 
 // listen
-function startListen () {
+function startListen() {
   var address
-  var listenCallback = function () {
+  var listenCallback = function() {
     var schema = config.useSSL ? 'HTTPS' : 'HTTP'
     logger.info('%s Server listening at %s', schema, address)
     realtime.maintenance = false
@@ -272,10 +287,10 @@ function startListen () {
 }
 
 // sync db then start listen
-models.sequelize.sync().then(function () {
+models.sequelize.sync().then(function() {
   // check if realtime is ready
   if (realtime.isReady()) {
-    models.Revision.checkAllNotesRevision(function (err, notes) {
+    models.Revision.checkAllNotesRevision(function(err, notes) {
       if (err) throw new Error(err)
       if (!notes || notes.length <= 0) return startListen()
     })
@@ -290,7 +305,7 @@ models.sequelize.sync().then(function () {
 })
 
 // log uncaught exception
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', function(err) {
   logger.error('An uncaught exception has occured.')
   logger.error(err)
   console.error(err)
@@ -299,22 +314,22 @@ process.on('uncaughtException', function (err) {
 })
 
 // install exit handler
-function handleTermSignals () {
+function handleTermSignals() {
   logger.info('CodiLIA has been killed by signal, try to exit gracefully...')
   realtime.maintenance = true
   realtime.terminate()
   // disconnect all socket.io clients
-  Object.keys(io.sockets.sockets).forEach(function (key) {
+  Object.keys(io.sockets.sockets).forEach(function(key) {
     var socket = io.sockets.sockets[key]
     // notify client server going into maintenance status
     socket.emit('maintenance')
-    setTimeout(function () {
+    setTimeout(function() {
       socket.disconnect(true)
     }, 0)
   })
-  var checkCleanTimer = setInterval(function () {
+  var checkCleanTimer = setInterval(function() {
     if (realtime.isReady()) {
-      models.Revision.checkAllNotesRevision(function (err, notes) {
+      models.Revision.checkAllNotesRevision(function(err, notes) {
         if (err) return logger.error(err)
         if (!notes || notes.length <= 0) {
           clearInterval(checkCleanTimer)
