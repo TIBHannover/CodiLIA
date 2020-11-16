@@ -32,7 +32,7 @@
                 </span>
             </small>
         </div>
-        <iframe id="lia" style="width: 100%; height: calc(100% - 30px)" src="<%- serverURL %>/liascript/index.html"></iframe>
+        <iframe id="lia" style="width: 100%; height: calc(100% - 30px)" src="<%- serverURL %>/liascript/index.html" onload="Array.prototype.slice.call(this.contentWindow.document.head.children).forEach((e) => { let src = e.src; if(src) if(src.startsWith('https://code.responsivevoice.org')) e.src='https://code.responsivevoice.org/responsivevoice.js?key=<%= responsivevoiceKey %>' })"></iframe>
         <!--div id="doc" class="markdown-body container-fluid"></div>
         <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
             <div class="pull-right dropdown">
