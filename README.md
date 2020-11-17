@@ -16,6 +16,18 @@ Click on the button below and follow the install-instructions.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+There are two parameters that you might set during the installation on heroku:
+
+* `CMD_SHARE_URL`: If you want to use LiaScript website as the target-website
+  for publishing you can set this parameter to
+
+  `https://LiaScript.github.io/course/?https://YOURAPP.herokuapp.com`
+
+  If you leave this out, your courses will be published locally...
+
+* `CMD_RESPONSIVEVOICE_KEY`: get a key that fits to your target-projects from
+   https://responsivevoice.com
+
 
 ## HackMD
 
@@ -89,7 +101,13 @@ docker-compose up
 Change the configuration in [docker-compose.yml](deployments/docer-compose.yml).
 It will automatically download the latest CodiLIA version. If you want to share
 your course, you have to set the `CMD_SHARE_URL` parameter in this file
-accordingly. All the other parameters are CodiMD-parameters, see the
+accordingly.
+
+Also checkout https://responsivevoice.com and get a free key. This key can be
+used with `CMD_RESPONSIVEVOICE_KEY` to enable text to speech output for your
+editor.
+
+All the other parameters are CodiMD-parameters, see the
 [CodiMD Configuration](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-configuration).
 
 

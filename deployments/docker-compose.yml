@@ -21,8 +21,9 @@ services:
       - CMD_DB_URL=postgres://codimd:change_password@database/codimd
       - CMD_USECDN=false
       - CMD_ALLOW_ANONYMOUS=true
-      #- CMD_DOMAIN=localhost:4000
       # - CMD_SHARE_URL=https://LiaScript.github.io/course/?https://yourserver,running.codi.md
+      # - CMD_RESPONSIVEVOICE_KEY=12345678
+      # - CMD_DOMAIN=localhost:4000
     depends_on:
       - database
     ports:
