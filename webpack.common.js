@@ -136,6 +136,11 @@ module.exports = {
         context: path.join(__dirname, 'node_modules/fork-awesome'),
         from: 'css',
         to: 'fork-awesome/css'
+      },
+      {
+        context: path.join(__dirname, 'node_modules/@liascript/editor'),
+        from: 'dist',
+        to: 'liascript'
       }
     ]),
     new MiniCssExtractPlugin()
