@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:12-buster
 
 ENV NODE_ENV=production
 

@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:12-buster
 
 ARG USER_NAME=hackmd
 ARG UID=1500
