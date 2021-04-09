@@ -296,9 +296,17 @@ window.editor = editor
 
 window.lia = document.getElementById("lia");
 
+let liaReady = false
+
 window.liaReady = function() {
   console.warn("liaReady");
+  liaReady = true  
 }
+
+setTimeout(function() {
+  if (!liaReady)
+    window.lia.contentWindow.jitLia(" ")
+}, 1000)
 
 window.lia.contentWindow.liaGoto = function(line) {
   editor.setCursor({line: line, ch: 0})
@@ -315,6 +323,8 @@ window.editor.on('dblclick', function(e) {
 
 var inlineAttach = inlineAttachment.editors.codemirror4.attach(editor)
 defaultTextHeight = parseInt($('.CodeMirror').css('line-height'))
+
+
 
 //  initalize ui reference
 const ui = getUIElements()
