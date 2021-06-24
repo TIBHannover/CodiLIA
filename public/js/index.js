@@ -299,14 +299,22 @@ window.lia = document.getElementById("lia");
 let liaReady = false
 
 window.liaReady = function() {
-  console.warn("liaReady");
-  liaReady = true  
-}
+  
+  liaReady = true
 
-setTimeout(function() {
-  if (!liaReady)
+  var value = editor.getValue()
+
+  console.log("LiaScript is ready")
+
+  if (value.trim() == "") {
+    console.warn("Empty Document, generating help")
+    //window.lia.contentWindow.location.reload(true)
+    window.lia.contentWindow.jitLia("# LiaScript\n")
     window.lia.contentWindow.jitLia(" ")
-}, 1000)
+  } else {
+    updateViewInner()
+  }
+}
 
 window.lia.contentWindow.liaGoto = function(line) {
   editor.setCursor({line: line, ch: 0})
