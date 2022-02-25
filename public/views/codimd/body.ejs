@@ -227,6 +227,40 @@
         </div>
     </div>
 </div>
+<!-- gitlab file export modal -->
+<div class="modal fade" id="gitlabExportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><%= __('Export to GitLab') %></h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="gitlabExportModalAccessToken" />
+                <input type="hidden" id="gitlabExportModalBaseURL" />
+                <input type="hidden" id="gitlabExportModalVersion" />
+                <div class="ui-field-contain" style="display:table;margin-bottom:10px;width:100%;">
+                    <div style="display:table-row;margin-bottom:5px;">
+                        <label style="display:table-cell;">File Name:</label>
+                        <input class="form-control" placeholder="new_file.md" type="text" id="gitlabExportModalFileName" />
+                    </div>
+                    <div style="display:table-row;margin-bottom:5px;">
+                        <label style="display:table-cell;">Project:</label>
+                        <select class="form-control" id="gitlabExportModalProjects" style="display:table-cell;">
+                            <option value="init" selected="selected" disabled="disabled"><%= __('Select From Available Projects') %></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span id="gitlabExportModalLoading"><i class="fa fa-refresh fa-spin fa-fw"></i></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><%= __('Cancel') %></button>
+                <button type="button" class="btn btn-primary" id="gitlabExportModalConfirm"><%= __('Export') %></button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- delete modal -->
 <div class="modal fade delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">

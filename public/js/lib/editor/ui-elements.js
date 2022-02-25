@@ -24,7 +24,8 @@ export const getUIElements = () => ({
     export: {
       dropbox: $('.ui-save-dropbox'),
       gist: $('.ui-save-gist'),
-      snippet: $('.ui-save-snippet')
+      snippet: $('.ui-save-snippet'),
+      gitlab: $('.ui-save-gitlab')
     },
     import: {
       dropbox: $('.ui-import-dropbox'),

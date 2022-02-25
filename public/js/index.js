@@ -1010,6 +1010,39 @@ ui.toolbar.export.snippet.click(function () {
       ui.spinner.hide()
     })
 })
+// export to gitlab
+ui.toolbar.export.gitlab.click(function () {
+  ui.spinner.show()
+  $.get(serverurl + '/auth/gitlab/callback/' + noteid + '/projects')
+    .done(function (data) {
+      $('#gitlabExportModalAccessToken').val(data.accesstoken)
+      $('#gitlabExportModalBaseURL').val(data.baseURL)
+      $('#gitlabExportModalVersion').val(data.version)
+      $('#gitlabExportModalLoading').hide()
+      $('#gitlabExportModal').modal('toggle')
+      $('#gitlabExportModalProjects').find('option').remove().end().append('<option value="init" selected="selected" disabled="disabled">Select From Available Projects</option>')
+      if (data.projects) {
+        data.projects.sort(function (a, b) {
+          return (a.path_with_namespace < b.path_with_namespace) ? -1 : ((a.path_with_namespace > b.path_with_namespace) ? 1 : 0)
+        })
+        data.projects.forEach(function (project) {
+          if (          (project.permissions.project_access === null && project.permissions.group_access === null) ||
+                        (project.permissions.project_access !== null && project.permissions.project_access.access_level < 20)) {
+            return
+          }
+          $('<option>').val(project.id).text(project.path_with_namespace).appendTo('#gitlabExportModalProjects')
+        })
+        $('#gitlabExportModalProjects').prop('disabled', false)
+      }
+      $('#gitlabExportModalLoading').hide()
+    })
+    .fail(function (data) {
+      showMessageModal('<i class="fa fa-gitlab"></i> Import from gitlab', 'Unable to fetch gitlab parameters :(', '', '', false)
+    })
+    .always(function () {
+      ui.spinner.hide()
+    })
+})
 // import from dropbox
 ui.toolbar.import.dropbox.click(function () {
   var options = {
@@ -1472,6 +1505,33 @@ $('#snippetExportModalConfirm').click(function () {
       $('#snippetExportModal').modal('hide')
       var redirect = baseURL + '/' + $("#snippetExportModalProjects option[value='" + $('#snippetExportModalProjects').val() + "']").text() + '/snippets/' + ret.id
       showMessageModal('<i class="fa fa-gitlab"></i> Export to Snippet', 'Export Successful!', redirect, 'View Snippet Here', true)
+    }
+  )
+})
+
+// gitlab export modal
+$('#gitlabExportModalConfirm').click(function () {
+  var accesstoken = $('#gitlabExportModalAccessToken').val()
+  var baseURL = $('#gitlabExportModalBaseURL').val()
+  var version = $('#gitlabExportModalVersion').val()
+  var fileName = $('#gitlabExportModalFileName').val()
+
+  var data = {
+    branch: "master",
+    content: editor.getValue(),
+    commit_message: "Updated " + fileName
+  }
+
+  if (!data.commit_message || !fileName || !data.content || !$('#gitlabExportModalProjects').val()) return
+  $('#gitlabExportModalLoading').show()
+  var fullURL = baseURL + '/api/' + version + '/projects/' + $('#gitlabExportModalProjects').val() + '/repository/files/' + fileName + '?access_token=' + accesstoken
+  $.post(fullURL
+    , data
+    , function (ret) {
+      $('#gitlabExportModalLoading').hide()
+      $('#gitlabExportModal').modal('hide')
+      var redirect = baseURL + '/' + $("#gitlabExportModalProjects option[value='" + $('#gitlabExportModalProjects').val() + "']").text() + '/-/blob/' + data.branch + '/' + fileName
+      showMessageModal('<i class="fa fa-gitlab"></i> Export to GitLab', 'Export Successful!', redirect, 'View File Here', true)
     }
   )
 })
