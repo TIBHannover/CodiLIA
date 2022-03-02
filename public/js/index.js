@@ -22,6 +22,8 @@ import { Spinner } from 'spin.js'
 
 import { liaSnippets } from './liaHelp'
 
+import { isGitLabNote, updateGitLabFile } from './gitlabHelper'
+
 import {
   checkLoginStateChanged,
   setloginStateChangeEvent
@@ -1043,6 +1045,31 @@ ui.toolbar.export.gitlab.click(function () {
       ui.spinner.hide()
     })
 })
+// update original file in gitlab
+if (!isGitLabNote(noteid)) {
+  ui.toolbar.updateGitLab.hide()
+} else {
+  ui.toolbar.updateGitLab.click(function () {
+    ui.spinner.show()
+    $.get(serverurl + '/auth/gitlab/callback/' + noteid + '/projects')
+      .done(async function (data) {
+        const updateGitLabResponse = await updateGitLabFile(data.baseURL, data.version, data.accesstoken, noteid, editor.getValue())
+        if (updateGitLabResponse.status === "Successful") {
+          const redirect = data.baseURL + '/' + updateGitLabResponse.projectPath + '/-/blob/' + updateGitLabResponse.branch + '/' + updateGitLabResponse.filePath
+          showMessageModal('<i class="fa fa-gitlab"></i> Export to GitLab', 'Export Successful!', redirect, 'View File Here', true)
+        } else {
+          showMessageModal('<i class="fa fa-gitlab"></i> Export to GitLab', 'Export Not Successful!', '', '', false)
+        }
+      })
+      .fail(function (data) {
+        showMessageModal('<i class="fa fa-gitlab"></i> Save to gitlab', 'Unable to fetch gitlab parameters :(', '', '', false)
+      })
+      .always(function () {
+        ui.spinner.hide()
+      })
+  })
+}
+
 // import from dropbox
 ui.toolbar.import.dropbox.click(function () {
   var options = {

@@ -9,6 +9,7 @@ export const getUIElements = () => ({
   toolbar: {
     shortStatus: $('.ui-short-status'),
     status: $('.ui-status'),
+    updateGitLab: $('.ui-update-gitlab'),
     new: $('.ui-new'),
     publish: $('.ui-publish'),
     extra: {
